@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import './globals.css';
 import { siteConfig } from '@/lib/site-config';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -63,6 +64,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="min-h-screen flex flex-col" style={{ background: 'var(--bg-deep)' }}>
+        <GoogleAnalytics gaId={siteConfig.gaId} />
         {/* ===== Glassmorphism Header ===== */}
         <header
           className="sticky top-0 z-50 border-b"

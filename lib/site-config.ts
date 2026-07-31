@@ -7,4 +7,5 @@ export const siteConfig = {
   name: 'GameMetaHub',
   url: 'https://www.gamemetahub.com',
   domain: 'www.gamemetahub.com',
+  gaId: process.env.NEXT_PUBLIC_GA_ID || '',
 };
