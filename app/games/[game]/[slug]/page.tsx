@@ -5,6 +5,7 @@
 // ============================================
 
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getContentByPath, listAllContent, readingTime, generatePageJsonLd } from '@/lib/content';
@@ -242,9 +243,9 @@ export default async function GameContentPage({
                   <p>Your go-to source for trending game guides and news.</p>
                 </div>
                 <div className="flex gap-4">
-                  <a href="/about" className="hover:text-white transition-colors">About</a>
-                  <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
-                  <a href="/contact" className="hover:text-white transition-colors">Contact</a>
+                  <Link href="/about" className="hover:text-white transition-colors">About</Link>
+                  <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+                  <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
                 </div>
               </div>
             </footer>

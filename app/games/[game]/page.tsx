@@ -281,36 +281,8 @@ export default function GameHubPage({
           style={{ background: 'linear-gradient(to bottom, transparent, var(--bg-deep))' }} />
       </section>
 
-      {/* ===== Article Grid ===== */}
+      {/* ===== Article Sections ===== */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h2 className="text-xl md:text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
-              📝 Articles
-            </h2>
-            <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>
-              {gameArticles.length} article{gameArticles.length !== 1 ? 's' : ''} for {meta.name}
-            </p>
-          </div>
-
-          {/* Type filter chips */}
-          <div className="hidden sm:flex gap-2">
-            {['guide', 'tier_list', 'comparison', 'error_fix', 'patch_notes', 'game_release'].map((type) => {
-              const count = gameArticles.filter((a) => a.type === type).length;
-              if (count === 0) return null;
-              return (
-                <Link
-                  key={type}
-                  href={`/${type === 'tier_list' ? 'tier-lists' : type === 'error_fix' ? 'fixes' : type === 'patch_notes' ? 'news' : type === 'game_release' ? 'releases' : `${type}s`}`}
-                  className="px-3 py-1.5 rounded-full text-xs font-semibold transition-colors hover:bg-white/10"
-                  style={{ background: 'rgba(255,255,255,0.04)', color: 'var(--text-muted)', border: '1px solid rgba(255,255,255,0.06)' }}
-                >
-                  {TYPE_ICON[type]} {count}
-                </Link>
-              );
-            })}
-          </div>
-        </div>
 
         {gameArticles.length === 0 ? (
           <div className="text-center py-20">
@@ -319,12 +291,117 @@ export default function GameHubPage({
             <p className="text-sm mt-2" style={{ color: 'var(--text-muted)' }}>Content for this game is coming soon</p>
           </div>
         ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {gameArticles.map((item) => (
-              <ArticleCard key={`${item.game}/${item.slug}`} item={item} />
-            ))}
-          </div>
+          <>
+            {/* Group articles by type for organized display */}
+            {(() => {
+              // Order: guide, tier_list, comparison, error_fix, patch_notes, news, game_release
+              const typeOrder = ['guide', 'tier_list', 'comparison', 'error_fix', 'patch_notes', 'news', 'game_release'];
+
+              // Get the "featured" article — the one with highest reading time
+              const featured = [...gameArticles].sort((a, b) => (b.readingTime || 0) - (a.readingTime || 0))[0];
+
+              // Build type groups — only include types present in this game
+              const typeGroups: { type: string; label: string; icon: string; articles: typeof gameArticles }[] = [];
+              const seen = new Set<string>();
+
+              for (const type of typeOrder) {
+                const articles = gameArticles.filter((a) => a.type === type);
+                if (articles.length > 0) {
+                  typeGroups.push({
+                    type,
+                    label: TYPE_LABEL[type] || type,
+                    icon: TYPE_ICON[type] || '🎮',
+                    articles,
+                  });
+                  seen.add(type);
+                }
+              }
+
+              // Any remaining types not in typeOrder
+              gameArticles.forEach((a) => {
+                if (!seen.has(a.type)) {
+                  typeGroups.push({
+                    type: a.type,
+                    label: a.type.replace(/_/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()),
+                    icon: '🎮',
+                    articles: [a],
+                  });
+                  seen.add(a.type);
+                }
+              });
+
+              return typeGroups.map((group, gi) => (
+                <div key={group.type} style={gi > 0 ? { marginTop: '3rem' } : {}}>
+                  {/* Section Header */}
+                  <div className="flex items-center gap-3 mb-5">
+                    <span className="text-xl" role="img" aria-label={group.type}>{group.icon}</span>
+                    <h2 className="text-lg md:text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
+                      {group.label}
+                    </h2>
+                    <span className="text-xs px-2 py-0.5 rounded-full"
+                      style={{ background: 'rgba(255,255,255,0.04)', color: 'var(--text-muted)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                      {group.articles.length}
+                    </span>
+                    {/* Highlight featured article */}
+                    {group.articles.some((a) => a.slug === featured?.slug && a.game === featured?.game) && (
+                      <span className="text-xs px-2 py-0.5 rounded-full"
+                        style={{ background: 'rgba(245,158,11,0.1)', color: '#fbbf24', border: '1px solid rgba(245,158,11,0.2)' }}>
+                        ⭐ Featured
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {group.articles.map((item) => (
+                      <ArticleCard key={`${item.game}/${item.slug}`} item={item} />
+                    ))}
+                  </div>
+                </div>
+              ));
+            })()}
+          </>
         )}
+      </section>
+
+      {/* ===== Explore Other Games ===== */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-16 md:pb-20">
+        <div className="pt-12" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+          <h2 className="text-xl md:text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+            🎮 Explore Other Games
+          </h2>
+          <p className="text-sm mb-8" style={{ color: 'var(--text-muted)' }}>
+            Discover guides and content for more trending games
+          </p>
+
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {Object.entries(GAME_META)
+              .filter(([slug]) => slug !== params.game)
+              .map(([slug, gameMeta]) => (
+                <Link
+                  key={slug}
+                  href={`/games/${slug}`}
+                  className="group block p-5 rounded-xl transition-all duration-300 hover:-translate-y-1"
+                  style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}
+                >
+                  <h3 className="font-bold text-sm mb-2 group-hover:text-purple-400 transition-colors"
+                    style={{ color: 'var(--text-primary)' }}>
+                    {gameMeta.name}
+                  </h3>
+                  <p className="text-xs line-clamp-2 leading-relaxed mb-3" style={{ color: 'var(--text-muted)' }}>
+                    {gameMeta.description}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {gameMeta.tags.slice(0, 3).map((tag) => (
+                      <span key={tag} className="text-xs px-2 py-0.5 rounded-full"
+                        style={{ background: 'rgba(255,255,255,0.04)', color: 'var(--text-muted)' }}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </Link>
+              ))}
+          </div>
+        </div>
       </section>
     </div>
   );
