@@ -19,7 +19,6 @@ const TYPE_BADGE: Record<string, string> = {
 const GAME_META: Record<string, { name: string; image?: string }> = {
   'elden-ring': { name: 'Elden Ring', image: '/images/games/elden-ring-header.jpg' },
   'baldurs-gate-3': { name: "Baldur's Gate 3", image: '/images/games/baldurs-gate-3-header.jpg' },
-  'assassins-creed-black-flag-resynced': { name: "Assassin's Creed Black Flag Resynced", image: '/images/games/ac-black-flag-header.jpg' },
 };
 
 export default function GamesPage() {

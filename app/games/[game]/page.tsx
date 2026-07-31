@@ -36,15 +36,6 @@ const GAME_META: Record<string, {
     publisher: 'Larian Studios',
     tags: ['CRPG', 'Turn-Based', 'D&D', 'Fantasy', 'Story-Rich'],
   },
-  'assassins-creed-black-flag-resynced': {
-    name: "Assassin's Creed Black Flag Resynced",
-    headerImage: '/images/games/ac-black-flag-header.jpg',
-    description: 'The remastered edition of the iconic pirate adventure. Sail the Caribbean as Edward Kenway in stunning 4K with enhanced gameplay mechanics.',
-    releaseYear: '2026',
-    developer: 'Ubisoft',
-    publisher: 'Ubisoft',
-    tags: ['Action-Adventure', 'Open World', 'Pirate', 'Stealth', 'Remaster'],
-  },
   'rampage-evolution': {
     name: 'Rampage Evolution',
     headerImage: '/images/games/rampage-evolution-header.jpg',
