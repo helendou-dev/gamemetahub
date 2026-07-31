@@ -47,13 +47,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Dynamic content pages from /content/games/
   const contentRoutes: MetadataRoute.Sitemap = pages.map((p) => {
-    const lastMod = p.frontmatter.modifiedDate || p.frontmatter.publishDate || p.frontmatter.date;
-    const isNews = p.frontmatter.type === 'news';
-    const isGuide = p.frontmatter.type === 'guide';
+    const isNews = p.type === 'news' || p.type === 'patch_notes';
+    const isGuide = p.type === 'guide';
 
     return {
       url: `${baseUrl}/games/${p.game}/${p.slug}`,
-      lastModified: lastMod ? new Date(lastMod) : new Date(),
+      lastModified: p.date ? new Date(p.date) : new Date(),
       changeFrequency: (isNews ? 'daily' : 'weekly') as 'daily' | 'weekly',
       priority: isGuide ? 0.9 : isNews ? 0.7 : 0.8,
     };

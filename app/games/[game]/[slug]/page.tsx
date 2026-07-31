@@ -1,22 +1,25 @@
 // ============================================
 // [game]/[slug]/page.tsx — Dynamic MDX Page
-// Renders any MDX content from /content/games/
-// with full SEO metadata, JSON-LD, breadcrumbs.
+// Dark gaming theme — 2026 redesign
+// P1-P5: TOC, Related Articles, Author Bio, Platform Badges, Reading Time
 // ============================================
 
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getContentByPath, listAllContent, readingTime, generatePageJsonLd } from '@/lib/content';
+import { slugify } from '@/lib/slugify';
 import { mdxComponents, BreadcrumbJsonLd } from '@/components/mdx-components';
+import ArticleTOC from '@/components/article-toc';
+import DesktopTOC from '@/components/desktop-toc';
+import RelatedArticles from '@/components/related-articles';
+import AuthorBio from '@/components/author-bio';
 
-// ─── Static Params (build-time optimization) ───
 export function generateStaticParams() {
   const pages = listAllContent();
   return pages.map((p) => ({ game: p.game, slug: p.slug }));
 }
 
-// ─── SEO Metadata ───────────────────────────
 export async function generateMetadata({
   params,
 }: {
@@ -29,11 +32,7 @@ export async function generateMetadata({
   const url = `https://gamemetahub.com/games/${params.game}/${params.slug}`;
 
   return {
-    // Use absolute title to prevent layout template from appending "| GameMetaHub"
-    // (content pages already have descriptive titles; brand suffix would make them too long)
-    title: {
-      absolute: frontmatter.title,
-    },
+    title: { absolute: frontmatter.title },
     description: frontmatter.description || `Guide and tips for ${params.game.replace(/-/g, ' ')}`,
     keywords: frontmatter.keywords || frontmatter.tags?.join(', '),
     alternates: { canonical: frontmatter.canonicalUrl || url },
@@ -47,14 +46,10 @@ export async function generateMetadata({
       ...(frontmatter.image
         ? { images: [{ url: frontmatter.image, width: 1200, height: 630 }] }
         : {
-            images: [
-              {
-                url: `/og?title=${encodeURIComponent(frontmatter.title)}&type=${encodeURIComponent(frontmatter.type || 'default')}&game=${encodeURIComponent(frontmatter.game || params.game.replace(/-/g, ' '))}`,
-                width: 1200,
-                height: 630,
-                alt: frontmatter.title,
-              },
-            ],
+            images: [{
+              url: `/og?title=${encodeURIComponent(frontmatter.title)}&type=${encodeURIComponent(frontmatter.type || 'default')}&game=${encodeURIComponent(frontmatter.game || params.game.replace(/-/g, ' '))}`,
+              width: 1200, height: 630, alt: frontmatter.title,
+            }],
           }),
     },
     twitter: {
@@ -62,14 +57,48 @@ export async function generateMetadata({
       title: frontmatter.title,
       description: frontmatter.description || '',
     },
-    // Signal freshness to search engines
-    ...(frontmatter.type === 'news'
-      ? { robots: { index: true, follow: true, 'max-snippet': -1, 'max-image-preview': 'large' } }
-      : {}),
   };
 }
 
-// ─── Page Component ─────────────────────────
+const TYPE_BADGE: Record<string, string> = {
+  guide: 'type-badge-guide',
+  tier_list: 'type-badge-tier',
+  comparison: 'type-badge-comparison',
+  error_fix: 'type-badge-fix',
+  patch_notes: 'type-badge-patch',
+  news: 'type-badge-news',
+  game_release: 'type-badge-release',
+};
+
+const TYPE_LABEL: Record<string, string> = {
+  guide: '📖 Guide',
+  tier_list: '🏆 Tier List',
+  comparison: '⚖️ Comparison',
+  error_fix: '🔧 Fix Guide',
+  patch_notes: '📋 Patch Notes',
+  news: '📰 News',
+  game_release: '🚀 Launch Guide',
+};
+
+const PLATFORM_COLORS: Record<string, { bg: string; color: string; border: string }> = {
+  PC: { bg: 'rgba(100,116,139,0.12)', color: '#94a3b8', border: 'rgba(100,116,139,0.2)' },
+  PS5: { bg: 'rgba(59,130,246,0.12)', color: '#60a5fa', border: 'rgba(59,130,246,0.2)' },
+  PS4: { bg: 'rgba(59,130,246,0.08)', color: '#93c5fd', border: 'rgba(59,130,246,0.15)' },
+  Xbox: { bg: 'rgba(16,185,129,0.12)', color: '#34d399', border: 'rgba(16,185,129,0.2)' },
+  Switch: { bg: 'rgba(244,63,94,0.12)', color: '#fb7185', border: 'rgba(244,63,94,0.2)' },
+  Steam: { bg: 'rgba(99,102,241,0.12)', color: '#818cf8', border: 'rgba(99,102,241,0.2)' },
+};
+
+function PlatformBadge({ platform }: { platform: string }) {
+  const c = PLATFORM_COLORS[platform] || { bg: 'rgba(100,116,139,0.08)', color: '#94a3b8', border: 'rgba(100,116,139,0.15)' };
+  return (
+    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold"
+      style={{ background: c.bg, color: c.color, border: `1px solid ${c.border}` }}>
+      {platform}
+    </span>
+  );
+}
+
 export default async function GameContentPage({
   params,
 }: {
@@ -80,20 +109,22 @@ export default async function GameContentPage({
 
   const { frontmatter } = content;
   const url = `https://gamemetahub.com/games/${params.game}/${params.slug}`;
-  const jsonLd = frontmatter.jsonLd || generatePageJsonLd(frontmatter, url);
+  const jsonLd = generatePageJsonLd(frontmatter, url);
   const readTime = readingTime(content.content);
+  const tags = (frontmatter.tags || []) as string[];
+  const platforms = (frontmatter.platforms || []) as string[];
+  const gameName = frontmatter.game || params.game.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+  const typeLabel = TYPE_LABEL[frontmatter.type || ''] || '🎮 Article';
+  const typeBadge = TYPE_BADGE[frontmatter.type || ''] || 'type-badge-guide';
+  const heroImage = (frontmatter.image as string) || '';
+  const author = (frontmatter.author as string) || 'GameMetaHub';
+  const publishDate = frontmatter.publishDate || frontmatter.date;
 
-  // Parse tags
-  const tags = frontmatter.tags || [];
-  const gameName = frontmatter.game || params.game.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+  const allArticles = listAllContent();
 
   return (
     <>
-      {/* Structured Data (JSON-LD) — injected before DOM */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <BreadcrumbJsonLd
         items={[
           { name: 'Home', url: 'https://gamemetahub.com' },
@@ -103,113 +134,148 @@ export default async function GameContentPage({
         ]}
       />
 
-      {/* Article Page */}
-      <article className="max-w-3xl mx-auto px-4 py-10">
-        {/* Breadcrumb */}
-        <nav className="text-sm text-slate-400 mb-6" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-blue-600 transition-colors">Home</a>
-          <span className="mx-2">/</span>
-          <a href="/games" className="hover:text-blue-600 transition-colors">Games</a>
-          <span className="mx-2">/</span>
-          <a
-            href={`/games/${params.game}`}
-            className="hover:text-blue-600 transition-colors"
-          >
-            {gameName}
-          </a>
-          <span className="mx-2">/</span>
-          <span className="text-slate-600">{frontmatter.title?.slice(0, 60)}...</span>
-        </nav>
+      {/* === Two-column layout: article + TOC sidebar === */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-14">
+        <div className="flex gap-0 xl:gap-12">
 
-        {/* Article Header */}
-        <header className="mb-10">
-          {/* Type Badge */}
-          {frontmatter.type && (
-            <span className="inline-block bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide mb-4">
-              {frontmatter.type === 'guide'
-                ? '📖 Guide'
-                : frontmatter.type === 'news'
-                  ? '📰 News'
-                  : frontmatter.type === 'tierlist'
-                    ? '🏆 Tier List'
-                    : frontmatter.type === 'comparison'
-                      ? '⚖️ Comparison'
-                      : frontmatter.type}
-            </span>
-          )}
+          {/* ===== LEFT: Article Body ===== */}
+          <article className="flex-1 min-w-0 max-w-3xl mx-auto xl:mx-0">
 
-          <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            {frontmatter.title}
-          </h1>
+            {/* Breadcrumb */}
+            <nav className="text-sm mb-8 flex items-center gap-2 flex-wrap" aria-label="Breadcrumb" style={{ color: 'var(--text-muted)' }}>
+              <a href="/" className="hover:text-white transition-colors">Home</a>
+              <span>/</span>
+              <a href="/games" className="hover:text-white transition-colors">Games</a>
+              <span>/</span>
+              <a href={`/games/${params.game}`} className="hover:text-white transition-colors">{gameName}</a>
+            </nav>
 
-          {/* Meta Bar */}
-          <div className="flex flex-wrap items-center gap-4 mt-4 text-sm text-slate-500">
-            {frontmatter.author && (
-              <span>✍️ {frontmatter.author}</span>
+            {/* Hero Image */}
+            {heroImage && (
+              <div className="mb-8 rounded-2xl overflow-hidden relative" style={{ boxShadow: 'var(--shadow-lg)' }}>
+                <img
+                  src={heroImage}
+                  alt={frontmatter.title}
+                  className="w-full aspect-[16/9] md:aspect-[21/9] object-cover"
+                />
+                <div className="absolute inset-0" style={{
+                  background: 'linear-gradient(to top, rgba(6,6,11,0.7) 0%, transparent 50%)',
+                }} />
+              </div>
             )}
-            {(frontmatter.publishDate || frontmatter.date) && (
-              <time dateTime={frontmatter.publishDate || frontmatter.date}>
-                📅 {new Date(frontmatter.publishDate || frontmatter.date!).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </time>
-            )}
-            <span>⏱ {readTime} min read</span>
-            {frontmatter.game && (
-              <span>🎮 {gameName}</span>
-            )}
-          </div>
 
-          {/* Tags */}
-          {tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-4">
-              {tags.map((tag: string) => (
-                <span
-                  key={tag}
-                  className="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-xs"
-                >
-                  #{tag}
-                </span>
-              ))}
+            {/* Mobile TOC (only visible below xl breakpoint) */}
+            <ArticleTOC content={content.content} />
+
+            {/* Article Header */}
+            <header className="mb-10">
+              <span className={`type-badge ${typeBadge} mb-4`}>
+                {typeLabel}
+              </span>
+
+              <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mt-4"
+                style={{ color: 'var(--text-primary)' }}>
+                {frontmatter.title}
+              </h1>
+
+              {/* Meta Bar */}
+              <div className="flex flex-wrap items-center gap-4 mt-5 text-sm"
+                style={{ color: 'var(--text-muted)' }}>
+                <span>✍️ {author}</span>
+                {publishDate && (
+                  <time dateTime={publishDate}>
+                    📅 {new Date(publishDate).toLocaleDateString('en-US', {
+                      year: 'numeric', month: 'long', day: 'numeric',
+                    })}
+                  </time>
+                )}
+                <span>⏱ {readTime} min read</span>
+                <span>🎮 {gameName}</span>
+              </div>
+
+              {/* Platform Badges */}
+              {platforms.length > 0 && (
+                <div className="flex flex-wrap items-center gap-2 mt-4">
+                  <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Platforms:</span>
+                  {platforms.map((p) => (
+                    <PlatformBadge key={p} platform={p} />
+                  ))}
+                </div>
+              )}
+
+              {/* Tags */}
+              {tags.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {tags.map((tag: string) => (
+                    <span key={tag} className="px-2.5 py-1 rounded-full text-xs"
+                      style={{ background: 'rgba(139,92,246,0.08)', color: '#a78bfa', border: '1px solid rgba(139,92,246,0.15)' }}>
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              <div className="mt-8" style={{ height: '1px', background: 'linear-gradient(90deg, rgba(139,92,246,0.3), transparent)' }} />
+            </header>
+
+            {/* Article Body */}
+            <div className="article-body">
+              <MDXRemote source={content.content} components={mdxComponents} />
             </div>
-          )}
-        </header>
 
-        {/* Article Body — MDXRemote renders the .mdx content */}
-        <div className="article-body">
-          <MDXRemote source={content.content} components={mdxComponents} />
+            {/* Author Bio */}
+            <AuthorBio author={author} date={publishDate} />
+
+            {/* Related Articles */}
+            <RelatedArticles
+              current={{ game: params.game, slug: params.slug, type: frontmatter.type || 'guide' }}
+              articles={allArticles}
+            />
+
+            {/* Footer */}
+            <footer className="mt-16 pt-8" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-sm"
+                style={{ color: 'var(--text-secondary)' }}>
+                <div>
+                  <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>GameMetaHub</p>
+                  <p>Your go-to source for trending game guides and news.</p>
+                </div>
+                <div className="flex gap-4">
+                  <a href="/about" className="hover:text-white transition-colors">About</a>
+                  <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
+                  <a href="/contact" className="hover:text-white transition-colors">Contact</a>
+                </div>
+              </div>
+            </footer>
+          </article>
+
+          {/* ===== RIGHT: Desktop TOC Sidebar (hidden on mobile) ===== */}
+          <DesktopTOCSidebar content={content.content} />
         </div>
-
-        {/* Article Footer */}
-        <footer className="mt-16 pt-8 border-t border-slate-200">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-sm text-slate-500">
-            <div>
-              <p className="font-semibold text-slate-700">GameMetaHub</p>
-              <p>Your go-to source for trending game guides and news.</p>
-            </div>
-            <div className="flex gap-4">
-              <a href="/privacy" className="hover:text-blue-600 transition-colors">Privacy</a>
-              <a href="/contact" className="hover:text-blue-600 transition-colors">Contact</a>
-            </div>
-          </div>
-
-          {/* Ad Placeholder (Phase 2 — Month 3+) */}
-          <div
-            className="mt-8 p-4 bg-slate-100 border border-dashed border-slate-300 rounded-lg text-center text-sm text-slate-400"
-            data-ad-slot="article-footer"
-          >
-            Ad placeholder — will activate in Month 3 after sandbox period
-          </div>
-        </footer>
-      </article>
+      </div>
     </>
   );
 }
 
-// Dynamic rendering — pipeline-generated pages don't need build-time pre-render
-export const dynamic = 'force-dynamic';
+/**
+ * Extract headings server-side and pass to the DesktopTOC client widget.
+ * We do extraction here so the ArticleTOC (mobile widget) and this sidebar
+ * share the same source of truth — the raw MDX content.
+ */
+function DesktopTOCSidebar({ content }: { content: string }) {
+  const headingRegex = /^(#{2,3})\s+(.+)$/gm;
+  const items: { id: string; text: string; level: 2 | 3 }[] = [];
+  let match;
+  while ((match = headingRegex.exec(content)) !== null) {
+    const level = match[1].length as 2 | 3;
+    const text = match[2].replace(/[`*_~\[\]()]/g, '').trim();
+    const id = slugify(text);
+    items.push({ id, text, level });
+  }
 
-// ISR: revalidate every 1 hour (for pipeline-generated pages)
+  if (items.length < 2) return null;
+  return <DesktopTOC headings={items} />;
+}
+
+export const dynamic = 'force-dynamic';
 export const revalidate = 3600;

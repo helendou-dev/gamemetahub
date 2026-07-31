@@ -1,10 +1,21 @@
 // ============================================
 // mdx-components.tsx — Custom MDX Components
-// Renders ProTip, CommonMistake, FAQ sections,
-// comparison tables, and other structured content.
+// Dark gaming theme — 2026 redesign
 // ============================================
 
 import React from 'react';
+import { slugify } from '@/lib/slugify';
+
+/** Extract plain text from React children for slug generation */
+function childrenToText(children: React.ReactNode): string {
+  if (typeof children === 'string') return children;
+  if (typeof children === 'number') return String(children);
+  if (Array.isArray(children)) return children.map(childrenToText).join('');
+  if (React.isValidElement(children) && children.props?.children) {
+    return childrenToText(children.props.children);
+  }
+  return '';
+}
 
 // ─── Callout: Pro Tip ───────────────────────
 export function ProTip({ title, children }: { title?: string; children: React.ReactNode }) {
@@ -45,7 +56,9 @@ interface FaqItem {
 export function FaqSection({ items }: { items: FaqItem[] }) {
   return (
     <div className="faq-section my-8">
-      <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b border-slate-200 pb-2" id="faq">
+      <h2 className="text-2xl font-bold mb-4 pb-2 scroll-mt-24"
+        style={{ color: 'var(--text-primary)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+        id="faq">
         Frequently Asked Questions
       </h2>
       {items.map((item, i) => (
@@ -110,12 +123,13 @@ export function StepList({ steps }: { steps: Step[] }) {
     <ol className="space-y-4 my-6 pl-0 list-none">
       {steps.map((step, i) => (
         <li key={i} className="flex gap-4">
-          <span className="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center font-bold text-sm mt-0.5">
+          <span className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm mt-0.5"
+            style={{ background: 'rgba(139,92,246,0.15)', color: '#a78bfa' }}>
             {i + 1}
           </span>
           <div>
-            <strong className="text-slate-900">{step.title}</strong>
-            <p className="text-slate-600 text-sm mt-1">{step.desc}</p>
+            <strong style={{ color: 'var(--text-primary)' }}>{step.title}</strong>
+            <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>{step.desc}</p>
           </div>
         </li>
       ))}
@@ -125,22 +139,20 @@ export function StepList({ steps }: { steps: Step[] }) {
 
 // ─── Platform Tag ───────────────────────────
 export function PlatformTag({ platform }: { platform: string }) {
-  const colors: Record<string, string> = {
-    PC: 'bg-slate-100 text-slate-700',
-    PS5: 'bg-blue-100 text-blue-700',
-    PS4: 'bg-blue-50 text-blue-600',
-    Xbox: 'bg-green-100 text-green-700',
-    Switch: 'bg-red-100 text-red-700',
-    Mobile: 'bg-yellow-100 text-yellow-700',
-    Steam: 'bg-indigo-100 text-indigo-700',
+  const colors: Record<string, { bg: string; color: string; border: string }> = {
+    PC: { bg: 'rgba(100,116,139,0.12)', color: '#94a3b8', border: 'rgba(100,116,139,0.2)' },
+    PS5: { bg: 'rgba(59,130,246,0.12)', color: '#60a5fa', border: 'rgba(59,130,246,0.2)' },
+    PS4: { bg: 'rgba(59,130,246,0.08)', color: '#93c5fd', border: 'rgba(59,130,246,0.15)' },
+    Xbox: { bg: 'rgba(16,185,129,0.12)', color: '#34d399', border: 'rgba(16,185,129,0.2)' },
+    Switch: { bg: 'rgba(244,63,94,0.12)', color: '#fb7185', border: 'rgba(244,63,94,0.2)' },
+    Mobile: { bg: 'rgba(245,158,11,0.12)', color: '#fbbf24', border: 'rgba(245,158,11,0.2)' },
+    Steam: { bg: 'rgba(99,102,241,0.12)', color: '#818cf8', border: 'rgba(99,102,241,0.2)' },
   };
 
+  const c = colors[platform] || { bg: 'rgba(100,116,139,0.08)', color: '#94a3b8', border: 'rgba(100,116,139,0.15)' };
   return (
-    <span
-      className={`inline-block px-2 py-0.5 rounded-full text-xs font-semibold ${
-        colors[platform] || 'bg-slate-100 text-slate-600'
-      }`}
-    >
+    <span className="inline-block px-2 py-0.5 rounded-full text-xs font-semibold"
+      style={{ background: c.bg, color: c.color, border: `1px solid ${c.border}` }}>
       {platform}
     </span>
   );
@@ -176,34 +188,61 @@ export const mdxComponents = {
   ComparisonTable,
   StepList,
   PlatformTag,
-  h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h2 className="mt-12 mb-4 text-2xl font-bold text-slate-900 border-b border-slate-200 pb-2 scroll-mt-24" {...props} />
-  ),
-  h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h3 className="mt-8 mb-3 text-xl font-semibold text-slate-800 scroll-mt-24" {...props} />
-  ),
+  h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
+    const text = childrenToText(props.children);
+    const id = props.id || (text ? slugify(text) : undefined);
+    return (
+      <h2 id={id} style={{
+        color: 'var(--text-primary)',
+        borderBottom: '1px solid rgba(255,255,255,0.06)',
+      }} className="mt-12 mb-4 text-2xl font-bold pb-2 scroll-mt-24" {...props} />
+    );
+  },
+  h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
+    const text = childrenToText(props.children);
+    const id = props.id || (text ? slugify(text) : undefined);
+    return (
+      <h3 id={id} style={{ color: 'var(--text-primary)' }} className="mt-8 mb-3 text-xl font-semibold scroll-mt-24" {...props} />
+    );
+  },
   table: (props: React.HTMLAttributes<HTMLTableElement>) => (
     <div className="overflow-x-auto my-6">
       <table className="w-full border-collapse text-left" {...props} />
     </div>
   ),
   th: (props: React.HTMLAttributes<HTMLTableHeaderCellElement>) => (
-    <th className="px-4 py-3 text-sm font-semibold text-slate-700 bg-slate-100 border-b-2 border-slate-200" {...props} />
+    <th style={{
+      color: 'var(--text-primary)',
+      background: 'var(--bg-surface)',
+      borderBottom: '2px solid rgba(255,255,255,0.1)',
+    }} className="px-4 py-3 text-sm font-semibold" {...props} />
   ),
   td: (props: React.HTMLAttributes<HTMLTableDataCellElement>) => (
-    <td className="px-4 py-3 border-b border-slate-100 text-sm" {...props} />
+    <td style={{
+      color: 'var(--text-secondary)',
+      borderBottom: '1px solid rgba(255,255,255,0.04)',
+    }} className="px-4 py-3 text-sm" {...props} />
   ),
   img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    <img className="rounded-xl my-6 mx-auto max-w-full shadow-md" loading="lazy" {...props} alt={props.alt || ''} />
+    <img className="rounded-xl my-6 mx-auto max-w-full" loading="lazy"
+      style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
+      {...props} alt={props.alt || ''} />
   ),
   a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
     <a
-      className="text-blue-600 underline decoration-blue-300 hover:decoration-blue-600 transition-colors"
+      style={{ color: '#a78bfa', textDecorationColor: 'rgba(139,92,246,0.3)' }}
+      className="underline hover:decoration-purple-400 transition-colors"
       {...props}
       {...(props.href?.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
     />
   ),
   blockquote: (props: React.HTMLAttributes<HTMLQuoteElement>) => (
-    <blockquote className="my-6 border-l-4 border-blue-400 bg-blue-50 pl-5 py-3 rounded-r-lg text-slate-600 italic" {...props} />
+    <blockquote className="my-6 border-l-4 pl-5 py-3 rounded-r-lg italic"
+      style={{
+        background: 'rgba(139,92,246,0.06)',
+        borderColor: 'rgba(139,92,246,0.3)',
+        color: 'var(--text-secondary)',
+      }}
+      {...props} />
   ),
 };
