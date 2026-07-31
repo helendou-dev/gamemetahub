@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  // Vercel 使用默认输出；本地/独立服务器使用 standalone
+  output: process.env.VERCEL ? undefined : 'standalone',
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'cdn.cloudflare.steamstatic.com' },
