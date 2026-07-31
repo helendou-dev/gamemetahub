@@ -9,6 +9,7 @@
 
 import { ImageResponse } from '@vercel/og';
 import { NextRequest } from 'next/server';
+import { siteConfig } from '@/lib/site-config';
 
 export const runtime = 'edge';
 
@@ -138,7 +139,7 @@ export async function GET(request: NextRequest) {
               fontSize: 20,
             }}
           >
-            gamemetahub.com
+            {siteConfig.domain}
           </div>
         </div>
       </div>

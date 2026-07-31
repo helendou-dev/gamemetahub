@@ -4,6 +4,7 @@
 // ============================================
 
 import { MetadataRoute } from 'next';
+import { siteConfig } from '@/lib/site-config';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -26,7 +27,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: '/',   // Block Common Crawl (used for AI training)
       },
     ],
-    sitemap: 'https://gamemetahub.com/sitemap.xml',
-    host: 'https://gamemetahub.com',
+    sitemap: `${siteConfig.url}/sitemap.xml`,
+    host: siteConfig.url,
   };
 }

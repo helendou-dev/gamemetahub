@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import './globals.css';
+import { siteConfig } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://gamemetahub.com'),
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: 'GameMetaHub — Game Guides, Tier Lists & Patch Notes',
     template: '%s | GameMetaHub',
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     title: 'GameMetaHub — Game Guides, Tier Lists & Patch Notes',
     description:
       'Tier lists, build guides, patch breakdowns, and bug fixes for the games everyone is playing right now. Updated daily.',
-    url: 'https://gamemetahub.com',
+    url: siteConfig.url,
     images: [
       {
         url: '/og?title=GameMetaHub+—+Level+Up+Your+Game%2C+Every+Day&type=default',

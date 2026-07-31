@@ -6,9 +6,10 @@
 
 import { MetadataRoute } from 'next';
 import { listAllContent } from '@/lib/content';
+import { siteConfig } from '@/lib/site-config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://gamemetahub.com';
+  const baseUrl = siteConfig.url;
   const pages = listAllContent();
 
   // Static pages (always indexed)

@@ -9,6 +9,7 @@ import type { Metadata } from 'next';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getContentByPath, listAllContent, readingTime, generatePageJsonLd } from '@/lib/content';
 import { slugify } from '@/lib/slugify';
+import { siteConfig } from '@/lib/site-config';
 import { mdxComponents, BreadcrumbJsonLd } from '@/components/mdx-components';
 import ArticleTOC from '@/components/article-toc';
 import DesktopTOC from '@/components/desktop-toc';
@@ -29,7 +30,7 @@ export async function generateMetadata({
   if (!content) return {};
 
   const { frontmatter } = content;
-  const url = `https://gamemetahub.com/games/${params.game}/${params.slug}`;
+  const url = `${siteConfig.url}/games/${params.game}/${params.slug}`;
 
   return {
     title: { absolute: frontmatter.title },
@@ -108,7 +109,7 @@ export default async function GameContentPage({
   if (!content) notFound();
 
   const { frontmatter } = content;
-  const url = `https://gamemetahub.com/games/${params.game}/${params.slug}`;
+  const url = `${siteConfig.url}/games/${params.game}/${params.slug}`;
   const jsonLd = generatePageJsonLd(frontmatter, url);
   const readTime = readingTime(content.content);
   const tags = (frontmatter.tags || []) as string[];
@@ -127,9 +128,9 @@ export default async function GameContentPage({
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <BreadcrumbJsonLd
         items={[
-          { name: 'Home', url: 'https://gamemetahub.com' },
-          { name: 'Games', url: 'https://gamemetahub.com/games' },
-          { name: gameName, url: `https://gamemetahub.com/games/${params.game}` },
+          { name: 'Home', url: siteConfig.url },
+          { name: 'Games', url: `${siteConfig.url}/games` },
+          { name: gameName, url: `${siteConfig.url}/games/${params.game}` },
           { name: frontmatter.title, url },
         ]}
       />

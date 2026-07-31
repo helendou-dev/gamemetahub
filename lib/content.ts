@@ -7,6 +7,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { siteConfig } from './site-config';
 
 export interface ContentFrontmatter {
   title: string;
@@ -206,7 +207,7 @@ export function generatePageJsonLd(
     publisher: {
       '@type': 'Organization',
       name: 'GameMetaHub',
-      url: 'https://gamemetahub.com',
+      url: siteConfig.url,
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
   };
@@ -221,7 +222,7 @@ export function contentToSitemapEntry(
   frontmatter: ContentFrontmatter,
 ) {
   return {
-    url: `https://gamemetahub.com/games/${game}/${slug}`,
+    url: `${siteConfig.url}/games/${game}/${slug}`,
     lastModified: frontmatter.modifiedDate || frontmatter.publishDate || frontmatter.date || new Date().toISOString(),
     changeFrequency: frontmatter.type === 'news' ? 'daily' : 'weekly',
     priority: frontmatter.type === 'guide' ? 0.9 : 0.7,
