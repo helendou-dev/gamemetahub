@@ -19,6 +19,9 @@ const TYPE_BADGE: Record<string, string> = {
 const GAME_META: Record<string, { name: string; image?: string }> = {
   'elden-ring': { name: 'Elden Ring', image: '/images/games/elden-ring-header.jpg' },
   'baldurs-gate-3': { name: "Baldur's Gate 3", image: '/images/games/baldurs-gate-3-header.jpg' },
+  'rampage-evolution': { name: 'Rampage Evolution', image: '/images/games/rampage-evolution-header.jpg' },
+  'sir-we-have-an-orc-problem': { name: 'Sir, We Have an Orc Problem', image: '/images/games/sir-we-have-an-orc-problem-header.jpg' },
+  'beast-of-reincarnation': { name: 'Beast of Reincarnation', image: '/images/games/beast-of-reincarnation-header.jpg' },
 };
 
 export default function GamesPage() {

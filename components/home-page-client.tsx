@@ -317,6 +317,8 @@ export default function HomePageClient({ allArticles }: { allArticles: ContentLi
               { href: '/games/elden-ring', name: 'Elden Ring', image: '/images/games/elden-ring-header.jpg', emoji: '⚔️' },
               { href: '/games/baldurs-gate-3', name: "Baldur's Gate 3", image: '/images/games/baldurs-gate-3-header.jpg', emoji: '🎲' },
               { href: '/games/rampage-evolution', name: 'Rampage Evolution', image: '/images/games/rampage-evolution-header.jpg', emoji: '🦖' },
+              { href: '/games/sir-we-have-an-orc-problem', name: 'Sir, We Have an Orc Problem', image: '/images/games/sir-we-have-an-orc-problem-header.jpg', emoji: '🧌' },
+              { href: '/games/beast-of-reincarnation', name: 'Beast of Reincarnation', image: '/images/games/beast-of-reincarnation-header.jpg', emoji: '🐺' },
             ].map((game, i) => {
               const count = allArticles.filter(a => a.game === game.href.split('/').pop()).length;
               return (

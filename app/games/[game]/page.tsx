@@ -45,6 +45,24 @@ const GAME_META: Record<string, {
     publisher: 'Tencent',
     tags: ['Survival', 'Open World', 'Evolution', 'PVP', 'Multiplayer'],
   },
+  'sir-we-have-an-orc-problem': {
+    name: 'Sir, We Have an Orc Problem',
+    headerImage: '/images/games/sir-we-have-an-orc-problem-header.jpg',
+    description: 'A progressive tower defense roguelite from Mumpitz Games. Defend against 100,000+ physics-driven orcs with turrets, lasers, and nukes in a satisfying fail-forward loop.',
+    releaseYear: '2026',
+    developer: 'Mumpitz Games',
+    publisher: 'Mumpitz Games',
+    tags: ['Tower Defense', 'Roguelite', 'Indie', 'Strategy', 'Incremental'],
+  },
+  'beast-of-reincarnation': {
+    name: 'Beast of Reincarnation',
+    headerImage: '/images/games/beast-of-reincarnation-header.jpg',
+    description: 'Game Freak\'s dark action RPG set in post-apocalyptic Japan. Fight alongside your dog Koo in a hybrid real-time and tactical combat system. Day one on Game Pass.',
+    releaseYear: '2026',
+    developer: 'Game Freak',
+    publisher: 'Fictions',
+    tags: ['Action RPG', 'Post-Apocalyptic', 'Single-Player', 'Soulslike', 'Story-Rich'],
+  },
 };
 
 export function generateStaticParams() {
