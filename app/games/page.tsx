@@ -22,6 +22,7 @@ const GAME_META: Record<string, { name: string; image?: string }> = {
   'rampage-evolution': { name: 'Rampage Evolution', image: '/images/games/rampage-evolution-header.jpg' },
   'sir-we-have-an-orc-problem': { name: 'Sir, We Have an Orc Problem', image: '/images/games/sir-we-have-an-orc-problem-header.jpg' },
   'beast-of-reincarnation': { name: 'Beast of Reincarnation', image: '/images/games/beast-of-reincarnation-header.jpg' },
+  'mistfall-hunter': { name: 'Mistfall Hunter', image: '/images/games/mistfall-hunter-header.jpg' },
 };
 
 export default function GamesPage() {

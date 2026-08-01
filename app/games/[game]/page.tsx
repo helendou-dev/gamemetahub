@@ -63,6 +63,15 @@ const GAME_META: Record<string, {
     publisher: 'Fictions',
     tags: ['Action RPG', 'Post-Apocalyptic', 'Single-Player', 'Soulslike', 'Story-Rich'],
   },
+  'mistfall-hunter': {
+    name: 'Mistfall Hunter',
+    headerImage: '/images/games/mistfall-hunter-header.jpg',
+    description: 'Bellring Games\' dark fantasy PvPvE extraction RPG. Six classes, lethal death penalty, crossplay on PC, PS5, and Xbox. Day one on Game Pass.',
+    releaseYear: '2026',
+    developer: 'Bellring Games',
+    publisher: 'Skystone Games',
+    tags: ['Extraction RPG', 'PvPvE', 'Dark Fantasy', 'Multiplayer', 'Soulslike'],
+  },
 };
 
 export function generateStaticParams() {
