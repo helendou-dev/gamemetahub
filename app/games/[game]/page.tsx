@@ -81,6 +81,15 @@ const GAME_META: Record<string, {
     publisher: 'Riot Games',
     tags: ['MOBA', 'Competitive', 'Multiplayer', 'Strategy', 'Esports'],
   },
+  'black-myth-zhong-kui': {
+    name: 'Black Myth: Zhong Kui',
+    headerImage: '/images/games/black-myth-zhong-kui-header-v20260802.jpg',
+    description: 'Game Science\'s next Black Myth title — a dark Chinese mythology ARPG featuring Zhong Kui, the legendary ghost-hunting deity. Announced at Gamescom 2025. Coming to PC, PS5, and Xbox Series X/S.',
+    releaseYear: 'TBA',
+    developer: 'Game Science',
+    publisher: 'Game Science',
+    tags: ['Action RPG', 'Chinese Mythology', 'Dark Fantasy', 'Soulslike', 'Single-Player'],
+  },
 };
 
 export function generateStaticParams() {

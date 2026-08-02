@@ -24,6 +24,7 @@ const GAME_META: Record<string, { name: string; image?: string }> = {
   'beast-of-reincarnation': { name: 'Beast of Reincarnation', image: '/images/games/beast-of-reincarnation-header.jpg' },
   'mistfall-hunter': { name: 'Mistfall Hunter', image: '/images/games/mistfall-hunter-header.jpg' },
   'league-of-legends': { name: 'League of Legends', image: '/images/games/league-of-legends-header.jpg?v=20260802' },
+  'black-myth-zhong-kui': { name: 'Black Myth: Zhong Kui', image: '/images/games/black-myth-zhong-kui-header-v20260802.jpg' },
 };
 
 export default function GamesPage() {
