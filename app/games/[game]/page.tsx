@@ -72,6 +72,15 @@ const GAME_META: Record<string, {
     publisher: 'Skystone Games',
     tags: ['Extraction RPG', 'PvPvE', 'Dark Fantasy', 'Multiplayer', 'Soulslike'],
   },
+  'league-of-legends': {
+    name: 'League of Legends',
+    headerImage: '/images/games/league-of-legends-header.jpg',
+    description: 'Riot Games\' genre-defining MOBA. Five-on-five team fights, ever-evolving champions, and a ranked ladder that has defined competitive PC gaming for over 15 years.',
+    releaseYear: '2009',
+    developer: 'Riot Games',
+    publisher: 'Riot Games',
+    tags: ['MOBA', 'Competitive', 'Multiplayer', 'Strategy', 'Esports'],
+  },
 };
 
 export function generateStaticParams() {
