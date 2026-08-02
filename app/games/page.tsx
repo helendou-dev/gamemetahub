@@ -23,7 +23,7 @@ const GAME_META: Record<string, { name: string; image?: string }> = {
   'sir-we-have-an-orc-problem': { name: 'Sir, We Have an Orc Problem', image: '/images/games/sir-we-have-an-orc-problem-header.jpg' },
   'beast-of-reincarnation': { name: 'Beast of Reincarnation', image: '/images/games/beast-of-reincarnation-header.jpg' },
   'mistfall-hunter': { name: 'Mistfall Hunter', image: '/images/games/mistfall-hunter-header.jpg' },
-  'league-of-legends': { name: 'League of Legends', image: '/images/games/league-of-legends-header.jpg' },
+  'league-of-legends': { name: 'League of Legends', image: '/images/games/league-of-legends-header.jpg?v=20260802' },
 };
 
 export default function GamesPage() {

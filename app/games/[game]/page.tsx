@@ -74,7 +74,7 @@ const GAME_META: Record<string, {
   },
   'league-of-legends': {
     name: 'League of Legends',
-    headerImage: '/images/games/league-of-legends-header.jpg',
+    headerImage: '/images/games/league-of-legends-header.jpg?v=20260802',
     description: 'Riot Games\' genre-defining MOBA. Five-on-five team fights, ever-evolving champions, and a ranked ladder that has defined competitive PC gaming for over 15 years.',
     releaseYear: '2009',
     developer: 'Riot Games',

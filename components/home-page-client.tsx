@@ -320,7 +320,7 @@ export default function HomePageClient({ allArticles }: { allArticles: ContentLi
               { href: '/games/sir-we-have-an-orc-problem', name: 'Sir, We Have an Orc Problem', image: '/images/games/sir-we-have-an-orc-problem-header.jpg', emoji: '🧌' },
               { href: '/games/beast-of-reincarnation', name: 'Beast of Reincarnation', image: '/images/games/beast-of-reincarnation-header.jpg', emoji: '🐺' },
               { href: '/games/mistfall-hunter', name: 'Mistfall Hunter', image: '/images/games/mistfall-hunter-header.jpg', emoji: '🌫️' },
-              { href: '/games/league-of-legends', name: 'League of Legends', image: '/images/games/league-of-legends-header.jpg', emoji: '🏆' },
+              { href: '/games/league-of-legends', name: 'League of Legends', image: '/images/games/league-of-legends-header.jpg?v=20260802', emoji: '🏆' },
             ].map((game, i) => {
               const count = allArticles.filter(a => a.game === game.href.split('/').pop()).length;
               return (
