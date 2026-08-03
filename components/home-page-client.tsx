@@ -316,14 +316,14 @@ export default function HomePageClient({ allArticles }: { allArticles: ContentLi
             {[
               { href: '/games/elden-ring', name: 'Elden Ring', image: '/images/games/elden-ring-header-v20260803.jpg', emoji: '⚔️' },
               { href: '/games/baldurs-gate-3', name: "Baldur's Gate 3", image: '/images/games/baldurs-gate-3-header-v20260803.jpg', emoji: '🎲' },
-              { href: '/games/rampage-evolution', name: 'Rampage Evolution', image: '/images/games/rampage-evolution-header.jpg', emoji: '🦖' },
-              { href: '/games/sir-we-have-an-orc-problem', name: 'Sir, We Have an Orc Problem', image: '/images/games/sir-we-have-an-orc-problem-header.jpg', emoji: '🧌' },
-              { href: '/games/beast-of-reincarnation', name: 'Beast of Reincarnation', image: '/images/games/beast-of-reincarnation-header.jpg', emoji: '🐺' },
-              { href: '/games/mistfall-hunter', name: 'Mistfall Hunter', image: '/images/games/mistfall-hunter-header.jpg', emoji: '🌫️' },
-              { href: '/games/league-of-legends', name: 'League of Legends', image: '/images/games/league-of-legends-header-v20260802.jpg', emoji: '🏆' },
-              { href: '/games/black-myth-zhong-kui', name: 'Black Myth: Zhong Kui', image: '/images/games/black-myth-zhong-kui-header-v20260802.jpg', emoji: '👹' },
+              { href: '/games/rampage-evolution', name: 'Rampage Evolution', image: '/images/games/rampage-evolution-header-v20260803.jpg', emoji: '🦖' },
+              { href: '/games/sir-we-have-an-orc-problem', name: 'Sir, We Have an Orc Problem', image: '/images/games/sir-we-have-an-orc-problem-header-v20260803.jpg', emoji: '🧌' },
+              { href: '/games/beast-of-reincarnation', name: 'Beast of Reincarnation', image: '/images/games/beast-of-reincarnation-header-v20260803.jpg', emoji: '🐺' },
+              { href: '/games/mistfall-hunter', name: 'Mistfall Hunter', image: '/images/games/mistfall-hunter-header-v20260803.jpg', emoji: '🌫️' },
+              { href: '/games/league-of-legends', name: 'League of Legends', image: '/images/games/league-of-legends-header-v20260803.jpg', emoji: '🏆' },
+              { href: '/games/black-myth-zhong-kui', name: 'Black Myth: Zhong Kui', image: '/images/games/black-myth-zhong-kui-header-v20260803.jpg', emoji: '👹' },
               { href: '/games/silent-hill-f', name: 'Silent Hill f', image: '/images/games/silent-hill-f-header-v20260803.jpg', emoji: '🌸' },
-              { href: '/games/palworld', name: 'Palworld', image: '/images/games/palworld-header.jpg', emoji: '🐾' },
+              { href: '/games/palworld', name: 'Palworld', image: '/images/games/palworld-header-v20260803.jpg', emoji: '🐾' },
             ].map((game, i) => {
               const count = allArticles.filter(a => a.game === game.href.split('/').pop()).length;
               return (
