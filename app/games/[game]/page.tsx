@@ -90,6 +90,24 @@ const GAME_META: Record<string, {
     publisher: 'Game Science',
     tags: ['Action RPG', 'Chinese Mythology', 'Dark Fantasy', 'Soulslike', 'Single-Player'],
   },
+  'silent-hill-f': {
+    name: 'Silent Hill f',
+    headerImage: '/images/games/silent-hill-f-header-v20260803.jpg',
+    description: 'Konami\'s haunting return to Silent Hill — a psychological horror masterpiece set in 1960s Japan. Play as Hinako Shimizu in the fog-shrouded town of Ebisugaoka. Five endings, deep NG+ system, and one of 2025\'s most acclaimed horror games.',
+    releaseYear: '2025',
+    developer: 'Konami',
+    publisher: 'Konami',
+    tags: ['Survival Horror', 'Psychological Horror', 'Single-Player', 'Story-Rich', 'Japanese Horror'],
+  },
+  'palworld': {
+    name: 'Palworld',
+    headerImage: '/images/games/palworld-header.jpg',
+    description: "Pocketpair's survival crafting phenomenon — catch, breed, and battle 287 Pals across floating islands and the World Tree. 40 million players. 1.0 full release July 2026.",
+    releaseYear: '2026',
+    developer: 'Pocketpair',
+    publisher: 'Pocketpair',
+    tags: ['Survival', 'Crafting', 'Creature Collection', 'Open World', 'Multiplayer'],
+  },
 };
 
 export function generateStaticParams() {

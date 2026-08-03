@@ -322,6 +322,8 @@ export default function HomePageClient({ allArticles }: { allArticles: ContentLi
               { href: '/games/mistfall-hunter', name: 'Mistfall Hunter', image: '/images/games/mistfall-hunter-header.jpg', emoji: '🌫️' },
               { href: '/games/league-of-legends', name: 'League of Legends', image: '/images/games/league-of-legends-header.jpg?v=20260802', emoji: '🏆' },
               { href: '/games/black-myth-zhong-kui', name: 'Black Myth: Zhong Kui', image: '/images/games/black-myth-zhong-kui-header-v20260802.jpg', emoji: '👹' },
+              { href: '/games/silent-hill-f', name: 'Silent Hill f', image: '/images/games/silent-hill-f-header-v20260803.jpg', emoji: '🌸' },
+              { href: '/games/palworld', name: 'Palworld', image: '/images/games/palworld-header.jpg', emoji: '🐾' },
             ].map((game, i) => {
               const count = allArticles.filter(a => a.game === game.href.split('/').pop()).length;
               return (

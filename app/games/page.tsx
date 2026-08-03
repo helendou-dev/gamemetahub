@@ -25,6 +25,8 @@ const GAME_META: Record<string, { name: string; image?: string }> = {
   'mistfall-hunter': { name: 'Mistfall Hunter', image: '/images/games/mistfall-hunter-header.jpg' },
   'league-of-legends': { name: 'League of Legends', image: '/images/games/league-of-legends-header.jpg?v=20260802' },
   'black-myth-zhong-kui': { name: 'Black Myth: Zhong Kui', image: '/images/games/black-myth-zhong-kui-header-v20260802.jpg' },
+  'silent-hill-f': { name: 'Silent Hill f', image: '/images/games/silent-hill-f-header-v20260803.jpg' },
+  'palworld': { name: 'Palworld', image: '/images/games/palworld-header.jpg' },
 };
 
 export default function GamesPage() {
