@@ -17,13 +17,13 @@ const TYPE_BADGE: Record<string, string> = {
 };
 
 const GAME_META: Record<string, { name: string; image?: string }> = {
-  'elden-ring': { name: 'Elden Ring', image: '/images/games/elden-ring-header.jpg' },
-  'baldurs-gate-3': { name: "Baldur's Gate 3", image: '/images/games/baldurs-gate-3-header.jpg' },
+  'elden-ring': { name: 'Elden Ring', image: '/images/games/elden-ring-header-v20260803.jpg' },
+  'baldurs-gate-3': { name: "Baldur's Gate 3", image: '/images/games/baldurs-gate-3-header-v20260803.jpg' },
   'rampage-evolution': { name: 'Rampage Evolution', image: '/images/games/rampage-evolution-header.jpg' },
   'sir-we-have-an-orc-problem': { name: 'Sir, We Have an Orc Problem', image: '/images/games/sir-we-have-an-orc-problem-header.jpg' },
   'beast-of-reincarnation': { name: 'Beast of Reincarnation', image: '/images/games/beast-of-reincarnation-header.jpg' },
   'mistfall-hunter': { name: 'Mistfall Hunter', image: '/images/games/mistfall-hunter-header.jpg' },
-  'league-of-legends': { name: 'League of Legends', image: '/images/games/league-of-legends-header.jpg?v=20260802' },
+  'league-of-legends': { name: 'League of Legends', image: '/images/games/league-of-legends-header-v20260802.jpg' },
   'black-myth-zhong-kui': { name: 'Black Myth: Zhong Kui', image: '/images/games/black-myth-zhong-kui-header-v20260802.jpg' },
   'silent-hill-f': { name: 'Silent Hill f', image: '/images/games/silent-hill-f-header-v20260803.jpg' },
   'palworld': { name: 'Palworld', image: '/images/games/palworld-header.jpg' },

@@ -20,7 +20,7 @@ const GAME_META: Record<string, {
 }> = {
   'elden-ring': {
     name: 'Elden Ring',
-    headerImage: '/images/games/elden-ring-header.jpg',
+    headerImage: '/images/games/elden-ring-header-v20260803.jpg',
     description: 'FromSoftware\'s masterpiece — an open-world action RPG set in the Lands Between. Explore a vast dark fantasy world, face demigods, and become the Elden Lord.',
     releaseYear: '2022',
     developer: 'FromSoftware',
@@ -29,7 +29,7 @@ const GAME_META: Record<string, {
   },
   'baldurs-gate-3': {
     name: "Baldur's Gate 3",
-    headerImage: '/images/games/baldurs-gate-3-header.jpg',
+    headerImage: '/images/games/baldurs-gate-3-header-v20260803.jpg',
     description: 'Larian Studios\' award-winning CRPG set in the Dungeons & Dragons universe. Experience deep storytelling, tactical turn-based combat, and unprecedented player freedom.',
     releaseYear: '2023',
     developer: 'Larian Studios',
@@ -74,7 +74,7 @@ const GAME_META: Record<string, {
   },
   'league-of-legends': {
     name: 'League of Legends',
-    headerImage: '/images/games/league-of-legends-header.jpg?v=20260802',
+    headerImage: '/images/games/league-of-legends-header-v20260802.jpg',
     description: 'Riot Games\' genre-defining MOBA. Five-on-five team fights, ever-evolving champions, and a ranked ladder that has defined competitive PC gaming for over 15 years.',
     releaseYear: '2009',
     developer: 'Riot Games',
