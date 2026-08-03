@@ -8,7 +8,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import { getContentByPath, listAllContent, readingTime, generatePageJsonLd } from '@/lib/content';
+import { getContentByPath, listAllContent, readingTime, generatePageJsonLd, generateFaqSchema } from '@/lib/content';
 import { slugify } from '@/lib/slugify';
 import { siteConfig } from '@/lib/site-config';
 import { mdxComponents, BreadcrumbJsonLd } from '@/components/mdx-components';
@@ -111,7 +111,8 @@ export default async function GameContentPage({
 
   const { frontmatter } = content;
   const url = `${siteConfig.url}/games/${params.game}/${params.slug}`;
-  const jsonLd = generatePageJsonLd(frontmatter, url);
+  const jsonLd = generatePageJsonLd(frontmatter, url, content.content);
+  const faqJsonLd = generateFaqSchema(frontmatter, url, content.content);
   const readTime = readingTime(content.content);
   const tags = (frontmatter.tags || []) as string[];
   const platforms = (frontmatter.platforms || []) as string[];
@@ -127,6 +128,9 @@ export default async function GameContentPage({
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {faqJsonLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      )}
       <BreadcrumbJsonLd
         items={[
           { name: 'Home', url: siteConfig.url },

@@ -62,6 +62,39 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Organization + Website structured data for Google's Knowledge Graph & Sitelinks Searchbox */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                '@context': 'https://schema.org',
+                '@type': 'Organization',
+                name: 'GameMetaHub',
+                url: 'https://www.gamemetahub.com',
+                description:
+                  'Trending game guides, tier lists, and gaming news — updated daily by real players.',
+                foundingDate: '2026',
+                logo: 'https://www.gamemetahub.com/favicon.ico',
+              },
+              {
+                '@context': 'https://schema.org',
+                '@type': 'WebSite',
+                name: 'GameMetaHub',
+                url: 'https://www.gamemetahub.com',
+                potentialAction: {
+                  '@type': 'SearchAction',
+                  target: {
+                    '@type': 'EntryPoint',
+                    urlTemplate:
+                      'https://www.gamemetahub.com/search?q={search_term_string}',
+                  },
+                  'query-input': 'required name=search_term_string',
+                },
+              },
+            ]),
+          }}
+        />
       </head>
       <body className="min-h-screen flex flex-col" style={{ background: 'var(--bg-deep)' }}>
         <GoogleAnalytics gaId={siteConfig.gaId} />

@@ -182,10 +182,12 @@ export function readingTime(content: string): number {
 
 /**
  * Generate schema.org JSON-LD for a content page.
+ * Enhanced with image, wordCount, inLanguage, and FAQ auto-detection.
  */
 export function generatePageJsonLd(
   frontmatter: ContentFrontmatter,
   url: string,
+  rawContent?: string,
 ): Record<string, unknown> {
   // If the frontmatter already has embedded JSON-LD, use it (parse if stored as string)
   if (frontmatter.jsonLd) {
@@ -193,23 +195,99 @@ export function generatePageJsonLd(
     if (parsed) return parsed;
   }
 
-  // Otherwise generate a basic Article schema
-  return {
+  const publishDate = frontmatter.publishDate || frontmatter.date;
+  const modifiedDate = frontmatter.modifiedDate || publishDate;
+  const wordCount = rawContent ? rawContent.split(/\s+/).length : undefined;
+  const heroImage = (frontmatter.image as string) || '';
+
+  // Base Article schema
+  const article: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: frontmatter.title,
-    description: frontmatter.description || '',
-    datePublished: frontmatter.publishDate || frontmatter.date,
-    dateModified: frontmatter.modifiedDate || frontmatter.publishDate || frontmatter.date,
-    author: frontmatter.author
-      ? { '@type': 'Person', name: frontmatter.author }
-      : { '@type': 'Organization', name: 'GameMetaHub' },
+    description: frontmatter.description || frontmatter.metaDescription || '',
+    datePublished: publishDate,
+    dateModified: modifiedDate,
+    inLanguage: 'en',
+    author: frontmatter.author && frontmatter.author !== 'GameMetaHub'
+      ? { '@type': 'Person', name: frontmatter.author, url: `${siteConfig.url}/about` }
+      : { '@type': 'Organization', name: 'GameMetaHub', url: siteConfig.url },
     publisher: {
       '@type': 'Organization',
       name: 'GameMetaHub',
       url: siteConfig.url,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteConfig.url}/favicon.ico`,
+      },
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  };
+
+  // Add image if available (critical for Google Discover)
+  if (heroImage) {
+    article.image = heroImage.startsWith('http')
+      ? heroImage
+      : `${siteConfig.url}${heroImage}`;
+  }
+
+  // Add word count if available
+  if (wordCount) {
+    article.wordCount = wordCount;
+  }
+
+  return article;
+}
+
+/**
+ * Auto-detect FAQ sections in article content and generate FAQPage schema.
+ * Looks for h2 headings containing "FAQ" or "Frequently Asked" followed by Q&A pairs.
+ */
+export function generateFaqSchema(
+  frontmatter: ContentFrontmatter,
+  url: string,
+  rawContent: string,
+): Record<string, unknown> | null {
+  // Only process if content has an FAQ section
+  const hasFaqSection = /^#{1,3}\s+(FAQ|Frequently Asked Questions?)/mi.test(rawContent);
+  if (!hasFaqSection) return null;
+
+  // Extract Q&A pairs: look for lines starting with "### " as questions,
+  // followed by the content until the next "### " or end of section
+  const faqSectionStart = rawContent.search(/^#{1,3}\s+(FAQ|Frequently Asked Questions?)/mi);
+  if (faqSectionStart === -1) return null;
+
+  const faqSection = rawContent.slice(faqSectionStart);
+  const qaPairs: { question: string; answer: string }[] = [];
+
+  // Match "### Question text?" followed by answer content
+  const qaRegex = /^###\s+(.+?)(?:\s*)$\s*\n([\s\S]*?)(?=\n###\s|\n##\s|$)/gm;
+  let match;
+  let count = 0;
+  while ((match = qaRegex.exec(faqSection)) !== null && count < 10) {
+    const question = match[1].replace(/[`*_~]/g, '').trim();
+    // Strip markdown formatting from answer, limit to ~300 chars
+    let answer = match[2].replace(/[`*_~\[\]]/g, '').replace(/\n+/g, ' ').trim();
+    if (answer.length > 300) answer = answer.slice(0, 297) + '...';
+    if (question && answer) {
+      qaPairs.push({ question, answer });
+      count++;
+    }
+  }
+
+  if (qaPairs.length === 0) return null;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: qaPairs.map((qa) => ({
+      '@type': 'Question',
+      name: qa.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: qa.answer,
+      },
+    })),
   };
 }
 
