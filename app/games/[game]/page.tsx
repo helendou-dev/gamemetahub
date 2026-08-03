@@ -74,7 +74,7 @@ const GAME_META: Record<string, {
   },
   'league-of-legends': {
     name: 'League of Legends',
-    headerImage: '/images/games/league-of-legends-header-v20260802.jpg',
+    headerImage: '/images/games/league-of-legends-header-v20260803.jpg',
     description: 'Riot Games\' genre-defining MOBA. Five-on-five team fights, ever-evolving champions, and a ranked ladder that has defined competitive PC gaming for over 15 years.',
     releaseYear: '2009',
     developer: 'Riot Games',
@@ -83,7 +83,7 @@ const GAME_META: Record<string, {
   },
   'black-myth-zhong-kui': {
     name: 'Black Myth: Zhong Kui',
-    headerImage: '/images/games/black-myth-zhong-kui-header-v20260802.jpg',
+    headerImage: '/images/games/black-myth-zhong-kui-header-v20260803.jpg',
     description: 'Game Science\'s next Black Myth title — a dark Chinese mythology ARPG featuring Zhong Kui, the legendary ghost-hunting deity. Announced at Gamescom 2025. Coming to PC, PS5, and Xbox Series X/S.',
     releaseYear: 'TBA',
     developer: 'Game Science',
