@@ -9,6 +9,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getContentByPath, listAllContent, readingTime, generatePageJsonLd, generateFaqSchema } from '@/lib/content';
+import { ALL_GAMES } from '@/lib/game-data';
 import { slugify } from '@/lib/slugify';
 import { siteConfig } from '@/lib/site-config';
 import { mdxComponents, BreadcrumbJsonLd } from '@/components/mdx-components';
@@ -116,7 +117,7 @@ export default async function GameContentPage({
   const readTime = readingTime(content.content);
   const tags = (frontmatter.tags || []) as string[];
   const platforms = (frontmatter.platforms || []) as string[];
-  const gameName = frontmatter.game || params.game.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+  const gameName = ALL_GAMES[params.game]?.name || frontmatter.game || params.game.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
   const typeLabel = TYPE_LABEL[frontmatter.type || ''] || '🎮 Article';
   const typeBadge = TYPE_BADGE[frontmatter.type || ''] || 'type-badge-guide';
   const heroImage = (frontmatter.image as string) || '';
