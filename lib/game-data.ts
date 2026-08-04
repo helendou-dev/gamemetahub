@@ -105,6 +105,17 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Action RPG', 'Chinese Mythology', 'Dark Fantasy', 'Soulslike', 'Single-Player'],
     emoji: '👹',
   },
+  'monster-hunter-wilds': {
+    name: 'Monster Hunter Wilds',
+    slug: 'monster-hunter-wilds',
+    headerImage: '/images/games/monster-hunter-wilds-header-v20260804.jpg',
+    description: "Capcom's flagship hunting action RPG — explore dynamic ecosystems, hunt massive monsters solo or in co-op, and craft powerful gear. The next evolution of the Monster Hunter series, with cross-platform play on PC, PS5, and Xbox.",
+    releaseYear: '2025',
+    developer: 'Capcom',
+    publisher: 'Capcom',
+    tags: ['Action RPG', 'Co-op', 'Hunting', 'Open World', 'Multiplayer'],
+    emoji: '🐉',
+  },
   'silent-hill-f': {
     name: 'Silent Hill f',
     slug: 'silent-hill-f',
@@ -139,6 +150,7 @@ export const POPULAR_GAMES_ORDER: string[] = [
   'mistfall-hunter',
   'league-of-legends',
   'black-myth-zhong-kui',
+  'monster-hunter-wilds',
   'silent-hill-f',
   'palworld',
 ];
