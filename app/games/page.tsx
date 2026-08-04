@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { listAllContent, type ContentListItem } from '@/lib/content';
+import { getGameCard } from '@/lib/game-data';
 
 export const metadata = {
   title: 'All Games — GameMetaHub',
@@ -16,18 +17,6 @@ const TYPE_BADGE: Record<string, string> = {
   game_release: 'type-badge-release',
 };
 
-const GAME_META: Record<string, { name: string; image?: string }> = {
-  'elden-ring': { name: 'Elden Ring', image: '/images/games/elden-ring-header-v20260803.jpg' },
-  'baldurs-gate-3': { name: "Baldur's Gate 3", image: '/images/games/baldurs-gate-3-header-v20260803.jpg' },
-  'rampage-evolution': { name: 'Rampage Evolution', image: '/images/games/rampage-evolution-header-v20260803.jpg' },
-  'sir-we-have-an-orc-problem': { name: 'Sir, We Have an Orc Problem', image: '/images/games/sir-we-have-an-orc-problem-header-v20260803.jpg' },
-  'beast-of-reincarnation': { name: 'Beast of Reincarnation', image: '/images/games/beast-of-reincarnation-header-v20260803.jpg' },
-  'mistfall-hunter': { name: 'Mistfall Hunter', image: '/images/games/mistfall-hunter-header-v20260803.jpg' },
-  'league-of-legends': { name: 'League of Legends', image: '/images/games/league-of-legends-header-v20260803.jpg' },
-  'black-myth-zhong-kui': { name: 'Black Myth: Zhong Kui', image: '/images/games/black-myth-zhong-kui-header-v20260803.jpg' },
-  'silent-hill-f': { name: 'Silent Hill f', image: '/images/games/silent-hill-f-header-v20260803.jpg' },
-  'palworld': { name: 'Palworld', image: '/images/games/palworld-header-v20260803.jpg' },
-};
 
 export default function GamesPage() {
   const allArticles = listAllContent();
@@ -55,7 +44,7 @@ export default function GamesPage() {
       </div>
 
       {Array.from(gameMap.entries()).map(([game, articles]) => {
-        const meta = GAME_META[game];
+        const meta = getGameCard(game);
 
         return (
           <section key={game} className="mb-12">

@@ -7,108 +7,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { listAllContent, ContentListItem } from '@/lib/content';
-
-// Game metadata lookup — extend as you add more games
-const GAME_META: Record<string, {
-  name: string;
-  headerImage?: string;
-  description: string;
-  releaseYear: string;
-  developer: string;
-  publisher: string;
-  tags: string[];
-}> = {
-  'elden-ring': {
-    name: 'Elden Ring',
-    headerImage: '/images/games/elden-ring-header-v20260803.jpg',
-    description: 'FromSoftware\'s masterpiece — an open-world action RPG set in the Lands Between. Explore a vast dark fantasy world, face demigods, and become the Elden Lord.',
-    releaseYear: '2022',
-    developer: 'FromSoftware',
-    publisher: 'Bandai Namco',
-    tags: ['Action RPG', 'Open World', 'Soulslike', 'Dark Fantasy'],
-  },
-  'baldurs-gate-3': {
-    name: "Baldur's Gate 3",
-    headerImage: '/images/games/baldurs-gate-3-header-v20260803.jpg',
-    description: 'Larian Studios\' award-winning CRPG set in the Dungeons & Dragons universe. Experience deep storytelling, tactical turn-based combat, and unprecedented player freedom.',
-    releaseYear: '2023',
-    developer: 'Larian Studios',
-    publisher: 'Larian Studios',
-    tags: ['CRPG', 'Turn-Based', 'D&D', 'Fantasy', 'Story-Rich'],
-  },
-  'rampage-evolution': {
-    name: 'Rampage Evolution',
-    headerImage: '/images/games/rampage-evolution-header.jpg',
-    description: 'Tencent\'s massive 2026 summer hit — open-world survival PVP with mutation-based evolution, territory control, and base building. 40 million pre-registrations worldwide.',
-    releaseYear: '2026',
-    developer: 'Tencent',
-    publisher: 'Tencent',
-    tags: ['Survival', 'Open World', 'Evolution', 'PVP', 'Multiplayer'],
-  },
-  'sir-we-have-an-orc-problem': {
-    name: 'Sir, We Have an Orc Problem',
-    headerImage: '/images/games/sir-we-have-an-orc-problem-header.jpg',
-    description: 'A progressive tower defense roguelite from Mumpitz Games. Defend against 100,000+ physics-driven orcs with turrets, lasers, and nukes in a satisfying fail-forward loop.',
-    releaseYear: '2026',
-    developer: 'Mumpitz Games',
-    publisher: 'Mumpitz Games',
-    tags: ['Tower Defense', 'Roguelite', 'Indie', 'Strategy', 'Incremental'],
-  },
-  'beast-of-reincarnation': {
-    name: 'Beast of Reincarnation',
-    headerImage: '/images/games/beast-of-reincarnation-header.jpg',
-    description: 'Game Freak\'s dark action RPG set in post-apocalyptic Japan. Fight alongside your dog Koo in a hybrid real-time and tactical combat system. Day one on Game Pass.',
-    releaseYear: '2026',
-    developer: 'Game Freak',
-    publisher: 'Fictions',
-    tags: ['Action RPG', 'Post-Apocalyptic', 'Single-Player', 'Soulslike', 'Story-Rich'],
-  },
-  'mistfall-hunter': {
-    name: 'Mistfall Hunter',
-    headerImage: '/images/games/mistfall-hunter-header.jpg',
-    description: 'Bellring Games\' dark fantasy PvPvE extraction RPG. Six classes, lethal death penalty, crossplay on PC, PS5, and Xbox. Day one on Game Pass.',
-    releaseYear: '2026',
-    developer: 'Bellring Games',
-    publisher: 'Skystone Games',
-    tags: ['Extraction RPG', 'PvPvE', 'Dark Fantasy', 'Multiplayer', 'Soulslike'],
-  },
-  'league-of-legends': {
-    name: 'League of Legends',
-    headerImage: '/images/games/league-of-legends-header-v20260803.jpg',
-    description: 'Riot Games\' genre-defining MOBA. Five-on-five team fights, ever-evolving champions, and a ranked ladder that has defined competitive PC gaming for over 15 years.',
-    releaseYear: '2009',
-    developer: 'Riot Games',
-    publisher: 'Riot Games',
-    tags: ['MOBA', 'Competitive', 'Multiplayer', 'Strategy', 'Esports'],
-  },
-  'black-myth-zhong-kui': {
-    name: 'Black Myth: Zhong Kui',
-    headerImage: '/images/games/black-myth-zhong-kui-header-v20260803.jpg',
-    description: 'Game Science\'s next Black Myth title — a dark Chinese mythology ARPG featuring Zhong Kui, the legendary ghost-hunting deity. Announced at Gamescom 2025. Coming to PC, PS5, and Xbox Series X/S.',
-    releaseYear: 'TBA',
-    developer: 'Game Science',
-    publisher: 'Game Science',
-    tags: ['Action RPG', 'Chinese Mythology', 'Dark Fantasy', 'Soulslike', 'Single-Player'],
-  },
-  'silent-hill-f': {
-    name: 'Silent Hill f',
-    headerImage: '/images/games/silent-hill-f-header-v20260803.jpg',
-    description: 'Konami\'s haunting return to Silent Hill — a psychological horror masterpiece set in 1960s Japan. Play as Hinako Shimizu in the fog-shrouded town of Ebisugaoka. Five endings, deep NG+ system, and one of 2025\'s most acclaimed horror games.',
-    releaseYear: '2025',
-    developer: 'Konami',
-    publisher: 'Konami',
-    tags: ['Survival Horror', 'Psychological Horror', 'Single-Player', 'Story-Rich', 'Japanese Horror'],
-  },
-  'palworld': {
-    name: 'Palworld',
-    headerImage: '/images/games/palworld-header.jpg',
-    description: "Pocketpair's survival crafting phenomenon — catch, breed, and battle 287 Pals across floating islands and the World Tree. 40 million players. 1.0 full release July 2026.",
-    releaseYear: '2026',
-    developer: 'Pocketpair',
-    publisher: 'Pocketpair',
-    tags: ['Survival', 'Crafting', 'Creature Collection', 'Open World', 'Multiplayer'],
-  },
-};
+import { ALL_GAMES } from '@/lib/game-data';
 
 export function generateStaticParams() {
   const allArticles = listAllContent();
@@ -121,7 +20,7 @@ export async function generateMetadata({
 }: {
   params: { game: string };
 }): Promise<Metadata> {
-  const meta = GAME_META[params.game];
+  const meta = ALL_GAMES[params.game];
   if (!meta) return {};
 
   return {
@@ -247,7 +146,7 @@ export default function GameHubPage({
 }: {
   params: { game: string };
 }) {
-  const meta = GAME_META[params.game];
+  const meta = ALL_GAMES[params.game];
   if (!meta) notFound();
 
   const allArticles = listAllContent();
@@ -428,7 +327,7 @@ export default function GameHubPage({
           </p>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {Object.entries(GAME_META)
+            {Object.entries(ALL_GAMES)
               .filter(([slug]) => slug !== params.game)
               .map(([slug, gameMeta]) => (
                 <Link

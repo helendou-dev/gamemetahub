@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import type { ContentListItem } from '@/lib/content';
+import { getPopularGames } from '@/lib/game-data';
 
 const TYPE_CONFIG: Record<string, { emoji: string; label: string; badgeClass: string }> = {
   guide: { emoji: '📖', label: 'Guide', badgeClass: 'type-badge-guide' },
@@ -313,28 +314,17 @@ export default function HomePageClient({ allArticles }: { allArticles: ContentLi
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { href: '/games/elden-ring', name: 'Elden Ring', image: '/images/games/elden-ring-header-v20260803.jpg', emoji: '⚔️' },
-              { href: '/games/baldurs-gate-3', name: "Baldur's Gate 3", image: '/images/games/baldurs-gate-3-header-v20260803.jpg', emoji: '🎲' },
-              { href: '/games/rampage-evolution', name: 'Rampage Evolution', image: '/images/games/rampage-evolution-header-v20260803.jpg', emoji: '🦖' },
-              { href: '/games/sir-we-have-an-orc-problem', name: 'Sir, We Have an Orc Problem', image: '/images/games/sir-we-have-an-orc-problem-header-v20260803.jpg', emoji: '🧌' },
-              { href: '/games/beast-of-reincarnation', name: 'Beast of Reincarnation', image: '/images/games/beast-of-reincarnation-header-v20260803.jpg', emoji: '🐺' },
-              { href: '/games/mistfall-hunter', name: 'Mistfall Hunter', image: '/images/games/mistfall-hunter-header-v20260803.jpg', emoji: '🌫️' },
-              { href: '/games/league-of-legends', name: 'League of Legends', image: '/images/games/league-of-legends-header-v20260803.jpg', emoji: '🏆' },
-              { href: '/games/black-myth-zhong-kui', name: 'Black Myth: Zhong Kui', image: '/images/games/black-myth-zhong-kui-header-v20260803.jpg', emoji: '👹' },
-              { href: '/games/silent-hill-f', name: 'Silent Hill f', image: '/images/games/silent-hill-f-header-v20260803.jpg', emoji: '🌸' },
-              { href: '/games/palworld', name: 'Palworld', image: '/images/games/palworld-header-v20260803.jpg', emoji: '🐾' },
-            ].map((game, i) => {
-              const count = allArticles.filter(a => a.game === game.href.split('/').pop()).length;
+            {getPopularGames().map((game, i) => {
+              const count = allArticles.filter(a => a.game === game.slug).length;
               return (
                 <motion.div
-                  key={game.href}
+                  key={game.slug}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.4 }}
                 >
-                  <Link href={game.href} className="group block relative rounded-2xl overflow-hidden h-56"
+                  <Link href={`/games/${game.slug}`} className="group block relative rounded-2xl overflow-hidden h-56 cursor-pointer"
                     style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
                     <img
                       src={game.image}
@@ -347,8 +337,9 @@ export default function HomePageClient({ allArticles }: { allArticles: ContentLi
                     }} />
                     <div className="absolute bottom-0 left-0 right-0 p-5">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-lg">{game.emoji}</span>
-                        <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>{game.name}</h3>
+                        {game.emoji && <span className="text-lg">{game.emoji}</span>}
+                        <h3 className="text-lg font-bold group-hover:text-purple-400 transition-colors" style={{ color: 'var(--text-primary)' }}>{game.name}</h3>
+                        <span className="ml-auto text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0" style={{ color: 'var(--accent-purple)' }}>→</span>
                       </div>
                       <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
                         {count} article{count !== 1 ? 's' : ''} · guides, tier lists & more

@@ -45,9 +45,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  verification: {
-    google: 'GOOGLE_VERIFICATION_CODE',
-  },
+  verification: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION }
+    : undefined,
 };
 
 export default function RootLayout({
