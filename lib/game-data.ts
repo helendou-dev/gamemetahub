@@ -138,12 +138,24 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Survival', 'Crafting', 'Creature Collection', 'Open World', 'Multiplayer'],
     emoji: '🐾',
   },
+  'project-zomboid': {
+    name: 'Project Zomboid',
+    slug: 'project-zomboid',
+    headerImage: '/images/games/project-zomboid-header-v20260805.jpg',
+    description: "The Indie Stone's hardcore open-world zombie survival sandbox. Loot, craft, build, farm, and fight to survive in a relentless post-apocalyptic Kentucky. 13 years in Early Access, Build 42 stable release July 2026.",
+    releaseYear: '2013',
+    developer: 'The Indie Stone',
+    publisher: 'The Indie Stone',
+    tags: ['Survival', 'Zombies', 'Open World', 'Sandbox', 'Multiplayer'],
+    emoji: '🧟',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
   'elden-ring',
   'baldurs-gate-3',
+  'project-zomboid',
   'rampage-evolution',
   'sir-we-have-an-orc-problem',
   'beast-of-reincarnation',
