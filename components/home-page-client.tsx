@@ -194,7 +194,7 @@ export default function HomePageClient({ allArticles }: { allArticles: ContentLi
               Tier lists, build guides, patch breakdowns, and bug fixes for the games
               everyone&apos;s playing right now — all in one place.
             </p>
-            <div className="flex items-center justify-center gap-3">
+            <div className="flex items-center justify-center gap-3 mb-12">
               <Link href="/games" className="btn-primary">
                 Browse All Games
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -203,6 +203,39 @@ export default function HomePageClient({ allArticles }: { allArticles: ContentLi
               </Link>
               <Link href="/guides" className="btn-ghost">Latest Guides</Link>
             </div>
+
+            {/* Latest articles strip — content visible on first fold */}
+            {allArticles.length > 0 && (
+              <div className="mt-2">
+                <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--text-muted)' }}>
+                  ✨ Just Published
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+                  {allArticles.slice(0, 3).map((item) => {
+                    const tc = getTypeConfig(item.type);
+                    return (
+                      <Link
+                        key={`${item.game}/${item.slug}`}
+                        href={item.url}
+                        className="group block text-left p-4 rounded-xl transition-all duration-300 hover:-translate-y-1"
+                        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}
+                      >
+                        <span className={`type-badge ${tc.badgeClass} mb-2 inline-block`}>
+                          {tc.emoji} {tc.label}
+                        </span>
+                        <h3 className="text-sm font-bold leading-snug mb-1 line-clamp-2 group-hover:text-purple-400 transition-colors"
+                          style={{ color: 'var(--text-primary)' }}>
+                          {item.title}
+                        </h3>
+                        <p className="text-xs line-clamp-1 leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                          {item.description}
+                        </p>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </motion.div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"

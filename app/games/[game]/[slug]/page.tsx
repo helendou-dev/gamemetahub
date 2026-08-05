@@ -18,6 +18,7 @@ import DesktopTOC from '@/components/desktop-toc';
 import RelatedArticles from '@/components/related-articles';
 import AuthorBio from '@/components/author-bio';
 import AnalyticsTracker from '@/components/analytics-tracker';
+import ReadingProgressBar from '@/components/reading-progress';
 
 export function generateStaticParams() {
   const pages = listAllContent();
@@ -141,6 +142,9 @@ export default async function GameContentPage({
           { name: frontmatter.title, url },
         ]}
       />
+
+      {/* Reading Progress Bar — fills as user scrolls */}
+      <ReadingProgressBar />
 
       {/* === Two-column layout: article + TOC sidebar === */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-14">
