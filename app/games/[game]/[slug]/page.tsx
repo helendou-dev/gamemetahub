@@ -17,6 +17,7 @@ import ArticleTOC from '@/components/article-toc';
 import DesktopTOC from '@/components/desktop-toc';
 import RelatedArticles from '@/components/related-articles';
 import AuthorBio from '@/components/author-bio';
+import AnalyticsTracker from '@/components/analytics-tracker';
 
 export function generateStaticParams() {
   const pages = listAllContent();
@@ -229,6 +230,9 @@ export default async function GameContentPage({
             <div className="article-body">
               <MDXRemote source={content.content} components={mdxComponents} />
             </div>
+
+            {/* GA4 Enhanced Event Tracking */}
+            <AnalyticsTracker />
 
             {/* Author Bio */}
             <AuthorBio author={author} date={publishDate} />
