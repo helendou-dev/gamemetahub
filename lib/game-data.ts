@@ -171,10 +171,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Battle Royale', 'Shooter', 'Multiplayer', 'Building', 'Cross-Platform'],
     emoji: '🏝️',
   },
+  'big-walk': {
+    name: 'Big Walk',
+    slug: 'big-walk',
+    headerImage: '/images/games/big-walk-header-v20260806.jpg',
+    description: "House House's 94-rated co-op adventure where communication is the real mechanic. Explore a vast Australian island with up to 12 friends, solve proximity-voice puzzles, and discover why walking and talking together is 2026's most talked-about gaming experience.",
+    releaseYear: '2026',
+    developer: 'House House',
+    publisher: 'Panic',
+    tags: ['Co-op', 'Puzzle', 'Adventure', 'Exploration', 'Cross-Platform'],
+    emoji: '🚶',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'big-walk',
   'black-myth-wukong',
   'elden-ring',
   'baldurs-gate-3',
