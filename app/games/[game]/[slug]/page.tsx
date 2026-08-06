@@ -6,6 +6,7 @@
 
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getContentByPath, listAllContent, readingTime, generatePageJsonLd, generateFaqSchema } from '@/lib/content';
@@ -162,15 +163,18 @@ export default async function GameContentPage({
               <a href={`/games/${params.game}`} className="hover:text-white transition-colors">{gameName}</a>
             </nav>
 
-            {/* Hero Image */}
+            {/* Hero Image — next/image for auto WebP + responsive srcset */}
             {heroImage && (
-              <div className="mb-8 rounded-2xl overflow-hidden relative" style={{ boxShadow: 'var(--shadow-lg)' }}>
-                <img
+              <div className="mb-8 rounded-2xl overflow-hidden relative aspect-[2/1]" style={{ boxShadow: 'var(--shadow-lg)' }}>
+                <Image
                   src={heroImage}
                   alt={frontmatter.title}
-                  className="w-full aspect-[2/1] object-cover"
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 800px"
                 />
-                <div className="absolute inset-0" style={{
+                <div className="absolute inset-0 z-10" style={{
                   background: 'linear-gradient(to top, rgba(6,6,11,0.7) 0%, transparent 50%)',
                 }} />
               </div>

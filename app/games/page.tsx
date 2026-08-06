@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { listAllContent, type ContentListItem } from '@/lib/content';
 import { getGameCard } from '@/lib/game-data';
 
@@ -51,7 +52,7 @@ export default function GamesPage() {
             <div className="flex items-center gap-4 mb-5 pb-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
               {meta?.image && (
                 <Link href={`/games/${game}`} className="block flex-shrink-0">
-                  <img src={meta.image} alt={meta.name || game} className="w-14 h-10 rounded-lg object-cover transition-transform hover:scale-105" />
+                  <Image src={meta.image} alt={meta.name || game} width={56} height={40} className="rounded-lg object-cover transition-transform hover:scale-105" />
                 </Link>
               )}
               <div>
@@ -79,9 +80,9 @@ export default function GamesPage() {
                   >
                   {item.image ? (
                     <div className="relative aspect-[16/9] overflow-hidden">
-                      <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-                      <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(17,17,24,0.4), transparent 50%)' }} />
-                      <span className={`type-badge ${TYPE_BADGE[item.type] || 'type-badge-guide'} absolute top-3 left-3`}>
+                      <Image src={item.image} alt={item.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 400px" />
+                      <div className="absolute inset-0 z-10" style={{ background: 'linear-gradient(to top, rgba(17,17,24,0.4), transparent 50%)' }} />
+                      <span className={`type-badge ${TYPE_BADGE[item.type] || 'type-badge-guide'} absolute top-3 left-3 z-20`}>
                         {item.type.replace(/_/g, ' ')}
                       </span>
                     </div>

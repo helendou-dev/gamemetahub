@@ -3,6 +3,8 @@
 // Dark gaming theme — 2026 redesign
 // ============================================
 
+import Image from 'next/image';
+
 import React from 'react';
 import { slugify } from '@/lib/slugify';
 
@@ -223,11 +225,30 @@ export const mdxComponents = {
       borderBottom: '1px solid rgba(255,255,255,0.04)',
     }} className="px-4 py-3 text-sm" {...props} />
   ),
-  img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    <img className="rounded-xl my-6 mx-auto max-w-full" loading="lazy"
-      style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
-      {...props} alt={props.alt || ''} />
-  ),
+  img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
+    const src = props.src || '';
+    // Use next/image for local images (optimized), fallback to native <img> for external URLs
+    if (src.startsWith('/')) {
+      return (
+        <span className="block rounded-xl my-6 mx-auto max-w-full overflow-hidden relative" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.4)' }}>
+          <Image
+            src={src}
+            alt={props.alt || ''}
+            width={1408}
+            height={704}
+            className="w-full h-auto"
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 800px"
+          />
+        </span>
+      );
+    }
+    return (
+      <img className="rounded-xl my-6 mx-auto max-w-full" loading="lazy"
+        style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
+        {...props} alt={props.alt || ''} />
+    );
+  },
   a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
     <a
       style={{ color: '#a78bfa', textDecorationColor: 'rgba(139,92,246,0.3)' }}
