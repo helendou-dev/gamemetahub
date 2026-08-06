@@ -42,6 +42,7 @@ const TYPE_BADGE: Record<string, string> = {
   patch_notes: 'type-badge-patch',
   news: 'type-badge-news',
   game_release: 'type-badge-release',
+  review_roundup: 'type-badge-guide',
 };
 
 const TYPE_LABEL: Record<string, string> = {
@@ -52,6 +53,7 @@ const TYPE_LABEL: Record<string, string> = {
   patch_notes: '📋 Patch',
   news: '📰 News',
   game_release: '🚀 Release',
+  review_roundup: '📰 Review Roundup',
 };
 
 const TYPE_ICON: Record<string, string> = {
@@ -62,6 +64,7 @@ const TYPE_ICON: Record<string, string> = {
   patch_notes: '📋',
   news: '📰',
   game_release: '🚀',
+  review_roundup: '📰',
 };
 
 function formatDate(dateStr: string): string {

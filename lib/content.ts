@@ -79,7 +79,7 @@ export function normalizeEntry(
     date: (fm.publishDate || fm.publishedAt || fm.updatedAt || fm.date || '') as string,
     author: (fm.author || 'GameMetaHub') as string,
     tags: (fm.tags || []) as string[],
-    image: (fm.image || fm.featuredImage || '') as string | undefined,
+    image: (fm.image || fm.featuredImage || fm.headerImage || '') as string | undefined,
     url: `/games/${game}/${slug}`,
     readingTime: readTime,
     platforms: platforms.length > 0 ? platforms : undefined,
