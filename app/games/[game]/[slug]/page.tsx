@@ -168,7 +168,7 @@ export default async function GameContentPage({
                 <img
                   src={heroImage}
                   alt={frontmatter.title}
-                  className="w-full aspect-[16/9] md:aspect-[21/9] object-cover"
+                  className="w-full aspect-[2/1] object-cover"
                 />
                 <div className="absolute inset-0" style={{
                   background: 'linear-gradient(to top, rgba(6,6,11,0.7) 0%, transparent 50%)',
