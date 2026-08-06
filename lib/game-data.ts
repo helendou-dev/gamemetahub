@@ -160,6 +160,17 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Survival', 'Zombies', 'Open World', 'Sandbox', 'Multiplayer'],
     emoji: '🧟',
   },
+  'fortnite': {
+    name: 'Fortnite',
+    slug: 'fortnite',
+    headerImage: '/images/games/fortnite-header-v20260806.jpg',
+    description: "Epic Games' genre-defining battle royale. Drop onto an ever-evolving island, build, battle, and adapt through seasonal events, massive crossovers, and zero-build modes that keep the meta fresh.",
+    releaseYear: '2017',
+    developer: 'Epic Games',
+    publisher: 'Epic Games',
+    tags: ['Battle Royale', 'Shooter', 'Multiplayer', 'Building', 'Cross-Platform'],
+    emoji: '🏝️',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
@@ -177,6 +188,7 @@ export const POPULAR_GAMES_ORDER: string[] = [
   'monster-hunter-wilds',
   'silent-hill-f',
   'palworld',
+  'fortnite',
 ];
 
 /** Lightweight view for pages that only need name + image */
