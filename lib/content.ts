@@ -198,7 +198,7 @@ export function generatePageJsonLd(
   const publishDate = frontmatter.publishDate || frontmatter.date;
   const modifiedDate = frontmatter.modifiedDate || publishDate;
   const wordCount = rawContent ? rawContent.split(/\s+/).length : undefined;
-  const heroImage = (frontmatter.image as string) || '';
+  const heroImage = (frontmatter.image as string) || (frontmatter.headerImage as string) || '';
 
   // Base Article schema
   const article: Record<string, unknown> = {
