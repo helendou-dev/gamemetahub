@@ -46,6 +46,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/favicon.ico',
+    apple: '/apple-icon.png',
+  },
   verification: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION
     ? { google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION }
     : undefined,
@@ -75,7 +80,7 @@ export default function RootLayout({
               description:
                 'Trending game guides, tier lists, and gaming news — updated daily by real players.',
               foundingDate: '2026',
-              logo: 'https://www.gamemetahub.com/favicon.ico',
+              logo: 'https://www.gamemetahub.com/icon.png',
             }),
           }}
         />
