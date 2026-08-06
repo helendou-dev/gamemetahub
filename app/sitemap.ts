@@ -7,6 +7,7 @@
 import { MetadataRoute } from 'next';
 import { listAllContent } from '@/lib/content';
 import { siteConfig } from '@/lib/site-config';
+import { ALL_GAMES } from '@/lib/game-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
@@ -64,6 +65,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  // Game hub pages (e.g. /games/elden-ring)
+  const gameHubRoutes: MetadataRoute.Sitemap = Object.keys(ALL_GAMES).map((slug) => ({
+    url: `${baseUrl}/games/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'daily' as const,
+    priority: 0.85,
+  }));
+
   // Dynamic content pages from /content/games/
   const contentRoutes: MetadataRoute.Sitemap = pages.map((p) => {
     const isNews = p.type === 'news' || p.type === 'patch_notes';
@@ -77,5 +86,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  return [...staticRoutes, ...contentRoutes];
+  return [...staticRoutes, ...gameHubRoutes, ...contentRoutes];
 }
