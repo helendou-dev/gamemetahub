@@ -139,6 +139,62 @@ export function StepList({ steps }: { steps: Step[] }) {
   );
 }
 
+// ─── Game Rating ────────────────────────────
+export function GameRating({
+  score,
+  source,
+  platforms,
+}: {
+  score: string | number;
+  source?: string;
+  platforms?: string;
+}) {
+  const numScore = typeof score === 'string' ? parseFloat(score) : score;
+  const isHigh = numScore >= 90;
+  const isGood = numScore >= 75;
+  const color = isHigh ? '#22c55e' : isGood ? '#eab308' : '#ef4444';
+  const bg = isHigh ? 'rgba(34,197,94,0.08)' : isGood ? 'rgba(234,179,8,0.08)' : 'rgba(239,68,68,0.08)';
+  const borderColor = isHigh ? 'rgba(34,197,94,0.2)' : isGood ? 'rgba(234,179,8,0.2)' : 'rgba(239,68,68,0.2)';
+
+  return (
+    <div
+      className="my-6 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center gap-3"
+      style={{ background: bg, border: `1px solid ${borderColor}` }}
+    >
+      <div className="flex items-center gap-3">
+        <span
+          className="text-3xl font-extrabold"
+          style={{ color }}
+        >
+          {score}
+        </span>
+        <div className="flex flex-col">
+          {source && (
+            <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
+              {source}
+            </span>
+          )}
+          <div className="flex gap-0.5 mt-1">
+            {[1, 2, 3, 4, 5].map((i) => {
+              const filled = (numScore / 100) * 5 >= i;
+              return (
+                <span key={i} style={{ color: filled ? color : 'rgba(255,255,255,0.1)' }}>
+                  ★
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      {platforms && (
+        <div className="sm:ml-auto text-sm" style={{ color: 'var(--text-secondary)' }}>
+          Available on: <span style={{ color: 'var(--text-primary)' }}>{platforms}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Platform Tag ───────────────────────────
 export function PlatformTag({ platform }: { platform: string }) {
   const colors: Record<string, { bg: string; color: string; border: string }> = {
@@ -190,6 +246,7 @@ export const mdxComponents = {
   ComparisonTable,
   StepList,
   PlatformTag,
+  GameRating,
   h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
     const text = childrenToText(props.children);
     const id = props.id || (text ? slugify(text) : undefined);
