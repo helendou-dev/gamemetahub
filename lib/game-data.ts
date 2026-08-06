@@ -105,6 +105,17 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Action RPG', 'Chinese Mythology', 'Dark Fantasy', 'Soulslike', 'Single-Player'],
     emoji: '👹',
   },
+  'black-myth-wukong': {
+    name: 'Black Myth: Wukong',
+    slug: 'black-myth-wukong',
+    headerImage: '/images/games/black-myth-wukong-header-v20260806.jpg',
+    description: "Game Science's landmark Chinese mythology action RPG. Play as the Destined One in a breathtaking journey inspired by Journey to the West. 2024 TGA Best Action Game winner, 25+ million copies sold, the game that put Chinese AAA on the global map.",
+    releaseYear: '2024',
+    developer: 'Game Science',
+    publisher: 'Game Science',
+    tags: ['Action RPG', 'Chinese Mythology', 'Soulslike', 'Single-Player', 'Boss Rush'],
+    emoji: '🐒',
+  },
   'monster-hunter-wilds': {
     name: 'Monster Hunter Wilds',
     slug: 'monster-hunter-wilds',
@@ -153,6 +164,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'black-myth-wukong',
   'elden-ring',
   'baldurs-gate-3',
   'project-zomboid',
