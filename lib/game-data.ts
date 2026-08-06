@@ -20,7 +20,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
   'elden-ring': {
     name: 'Elden Ring',
     slug: 'elden-ring',
-    headerImage: '/images/games/elden-ring-header-v20260803.jpg',
+    headerImage: '/images/games/elden-ring-header-v20260806.jpg',
     description: "FromSoftware's masterpiece — an open-world action RPG set in the Lands Between. Explore a vast dark fantasy world, face demigods, and become the Elden Lord.",
     releaseYear: '2022',
     developer: 'FromSoftware',
@@ -31,7 +31,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
   'baldurs-gate-3': {
     name: "Baldur's Gate 3",
     slug: 'baldurs-gate-3',
-    headerImage: '/images/games/baldurs-gate-3-header-v20260803.jpg',
+    headerImage: '/images/games/baldurs-gate-3-header-v20260806.jpg',
     description: "Larian Studios' award-winning CRPG set in the Dungeons & Dragons universe. Experience deep storytelling, tactical turn-based combat, and unprecedented player freedom.",
     releaseYear: '2023',
     developer: 'Larian Studios',
@@ -42,7 +42,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
   'rampage-evolution': {
     name: 'Rampage Evolution',
     slug: 'rampage-evolution',
-    headerImage: '/images/games/rampage-evolution-header-v20260803.jpg',
+    headerImage: '/images/games/rampage-evolution-header-v20260806.jpg',
     description: "Tencent's massive 2026 summer hit — open-world survival PVP with mutation-based evolution, territory control, and base building. 40 million pre-registrations worldwide.",
     releaseYear: '2026',
     developer: 'Tencent',
@@ -53,7 +53,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
   'sir-we-have-an-orc-problem': {
     name: 'Sir, We Have an Orc Problem',
     slug: 'sir-we-have-an-orc-problem',
-    headerImage: '/images/games/sir-we-have-an-orc-problem-header-v20260803.jpg',
+    headerImage: '/images/games/sir-we-have-an-orc-problem-header-v20260806.jpg',
     description: 'A progressive tower defense roguelite from Mumpitz Games. Defend against 100,000+ physics-driven orcs with turrets, lasers, and nukes in a satisfying fail-forward loop.',
     releaseYear: '2026',
     developer: 'Mumpitz Games',
@@ -64,7 +64,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
   'beast-of-reincarnation': {
     name: 'Beast of Reincarnation',
     slug: 'beast-of-reincarnation',
-    headerImage: '/images/games/beast-of-reincarnation-header-v20260803.jpg',
+    headerImage: '/images/games/beast-of-reincarnation-header-v20260806.jpg',
     description: "Game Freak's dark action RPG set in post-apocalyptic Japan. Fight alongside your dog Koo in a hybrid real-time and tactical combat system. Day one on Game Pass.",
     releaseYear: '2026',
     developer: 'Game Freak',
@@ -75,7 +75,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
   'mistfall-hunter': {
     name: 'Mistfall Hunter',
     slug: 'mistfall-hunter',
-    headerImage: '/images/games/mistfall-hunter-header-v20260803.jpg',
+    headerImage: '/images/games/mistfall-hunter-header-v20260806.jpg',
     description: 'Bellring Games\' dark fantasy PvPvE extraction RPG. Six classes, lethal death penalty, crossplay on PC, PS5, and Xbox. Day one on Game Pass.',
     releaseYear: '2026',
     developer: 'Bellring Games',
@@ -86,7 +86,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
   'league-of-legends': {
     name: 'League of Legends',
     slug: 'league-of-legends',
-    headerImage: '/images/games/league-of-legends-header-v20260803.jpg',
+    headerImage: '/images/games/league-of-legends-header-v20260806.jpg',
     description: "Riot Games' genre-defining MOBA. Five-on-five team fights, ever-evolving champions, and a ranked ladder that has defined competitive PC gaming for over 15 years.",
     releaseYear: '2009',
     developer: 'Riot Games',
@@ -97,7 +97,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
   'black-myth-zhong-kui': {
     name: 'Black Myth: Zhong Kui',
     slug: 'black-myth-zhong-kui',
-    headerImage: '/images/games/black-myth-zhong-kui-header-v20260803.jpg',
+    headerImage: '/images/games/black-myth-zhong-kui-header-v20260806.jpg',
     description: "Game Science's next Black Myth title — a dark Chinese mythology ARPG featuring Zhong Kui, the legendary ghost-hunting deity. Announced at Gamescom 2025. Coming to PC, PS5, and Xbox Series X/S.",
     releaseYear: 'TBA',
     developer: 'Game Science',
@@ -119,7 +119,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
   'monster-hunter-wilds': {
     name: 'Monster Hunter Wilds',
     slug: 'monster-hunter-wilds',
-    headerImage: '/images/games/monster-hunter-wilds-header-v20260804.jpg',
+    headerImage: '/images/games/monster-hunter-wilds-header-v20260806.jpg',
     description: "Capcom's flagship hunting action RPG — explore dynamic ecosystems, hunt massive monsters solo or in co-op, and craft powerful gear. The next evolution of the Monster Hunter series, with cross-platform play on PC, PS5, and Xbox.",
     releaseYear: '2025',
     developer: 'Capcom',
@@ -130,7 +130,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
   'silent-hill-f': {
     name: 'Silent Hill f',
     slug: 'silent-hill-f',
-    headerImage: '/images/games/silent-hill-f-header-v20260803.jpg',
+    headerImage: '/images/games/silent-hill-f-header-v20260806.jpg',
     description: "Konami's haunting return to Silent Hill — a psychological horror masterpiece set in 1960s Japan. Play as Hinako Shimizu in the fog-shrouded town of Ebisugaoka. Five endings, deep NG+ system, and one of 2025's most acclaimed horror games.",
     releaseYear: '2025',
     developer: 'Konami',
@@ -141,7 +141,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
   'palworld': {
     name: 'Palworld',
     slug: 'palworld',
-    headerImage: '/images/games/palworld-header-v20260803.jpg',
+    headerImage: '/images/games/palworld-header-v20260806.jpg',
     description: "Pocketpair's survival crafting phenomenon — catch, breed, and battle 287 Pals across floating islands and the World Tree. 40 million players. 1.0 full release July 2026.",
     releaseYear: '2026',
     developer: 'Pocketpair',
@@ -152,7 +152,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
   'project-zomboid': {
     name: 'Project Zomboid',
     slug: 'project-zomboid',
-    headerImage: '/images/games/project-zomboid-header-v20260805.jpg',
+    headerImage: '/images/games/project-zomboid-header-v20260806.jpg',
     description: "The Indie Stone's hardcore open-world zombie survival sandbox. Loot, craft, build, farm, and fight to survive in a relentless post-apocalyptic Kentucky. 13 years in Early Access, Build 42 stable release July 2026.",
     releaseYear: '2013',
     developer: 'The Indie Stone',
