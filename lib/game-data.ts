@@ -185,7 +185,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
   'apex-legends': {
     name: 'Apex Legends',
     slug: 'apex-legends',
-    headerImage: '/images/games/apex-legends-header-v20260807.jpg',
+    headerImage: '/images/games/apex-legends-header-v20260807b.jpg',
     description: "Respawn's genre-leading hero battle royale — 28 Legends, seasonal meta shifts, and the best gunplay in the genre. Season 30 Marked brings Bloodhound's Allfather's Cloak and the biggest systemic overhaul in years.",
     releaseYear: '2019',
     developer: 'Respawn Entertainment',
@@ -207,7 +207,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
   'phantom-blade-zero': {
     name: 'Phantom Blade Zero',
     slug: 'phantom-blade-zero',
-    headerImage: '/images/games/phantom-blade-zero-header-v20260807.jpg',
+    headerImage: '/images/games/phantom-blade-zero-header-v20260807b.jpg',
     description: "S-GAME's Kungfupunk action RPG — play as Soul, an elite assassin with 66 days to live, in a dark wuxia world blending martial arts and steampunk. 30+ weapons, 8 endings, combat inspired by Hong Kong action cinema. Launching October 29, 2026 on PS5 and PC.",
     releaseYear: '2026',
     developer: 'S-GAME',
