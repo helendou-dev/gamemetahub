@@ -204,10 +204,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Co-op', 'Puzzle', 'Adventure', 'Exploration', 'Cross-Platform'],
     emoji: '🚶',
   },
+  'phantom-blade-zero': {
+    name: 'Phantom Blade Zero',
+    slug: 'phantom-blade-zero',
+    headerImage: '/images/games/phantom-blade-zero-header-v20260807.jpg',
+    description: "S-GAME's Kungfupunk action RPG — play as Soul, an elite assassin with 66 days to live, in a dark wuxia world blending martial arts and steampunk. 30+ weapons, 8 endings, combat inspired by Hong Kong action cinema. Launching October 29, 2026 on PS5 and PC.",
+    releaseYear: '2026',
+    developer: 'S-GAME',
+    publisher: 'S-GAME',
+    tags: ['Action RPG', 'Wuxia', 'Kungfupunk', 'Martial Arts', 'Single-Player'],
+    emoji: '🗡️',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'phantom-blade-zero',
   'marvel-tokon',
   'apex-legends',
   'big-walk',
