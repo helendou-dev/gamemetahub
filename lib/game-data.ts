@@ -171,6 +171,28 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Battle Royale', 'Shooter', 'Multiplayer', 'Building', 'Cross-Platform'],
     emoji: '🏝️',
   },
+  'marvel-tokon': {
+    name: 'Marvel Tōkon: Fighting Souls',
+    slug: 'marvel-tokon',
+    headerImage: '/images/games/marvel-tokon-header-v20260807.jpg',
+    description: "Arc System Works' 4v4 Marvel tag fighter featuring 20 launch characters across five teams. Shared health bar, progressive character unlocks, and the deepest assist system in the genre. Day one on PC, PS5, and PS4.",
+    releaseYear: '2026',
+    developer: 'Arc System Works',
+    publisher: 'PlayStation Publishing / Marvel Games',
+    tags: ['Fighting', 'Tag Fighter', '4v4', 'Superhero', 'Competitive'],
+    emoji: '💥',
+  },
+  'apex-legends': {
+    name: 'Apex Legends',
+    slug: 'apex-legends',
+    headerImage: '/images/games/apex-legends-header-v20260807.jpg',
+    description: "Respawn's genre-leading hero battle royale — 28 Legends, seasonal meta shifts, and the best gunplay in the genre. Season 30 Marked brings Bloodhound's Allfather's Cloak and the biggest systemic overhaul in years.",
+    releaseYear: '2019',
+    developer: 'Respawn Entertainment',
+    publisher: 'Electronic Arts',
+    tags: ['Battle Royale', 'Shooter', 'Hero Shooter', 'Multiplayer', 'Competitive'],
+    emoji: '🎯',
+  },
   'big-walk': {
     name: 'Big Walk',
     slug: 'big-walk',
@@ -186,6 +208,8 @@ export const ALL_GAMES: Record<string, GameMeta> = {
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'marvel-tokon',
+  'apex-legends',
   'big-walk',
   'black-myth-wukong',
   'elden-ring',
