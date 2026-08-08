@@ -197,7 +197,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     name: 'Big Walk',
     slug: 'big-walk',
     headerImage: '/images/games/big-walk-header-v20260806.jpg',
-    description: "House House's 94-rated co-op adventure where communication is the real mechanic. Explore a vast Australian island with up to 12 friends, solve proximity-voice puzzles, and discover why walking and talking together is 2026's most talked-about gaming experience.",
+    description: "House House's 92-rated co-op adventure where communication is the real mechanic. Explore a vast Australian island with up to 12 friends, solve proximity-voice puzzles, and discover why walking and talking together is 2026's most talked-about gaming experience.",
     releaseYear: '2026',
     developer: 'House House',
     publisher: 'Panic',
