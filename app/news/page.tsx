@@ -4,6 +4,7 @@ import { listAllContent } from '@/lib/content';
 export const metadata = {
   title: 'Gaming News & Patch Notes — GameMetaHub',
   description: 'Latest gaming news, patch notes, DLC launch guides, and updates. Stay on top of game changes.',
+  alternates: { canonical: 'https://www.gamemetahub.com/news' },
 };
 
 export default function NewsPage() {

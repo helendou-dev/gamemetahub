@@ -4,6 +4,7 @@ import { listAllContent } from '@/lib/content';
 export const metadata = {
   title: 'Game Fixes & Troubleshooting — GameMetaHub',
   description: 'Fix crashes, stuttering, low FPS, and other PC gaming issues. Step-by-step troubleshooting guides.',
+  alternates: { canonical: 'https://www.gamemetahub.com/fixes' },
 };
 
 export default function FixesPage() {

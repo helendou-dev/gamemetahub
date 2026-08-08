@@ -6,6 +6,12 @@ import { getGameCard } from '@/lib/game-data';
 export const metadata = {
   title: 'All Games — GameMetaHub',
   description: 'Browse all game guides, tier lists, patch notes, and news on GameMetaHub.',
+  alternates: { canonical: 'https://www.gamemetahub.com/games' },
+  openGraph: {
+    title: 'All Games — GameMetaHub',
+    description: 'Browse all game guides, tier lists, patch notes, and news on GameMetaHub.',
+    url: 'https://www.gamemetahub.com/games',
+  },
 };
 
 const TYPE_BADGE: Record<string, string> = {

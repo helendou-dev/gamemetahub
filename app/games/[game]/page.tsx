@@ -26,9 +26,11 @@ export async function generateMetadata({
   return {
     title: { absolute: `${meta.name} Guides, Tier Lists & News` },
     description: meta.description,
+    alternates: { canonical: `https://www.gamemetahub.com/games/${params.game}` },
     openGraph: {
       title: `${meta.name} — GameMetaHub`,
       description: meta.description,
+      url: `https://www.gamemetahub.com/games/${params.game}`,
       ...(meta.headerImage ? { images: [{ url: meta.headerImage, width: 1200, height: 630 }] } : {}),
     },
   };

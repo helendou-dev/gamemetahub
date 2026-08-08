@@ -4,6 +4,7 @@ import { listAllContent } from '@/lib/content';
 export const metadata = {
   title: 'Tier Lists — GameMetaHub',
   description: 'Definitive game tier lists: best characters, weapons, builds, and more. Updated with latest patches.',
+  alternates: { canonical: 'https://www.gamemetahub.com/tier-lists' },
 };
 
 export default function TierListsPage() {

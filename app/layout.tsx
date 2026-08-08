@@ -159,8 +159,6 @@ export default function RootLayout({
                   title: 'Legal',
                   links: [
                     { href: '/privacy', label: 'Privacy Policy' },
-                    { href: '/terms', label: 'Terms of Service' },
-                    { href: '/affiliate', label: 'Affiliate Disclosure' },
                   ],
                 },
               ].map((col) => (

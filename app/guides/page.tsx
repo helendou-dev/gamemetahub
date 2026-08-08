@@ -4,6 +4,7 @@ import { listAllContent } from '@/lib/content';
 export const metadata = {
   title: 'Game Guides — GameMetaHub',
   description: 'Expert game guides, walkthroughs, tips and tricks for PC, console, and mobile games.',
+  alternates: { canonical: 'https://www.gamemetahub.com/guides' },
 };
 
 export default function GuidesPage() {

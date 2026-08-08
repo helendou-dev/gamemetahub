@@ -4,6 +4,7 @@ import { listAllContent } from '@/lib/content';
 export const metadata = {
   title: 'Game Releases & DLC Launch Guides — GameMetaHub',
   description: 'New game releases, DLC launch guides, and preparation checklists. Get ready before launch day.',
+  alternates: { canonical: 'https://www.gamemetahub.com/releases' },
 };
 
 export default function ReleasesPage() {

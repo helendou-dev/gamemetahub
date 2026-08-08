@@ -4,6 +4,7 @@ import { listAllContent } from '@/lib/content';
 export const metadata = {
   title: 'Game Comparisons — GameMetaHub',
   description: 'Head-to-head game comparisons. See which game wins on combat, story, graphics, and more.',
+  alternates: { canonical: 'https://www.gamemetahub.com/comparisons' },
 };
 
 export default function ComparisonsPage() {
