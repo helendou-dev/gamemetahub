@@ -215,10 +215,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Action RPG', 'Wuxia', 'Kungfupunk', 'Martial Arts', 'Single-Player'],
     emoji: '🗡️',
   },
+  'marvel-snap': {
+    name: 'Marvel Snap',
+    slug: 'marvel-snap',
+    headerImage: '/images/games/marvel-snap-header-v20260809.jpg',
+    description: "Second Dinner's strategic Marvel collectible card game — six-turn Three Locations battles featuring hundreds of heroes and villains. Free-to-play on iOS, Android, and Steam with cross-progression. The August 9 patch refunds Nexus Event tickets and rebalances nine cards including Hellcow and Jane Foster.",
+    releaseYear: '2022',
+    developer: 'Second Dinner',
+    publisher: 'Skystone Games',
+    tags: ['CCG', 'Card Game', 'Marvel', 'Free-to-Play', 'Cross-Platform'],
+    emoji: '🃏',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'marvel-snap',
   'phantom-blade-zero',
   'marvel-tokon',
   'apex-legends',
