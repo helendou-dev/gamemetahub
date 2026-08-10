@@ -226,10 +226,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['CCG', 'Card Game', 'Marvel', 'Free-to-Play', 'Cross-Platform'],
     emoji: '🃏',
   },
+  'grain-rot': {
+    name: 'GRAIN ROT',
+    slug: 'grain-rot',
+    headerImage: '/images/games/grain-rot-header-v20260810.jpg',
+    description: "Beck & Branch Games' viral co-op extraction horror — control fragile wooden vessels inhabited by Living Sparks, descend into shifting burned ruins, steal furniture, and rebuild your Sanctuary Outpost. 350,000+ demo downloads and a Top 15 Steam Next Fest demo.",
+    releaseYear: '2026',
+    developer: 'Beck & Branch Games',
+    publisher: 'Neem Interactive',
+    tags: ['Co-op', 'Extraction Horror', 'Roguelike', 'Base Building', 'Indie'],
+    emoji: '🔥',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'grain-rot',
   'marvel-snap',
   'phantom-blade-zero',
   'marvel-tokon',
