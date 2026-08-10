@@ -237,10 +237,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Co-op', 'Extraction Horror', 'Roguelike', 'Base Building', 'Indie'],
     emoji: '🔥',
   },
+  'mortal-shell-2': {
+    name: 'Mortal Shell II',
+    slug: 'mortal-shell-2',
+    headerImage: '/images/games/mortal-shell-2-header-v20260810.jpg',
+    description: "Cold Symmetry's standalone sequel to the 2020 dark fantasy soulslike. Stamina bar removed, 8 playable Shells, 60+ dungeons in a compact open world. Launching August 20, 2026 on PC, PS5, and Xbox Series X/S.",
+    releaseYear: '2026',
+    developer: 'Cold Symmetry',
+    publisher: 'Playstack',
+    tags: ['Action RPG', 'Soulslike', 'Dark Fantasy', 'Single-Player', 'Open World'],
+    emoji: '💀',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'mortal-shell-2',
   'grain-rot',
   'marvel-snap',
   'phantom-blade-zero',
