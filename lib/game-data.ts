@@ -270,10 +270,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['MOBA', 'Esports', 'Strategy', 'Competitive', '5v5'],
     emoji: '⚔️',
   },
+  'ghost-recon-wildlands': {
+    name: "Ghost Recon Wildlands",
+    slug: 'ghost-recon-wildlands',
+    headerImage: '/images/games/ghost-recon-wildlands-header-v20260811.jpg',
+    description: "Ubisoft's definitive open-world tactical shooter — lead an elite Ghost team across a vast, living Bolivia to dismantle the Santa Blanca cartel. The free August 2026 Last Rites update adds a new story mission, 4K/60 FPS console upgrade, and the return of the Predator event, driving a 418% player surge on Steam.",
+    releaseYear: '2017',
+    developer: 'Ubisoft Paris',
+    publisher: 'Ubisoft',
+    tags: ['Tactical Shooter', 'Open World', 'Co-op', 'Stealth', 'Military'],
+    emoji: '🎖️',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'ghost-recon-wildlands',
   'dota-2',
   'world-of-warcraft',
   'mortal-shell-2',
