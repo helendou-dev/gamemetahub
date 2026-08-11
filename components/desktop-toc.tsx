@@ -8,7 +8,7 @@ interface TocItem {
   level: 2 | 3;
 }
 
-export default function DesktopTOC({ headings }: { headings: TocItem[] }) {
+export default function DesktopTOC({ headings, extraFooter }: { headings: TocItem[]; extraFooter?: React.ReactNode }) {
   const [activeId, setActiveId] = useState<string>('');
 
   const handleScroll = useCallback(() => {
@@ -58,6 +58,12 @@ export default function DesktopTOC({ headings }: { headings: TocItem[] }) {
             ))}
           </ul>
         </nav>
+
+        {extraFooter && (
+          <div className="mt-8 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+            {extraFooter}
+          </div>
+        )}
       </div>
     </aside>
   );

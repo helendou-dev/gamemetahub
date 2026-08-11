@@ -259,10 +259,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['MMORPG', 'Fantasy', 'Multiplayer', 'Open World', 'PvE', 'PvP'],
     emoji: '🐉',
   },
+  'dota-2': {
+    name: 'Dota 2',
+    slug: 'dota-2',
+    headerImage: '/images/games/dota-2-header-v20260811.jpg',
+    description: "Valve's flagship MOBA — 124 heroes, 5v5 strategy, and the most prestigious annual esports championship on the planet. The International 2026 returns to Shanghai August 13-23 with a $1.6M base prize pool, but a pre-tournament match-fixing scandal has already rewritten the storyline.",
+    releaseYear: '2013',
+    developer: 'Valve',
+    publisher: 'Valve',
+    tags: ['MOBA', 'Esports', 'Strategy', 'Competitive', '5v5'],
+    emoji: '⚔️',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'dota-2',
   'world-of-warcraft',
   'mortal-shell-2',
   'grain-rot',

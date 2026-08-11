@@ -251,6 +251,22 @@ export default async function GameContentPage({
               articles={allArticles}
             />
 
+            {/* Back to Game Hub CTA */}
+            <div className="mt-10 text-center">
+              <Link
+                href={`/games/${params.game}`}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200"
+                style={{
+                  background: 'rgba(139,92,246,0.1)',
+                  border: '1px solid rgba(139,92,246,0.25)',
+                  color: '#a78bfa',
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Browse all {gameName} articles
+              </Link>
+            </div>
+
             {/* Footer */}
             <footer className="mt-16 pt-8" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-sm"
@@ -269,7 +285,13 @@ export default async function GameContentPage({
           </article>
 
           {/* ===== RIGHT: Desktop TOC Sidebar (hidden on mobile) ===== */}
-          <DesktopTOCSidebar content={content.content} />
+          <DesktopTOCSidebar
+            content={content.content}
+            gameName={gameName}
+            gameSlug={params.game}
+            allArticles={allArticles}
+            currentSlug={params.slug}
+          />
         </div>
       </div>
     </>
@@ -280,8 +302,23 @@ export default async function GameContentPage({
  * Extract headings server-side and pass to the DesktopTOC client widget.
  * We do extraction here so the ArticleTOC (mobile widget) and this sidebar
  * share the same source of truth — the raw MDX content.
+ *
+ * Also builds a "More in {gameName}" mini recommendation list below the TOC
+ * to turn wasted sidebar space into a retention engine.
  */
-function DesktopTOCSidebar({ content }: { content: string }) {
+function DesktopTOCSidebar({
+  content,
+  gameName,
+  gameSlug,
+  allArticles,
+  currentSlug,
+}: {
+  content: string;
+  gameName: string;
+  gameSlug: string;
+  allArticles: ReturnType<typeof listAllContent>;
+  currentSlug: string;
+}) {
   const headingRegex = /^(#{2,3})\s+(.+)$/gm;
   const items: { id: string; text: string; level: 2 | 3 }[] = [];
   let match;
@@ -292,8 +329,38 @@ function DesktopTOCSidebar({ content }: { content: string }) {
     items.push({ id, text, level });
   }
 
-  if (items.length < 2) return null;
-  return <DesktopTOC headings={items} />;
+  // Build mini recommendation list: same-game articles (exclude current), max 3
+  const sameGameArticles = allArticles
+    .filter((a) => a.game === gameSlug && a.slug !== currentSlug)
+    .slice(0, 3);
+
+  const extraFooter =
+    sameGameArticles.length > 0 ? (
+      <div>
+        <h4
+          className="text-xs font-bold uppercase tracking-wider mb-3"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          More in {gameName}
+        </h4>
+        <ul className="space-y-2">
+          {sameGameArticles.map((a) => (
+            <li key={a.slug}>
+              <a
+                href={`/games/${a.game}/${a.slug}`}
+                className="block text-xs leading-snug transition-colors duration-150 hover:no-underline hover:text-[#a78bfa]"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                {a.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ) : null;
+
+  if (items.length < 2 && !extraFooter) return null;
+  return <DesktopTOC headings={items} extraFooter={extraFooter} />;
 }
 
 export const dynamic = 'force-dynamic';
