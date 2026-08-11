@@ -200,10 +200,13 @@ export function generatePageJsonLd(
   const wordCount = rawContent ? rawContent.split(/\s+/).length : undefined;
   const heroImage = (frontmatter.image as string) || (frontmatter.headerImage as string) || '';
 
-  // Base Article schema
+  // Determine schema type: hot-take → NewsArticle, deep-guide → Article
+  const isHotTake = frontmatter.contentType === 'hot-take' || frontmatter.contentType === 'news';
+  const schemaType = isHotTake ? 'NewsArticle' : 'Article';
+
   const article: Record<string, unknown> = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': schemaType,
     headline: frontmatter.title,
     description: frontmatter.description || frontmatter.metaDescription || '',
     datePublished: publishDate,
@@ -299,10 +302,12 @@ export function contentToSitemapEntry(
   slug: string,
   frontmatter: ContentFrontmatter,
 ) {
+  const isGuide = frontmatter.contentType === 'deep-guide' || frontmatter.type === 'guide';
+  const isNews = frontmatter.contentType === 'hot-take' || frontmatter.type === 'news';
   return {
     url: `${siteConfig.url}/games/${game}/${slug}`,
     lastModified: frontmatter.modifiedDate || frontmatter.publishDate || frontmatter.date || new Date().toISOString(),
-    changeFrequency: frontmatter.type === 'news' ? 'daily' : 'weekly',
-    priority: frontmatter.type === 'guide' ? 0.9 : 0.7,
+    changeFrequency: isNews ? 'daily' : isGuide ? 'weekly' : 'monthly',
+    priority: isGuide ? 0.9 : isNews ? 0.8 : 0.7,
   };
 }
