@@ -49,8 +49,8 @@ export async function generateMetadata({
       type: 'article',
       publishedTime: frontmatter.publishDate || frontmatter.date,
       modifiedTime: frontmatter.modifiedDate || frontmatter.publishDate || frontmatter.date,
-      ...(frontmatter.image || frontmatter.headerImage
-        ? { images: [{ url: (frontmatter.image || frontmatter.headerImage) as string, width: 1200, height: 630 }] }
+      ...(frontmatter.image || frontmatter.ogImage || frontmatter.headerImage
+        ? { images: [{ url: (frontmatter.image || frontmatter.ogImage || frontmatter.headerImage) as string, width: 1200, height: 630 }] }
         : {
             images: [{
               url: `/og?title=${encodeURIComponent(frontmatter.title)}&type=${encodeURIComponent(frontmatter.type || 'default')}&game=${encodeURIComponent(frontmatter.game || params.game.replace(/-/g, ' '))}`,
@@ -123,7 +123,7 @@ export default async function GameContentPage({
   const gameName = ALL_GAMES[params.game]?.name || frontmatter.game || params.game.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
   const typeLabel = TYPE_LABEL[frontmatter.type || ''] || '🎮 Article';
   const typeBadge = TYPE_BADGE[frontmatter.type || ''] || 'type-badge-guide';
-  const heroImage = (frontmatter.image as string) || (frontmatter.headerImage as string) || '';
+  const heroImage = (frontmatter.image as string) || (frontmatter.ogImage as string) || (frontmatter.headerImage as string) || '';
   const author = (frontmatter.author as string) || 'GameMetaHub';
   const publishDate = frontmatter.publishDate || frontmatter.date;
 
