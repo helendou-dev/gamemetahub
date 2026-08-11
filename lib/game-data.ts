@@ -248,10 +248,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Action RPG', 'Soulslike', 'Dark Fantasy', 'Single-Player', 'Open World'],
     emoji: '💀',
   },
+  'world-of-warcraft': {
+    name: 'World of Warcraft',
+    slug: 'world-of-warcraft',
+    headerImage: '/images/games/world-of-warcraft-header-v20260811.jpg',
+    description: "Blizzard Entertainment's legendary MMORPG. The Midnight expansion continues with Patch 12.1: Curse of Ula'tek — explore the Coiled Isle, conquer the Venomous Abyss raid, and master the overhauled class meta.",
+    releaseYear: '2004',
+    developer: 'Blizzard Entertainment',
+    publisher: 'Blizzard Entertainment',
+    tags: ['MMORPG', 'Fantasy', 'Multiplayer', 'Open World', 'PvE', 'PvP'],
+    emoji: '🐉',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'world-of-warcraft',
   'mortal-shell-2',
   'grain-rot',
   'marvel-snap',
