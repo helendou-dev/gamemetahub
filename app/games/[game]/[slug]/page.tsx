@@ -16,6 +16,7 @@ import { siteConfig } from '@/lib/site-config';
 import { mdxComponents, BreadcrumbJsonLd } from '@/components/mdx-components';
 import ArticleTOC from '@/components/article-toc';
 import BackButton from '@/components/back-button';
+import ShareButtons from '@/components/share-buttons';
 import DesktopTOC from '@/components/desktop-toc';
 import RelatedArticles from '@/components/related-articles';
 import AuthorBio from '@/components/author-bio';
@@ -238,6 +239,12 @@ export default async function GameContentPage({
               <div className="mt-8" style={{ height: '1px', background: 'linear-gradient(90deg, rgba(139,92,246,0.3), transparent)' }} />
             </header>
 
+            {/* Share buttons */}
+            <div className="flex items-center justify-between gap-4 -mt-2 mb-6">
+              <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Share this article</span>
+              <ShareButtons title={frontmatter.title} variant="compact" />
+            </div>
+
             {/* Article Body */}
             <div className="article-body">
               <MDXRemote source={content.content} components={mdxComponents} />
@@ -255,8 +262,9 @@ export default async function GameContentPage({
               articles={allArticles}
             />
 
-            {/* Back to Game Hub CTA */}
-            <div className="mt-10 text-center">
+            {/* Share + Back to Game Hub CTA */}
+            <div className="mt-10 flex flex-col items-center gap-4">
+              <ShareButtons title={frontmatter.title} variant="full" />
               <Link
                 href={`/games/${params.game}`}
                 className="inline-flex items-center justify-center rounded-lg transition-all duration-200"
@@ -369,5 +377,4 @@ function DesktopTOCSidebar({
   return <DesktopTOC headings={items} extraFooter={extraFooter} />;
 }
 
-export const dynamic = 'force-dynamic';
 export const revalidate = 3600;

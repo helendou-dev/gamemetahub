@@ -84,7 +84,8 @@ export default function RootLayout({
             }),
           }}
         />
-        {/* WebSite structured data for Sitelinks Searchbox */}
+        {/* WebSite structured data */}
+        {/* SearchAction removed: /search page does not exist yet. Re-add when search is implemented. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -93,15 +94,6 @@ export default function RootLayout({
               '@type': 'WebSite',
               name: 'GameMetaHub',
               url: 'https://www.gamemetahub.com',
-              potentialAction: {
-                '@type': 'SearchAction',
-                target: {
-                  '@type': 'EntryPoint',
-                  urlTemplate:
-                    'https://www.gamemetahub.com/search?q={search_term_string}',
-                },
-                'query-input': 'required name=search_term_string',
-              },
             }),
           }}
         />
