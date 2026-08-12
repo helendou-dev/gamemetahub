@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { ContentListItem } from '@/lib/content';
 import { getPopularGames } from '@/lib/game-data';
 
@@ -54,11 +55,12 @@ function ArticleCard({ item, index }: { item: ContentListItem; index: number }) 
           {/* Image thumbnail */}
           {hasImage ? (
             <div className="relative w-full aspect-[16/9] overflow-hidden">
-              <img
-                src={item.image}
+              <Image
+                src={item.image!}
                 alt={item.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
               <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(17,17,24,0.6), transparent 50%)' }} />
               <span className={`type-badge ${tc.badgeClass} absolute top-3 left-3`}>
@@ -359,11 +361,12 @@ export default function HomePageClient({ allArticles }: { allArticles: ContentLi
                 >
                   <Link href={`/games/${game.slug}`} className="group block relative rounded-2xl overflow-hidden h-56 cursor-pointer"
                     style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
-                    <img
+                    <Image
                       src={game.image}
                       alt={game.name}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     <div className="absolute inset-0" style={{
                       background: 'linear-gradient(to top, rgba(6,6,11,0.92) 20%, rgba(6,6,11,0.3) 60%, transparent 100%)',

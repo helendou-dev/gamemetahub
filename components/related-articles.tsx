@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { ContentListItem } from '@/lib/content';
 
 const TYPE_EMOJI: Record<string, string> = {
@@ -69,11 +70,12 @@ export default function RelatedArticles({
                 {/* Thumbnail */}
                 {image && (
                   <div className="w-28 sm:w-32 flex-shrink-0 relative overflow-hidden">
-                    <img
+                    <Image
                       src={image}
                       alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 640px) 112px, 128px"
                     />
                     <div className="absolute inset-0" style={{
                       background: 'linear-gradient(to right, rgba(17,17,24,0.3), transparent)',

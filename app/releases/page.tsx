@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { listAllContent } from '@/lib/content';
 
 export const metadata = {
@@ -38,7 +39,7 @@ export default function ReleasesPage() {
             <Link key={`${item.game}/${item.slug}`} href={item.url} className="glow-card block group">
               {item.image ? (
                 <div className="relative w-full aspect-[16/9] overflow-hidden rounded-t-xl">
-                  <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  <Image src={item.image} alt={item.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                   <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(17,17,24,0.5), transparent 40%)" }} />
                   <span className={`type-badge type-badge-release absolute top-3 left-3`}>🚀 Release</span>
                 </div>

@@ -6,6 +6,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { listAllContent, ContentListItem } from '@/lib/content';
 import { ALL_GAMES } from '@/lib/game-data';
 
@@ -89,11 +90,12 @@ function ArticleCard({ item }: { item: ContentListItem }) {
       <div className="glow-card h-full flex flex-col">
         {hasImage ? (
           <div className="relative w-full aspect-[16/9] overflow-hidden">
-            <img
-              src={item.image}
+            <Image
+              src={item.image!}
               alt={item.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              loading="lazy"
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
             <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(17,17,24,0.6), transparent 50%)' }} />
             <span className={`type-badge ${badge} absolute top-3 left-3`}>{label}</span>
@@ -170,10 +172,13 @@ export default function GameHubPage({
         {/* Background image */}
         {meta.headerImage && (
           <div className="absolute inset-0">
-            <img
+            <Image
               src={meta.headerImage}
               alt={meta.name}
-              className="w-full h-full object-cover opacity-30"
+              fill
+              className="object-cover opacity-30"
+              sizes="100vw"
+              priority
             />
             <div className="absolute inset-0" style={{
               background: 'linear-gradient(to top, var(--bg-deep) 0%, rgba(6,6,11,0.5) 40%, rgba(6,6,11,0.3) 100%)',
@@ -365,5 +370,4 @@ export default function GameHubPage({
   );
 }
 
-export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
