@@ -15,6 +15,7 @@ import { slugify } from '@/lib/slugify';
 import { siteConfig } from '@/lib/site-config';
 import { mdxComponents, BreadcrumbJsonLd } from '@/components/mdx-components';
 import ArticleTOC from '@/components/article-toc';
+import BackButton from '@/components/back-button';
 import DesktopTOC from '@/components/desktop-toc';
 import RelatedArticles from '@/components/related-articles';
 import AuthorBio from '@/components/author-bio';
@@ -154,14 +155,17 @@ export default async function GameContentPage({
           {/* ===== LEFT: Article Body ===== */}
           <article className="flex-1 min-w-0 max-w-3xl mx-auto xl:mx-0">
 
-            {/* Breadcrumb */}
-            <nav className="text-sm mb-8 flex items-center gap-2 flex-wrap" aria-label="Breadcrumb" style={{ color: 'var(--text-muted)' }}>
-              <a href="/" className="hover:text-white transition-colors">Home</a>
-              <span>/</span>
-              <a href="/games" className="hover:text-white transition-colors">Games</a>
-              <span>/</span>
-              <a href={`/games/${params.game}`} className="hover:text-white transition-colors">{gameName}</a>
-            </nav>
+            {/* Back button + Breadcrumb */}
+            <div className="mb-8">
+              <BackButton fallbackHref={`/games/${params.game}`} label={`Back to ${gameName}`} variant="icon" />
+              <nav className="text-sm mt-3 flex items-center gap-2 flex-wrap" aria-label="Breadcrumb" style={{ color: 'var(--text-muted)' }}>
+                <a href="/" className="hover:text-white transition-colors">Home</a>
+                <span>/</span>
+                <a href="/games" className="hover:text-white transition-colors">Games</a>
+                <span>/</span>
+                <a href={`/games/${params.game}`} className="hover:text-white transition-colors">{gameName}</a>
+              </nav>
+            </div>
 
             {/* Hero Image — next/image for auto WebP + responsive srcset */}
             {heroImage && (
@@ -255,15 +259,17 @@ export default async function GameContentPage({
             <div className="mt-10 text-center">
               <Link
                 href={`/games/${params.game}`}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200"
+                className="inline-flex items-center justify-center rounded-lg transition-all duration-200"
                 style={{
-                  background: 'rgba(139,92,246,0.1)',
-                  border: '1px solid rgba(139,92,246,0.25)',
+                  background: 'rgba(139,92,246,0.08)',
+                  border: '1px solid rgba(139,92,246,0.2)',
                   color: '#a78bfa',
+                  padding: '0.6rem',
                 }}
+                aria-label={`Back to ${gameName}`}
+                title={`Back to ${gameName}`}
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                Browse all {gameName} articles
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
               </Link>
             </div>
 

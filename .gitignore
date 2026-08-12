@@ -31,3 +31,5 @@ yarn-error.log*
 next-env.d.ts
 ARTIFACT_*
 .workbuddy/
+server.log
+generated-images/
