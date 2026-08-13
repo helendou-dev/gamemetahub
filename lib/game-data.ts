@@ -281,6 +281,17 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Tactical Shooter', 'Open World', 'Co-op', 'Stealth', 'Military'],
     emoji: '🎖️',
   },
+  'marvel-rivals': {
+    name: 'Marvel Rivals',
+    slug: 'marvel-rivals',
+    headerImage: '/images/games/marvel-rivals-header-v20260813.jpg',
+    description: "NetEase Games' 6v6 hero shooter featuring 53+ Marvel heroes and villains. Team-Up abilities, destructible environments, and seasonal events. Season 9.5 brings The Hood and the Summer Finale '26 festival at Hellfire Bay Beach — running through September 24.",
+    releaseYear: '2024',
+    developer: 'NetEase Games',
+    publisher: 'NetEase Games / Marvel Games',
+    tags: ['Hero Shooter', '6v6', 'Marvel', 'Multiplayer', 'Competitive'],
+    emoji: '🦸',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
@@ -309,6 +320,7 @@ export const POPULAR_GAMES_ORDER: string[] = [
   'silent-hill-f',
   'palworld',
   'fortnite',
+  'marvel-rivals',
 ];
 
 /** Lightweight view for pages that only need name + image */
