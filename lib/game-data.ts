@@ -292,10 +292,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Hero Shooter', '6v6', 'Marvel', 'Multiplayer', 'Competitive'],
     emoji: '🦸',
   },
+  'marvels-wolverine': {
+    name: "Marvel's Wolverine",
+    slug: 'marvels-wolverine',
+    headerImage: '/images/games/marvels-wolverine-header-v20260814.jpg',
+    description: "Insomniac Games' brutal single-player action-adventure. Control Logan as he tears through the Reavers with adamantium claws, a three-tier Rage system, and cinematic combat. PS5 exclusive, launching September 15, 2026.",
+    releaseYear: '2026',
+    developer: 'Insomniac Games',
+    publisher: 'Sony Interactive Entertainment / Marvel Games',
+    tags: ['Action-Adventure', 'Marvel', 'Superhero', 'Single-Player', 'PS5 Exclusive'],
+    emoji: '💢',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'marvels-wolverine',
   'ghost-recon-wildlands',
   'dota-2',
   'world-of-warcraft',
