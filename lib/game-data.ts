@@ -303,10 +303,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Action-Adventure', 'Marvel', 'Superhero', 'Single-Player', 'PS5 Exclusive'],
     emoji: '💢',
   },
+  'peak': {
+    name: 'PEAK',
+    slug: 'peak',
+    headerImage: '/images/games/peak-header-v20260815.jpg',
+    description: "Aggro Crab and Landfall's four-player co-op climbing game. Scramble up a procedurally generated mountain with friends, manage stamina and scouts, and survive bizarre hazards. The Final Ascent update adds the Gloom and Citadel biomes, Ascent 8, and a secret ending — and the game is 50% off ($3.99) through August 18, 2026.",
+    releaseYear: '2025',
+    developer: 'Aggro Crab / Landfall Games',
+    publisher: 'Aggro Crab / Evil Landfall',
+    tags: ['Co-op', 'Climbing', 'Indie', 'Multiplayer', 'Roguelite'],
+    emoji: '⛰️',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'peak',
   'marvels-wolverine',
   'ghost-recon-wildlands',
   'dota-2',
