@@ -314,10 +314,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Co-op', 'Climbing', 'Indie', 'Multiplayer', 'Roguelite'],
     emoji: '⛰️',
   },
+  'the-sinking-city-2': {
+    name: 'The Sinking City 2',
+    slug: 'the-sinking-city-2',
+    headerImage: '/images/games/the-sinking-city-2-header-v20260816.jpg',
+    description: "Frogwares' Lovecraftian survival horror set in flooded 1920s Arkham. Manage scarce ammo, investigate occult crimes, and defy an eldritch deity as Calvin Rafferty. Launching August 18, 2026 on PC, PS5, and Xbox Series X|S — Premium Edition unlocks 24 hours early.",
+    releaseYear: '2026',
+    developer: 'Frogwares',
+    publisher: 'Frogwares',
+    tags: ['Survival Horror', 'Lovecraftian', 'Action-Adventure', 'Single-Player', 'Investigation'],
+    emoji: '🌊',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'the-sinking-city-2',
   'peak',
   'marvels-wolverine',
   'ghost-recon-wildlands',
