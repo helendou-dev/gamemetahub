@@ -325,10 +325,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Survival Horror', 'Lovecraftian', 'Action-Adventure', 'Single-Player', 'Investigation'],
     emoji: '🌊',
   },
+  'nioh-3': {
+    name: 'Nioh 3',
+    slug: 'nioh-3',
+    headerImage: '/images/games/nioh-3-header-v20260818.jpg',
+    description: "Team NINJA's dark samurai action RPG — play as Takechiyo across time-hopping chapters of feudal Japan, from the 1622 Edo period to Keian-era 1651. The first DLC, Hell Rising, arrives August 19, 2026 with the new Hoko & Shield weapon, the Hundred Demon Realms Picture Scroll, and the Enlightened One's Journey difficulty on PS5 and PC.",
+    releaseYear: '2026',
+    developer: 'Team NINJA',
+    publisher: 'Koei Tecmo',
+    tags: ['Action RPG', 'Soulslike', 'Dark Fantasy', 'Samurai', 'Single-Player'],
+    emoji: '⛩️',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'nioh-3',
   'the-sinking-city-2',
   'peak',
   'marvels-wolverine',
