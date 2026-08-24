@@ -1,0 +1,231 @@
+---
+title: "Marvel Tōkon Crashing After Windows Update? KB5121003 Fix Guide (2026)"
+metaDescription: "Windows 11 KB5121003 is crashing Marvel Tōkon, Arc Raiders, and The Finals. Here is the official Microsoft registry fix plus Embark Studios' driver removal method — step by step."
+slug: "win11-kb5121003-crash-fix"
+type: "error_fix"
+publishDate: "2026-08-24T17:30:00Z"
+category: "Gaming"
+gameName: "Marvel Tōkon: Fighting Souls"
+contentType: "error_fix"
+description: "Windows 11 KB5121003 is crashing Marvel Tōkon, Arc Raiders, and The Finals. Here is the official Microsoft registry fix plus Embark Studios' driver removal method — step by step."
+image: "/images/games/marvel-tokon-ss3-v20260824.jpg"
+author: "GameMetaHub"
+platforms: ["PC"]
+featuredImageAlt: "Gaming PC with RGB peripherals and Windows 11 crash error on screen after KB5121003 update"
+tags: ["Marvel Tōkon", "KB5121003", "Windows 11", "crash fix", "inpoutx64", "RGB driver", "Arc Raiders", "The Finals"]
+jsonLd: '{"@context":"https://schema.org","@type":"HowTo","name":"Fix Marvel Tōkon Crashing After Windows 11 KB5121003 Update","description":"Windows 11 KB5121003 is crashing Marvel Tōkon, Arc Raiders, and The Finals due to the inpoutx64 RGB driver. Here is the official Microsoft registry fix and Embark Studios driver removal method.","datePublished":"2026-08-24T17:30:00Z","supply":[{"@type":"HowToSupply","name":"Windows 11 Registry Editor"}],"step":[{"@type":"HowToStep","name":"Back up the Registry","text":"Create a restore point or export the registry key before making changes."},{"@type":"HowToStep","name":"Open Registry Editor","text":"Type regedit in the Start menu and open the Registry Editor."},{"@type":"HowToStep","name":"Navigate to inpoutx64 service key","text":"Go to HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\inpoutx64"},{"@type":"HowToStep","name":"Change Start value to 4","text":"Double-click the Start value and set its data to 4 to disable the driver."},{"@type":"HowToStep","name":"Restart your PC","text":"Restart for the change to take effect."}]}'
+---
+
+import { GameRating } from '@/components/mdx-components';
+
+You updated Windows 11, launched Marvel Tōkon: Fighting Souls, and the game crashed. Or froze. Or your entire PC restarted without warning. You are not alone — and it is not the game's fault.
+
+On August 11, 2026, Microsoft released security update **KB5121003** for Windows 11 versions 24H2 and 25H2. It patches over 400 security vulnerabilities. It also introduced a conflict with certain RGB peripheral drivers that crashes three Unreal Engine 5 games: **Marvel Tōkon: Fighting Souls**, **Arc Raiders**, and **The Finals**.
+
+Microsoft confirmed the issue on August 20 and published an official workaround on August 21. Embark Studios (developer of Arc Raiders and The Finals) released their own fix the same week. Here is everything you need to know, step by step.
+
+<GameRating score="84" source="Metacritic" platforms="PC, PS5, PS4" />
+
+---
+
+## What Is Happening
+
+The crash is caused by a kernel-level driver file called **inpoutx64.sys**. This driver provides low-level hardware access and is typically installed by:
+
+- RGB lighting control software (keyboards, mice, fans, motherboards)
+- Hardware monitoring tools like ZenTimings
+- Fan control or memory tuning utilities
+- Older versions of OpenRGB
+
+Before KB5121003, Windows tolerated this driver's behavior. The August update tightened **kernel handle validation** — a security improvement that exposed the driver's problematic operations. Now, when certain games launch and the game's anti-cheat probe detects inpoutx64.sys, the conflict triggers a crash.
+
+### Symptoms
+
+If you are affected, you will see one or more of these:
+
+- The game becomes unresponsive and stops accepting input
+- The game closes on its own with no error message
+- An **EXCEPTION_ACCESS_VIOLATION** error appears on screen
+- The entire PC restarts without warning, mid-game
+
+### Affected Games
+
+Microsoft's Windows release health dashboard specifically names three games:
+
+<table>
+<thead>
+<tr><th>Game</th><th>Developer</th><th>Engine</th></tr>
+</thead>
+<tbody>
+<tr><td>Marvel Tōkon: Fighting Souls</td><td>Arc System Works</td><td>Unreal Engine 5</td></tr>
+<tr><td>Arc Raiders</td><td>Embark Studios</td><td>Unreal Engine 5</td></tr>
+<tr><td>The Finals</td><td>Embark Studios</td><td>Unreal Engine 5</td></tr>
+</tbody>
+</table>
+
+All three are Unreal Engine 5 titles — the common thread is likely how UE5's anti-cheat interacts with the driver. Not every PC with RGB software is affected; the crash depends on which specific driver version and RGB utility you have installed.
+
+---
+
+## Fix 1: Microsoft's Official Registry Workaround (Recommended)
+
+This is Microsoft's published fix from the Windows release health dashboard. It temporarily disables the inpoutx64 driver without deleting it — you can easily reverse this later.
+
+**Time:** 3 minutes
+**Risk:** Low if you follow the steps exactly
+**Side effect:** RGB lighting controls may stop working until you re-enable the driver
+
+### Step 1: Back Up the Registry
+
+Before touching anything, create a restore point:
+
+1. Press **Win + S**, type "Create a restore point," and open it
+2. Click **Create** under System Protection
+3. Name it "Before inpoutx64 fix" and click **Create**
+
+### Step 2: Open Registry Editor
+
+1. Press **Win + S** or click Start
+2. Type **regedit**
+3. Select **Registry Editor** from the results
+4. Click **Yes** if prompted by User Account Control
+
+### Step 3: Navigate to the inpoutx64 Key
+
+In the address bar at the top of Registry Editor, paste this path:
+
+```
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\inpoutx64
+```
+
+Press Enter. If you do not see this key, the inpoutx64 driver is not installed on your system — your crashes may have a different cause.
+
+### Step 4: Change the Start Value
+
+1. On the right side, find the registry value named **Start**
+2. Double-click it
+3. Under "Value data," change whatever is there to **4**
+4. Click **OK**
+5. Close Registry Editor
+
+### Step 5: Restart Your PC
+
+Restart your computer for the change to take effect. After rebooting, launch Marvel Tōkon (or Arc Raiders / The Finals) and test whether the crash is resolved.
+
+### To Re-Enable RGB Lighting Later
+
+When Microsoft ships a permanent fix, or if you want your RGB lighting back, repeat the steps above and change the Start value back to its original number (typically **3**). Restart your PC.
+
+---
+
+## Fix 2: Embark Studios' Driver Removal Method
+
+If the registry fix does not work, or if you want a more thorough removal, Embark Studios published their own method on their official Discord. This permanently deletes the driver file rather than just disabling it.
+
+**Time:** 5 minutes
+**Risk:** Medium — this deletes a system driver file
+**Side effect:** The RGB or hardware utility that installed the driver may stop working entirely
+
+### Step 1: Stop the Service
+
+1. Press **Win + S**, type **cmd**
+2. Right-click **Command Prompt** and select **Run as administrator**
+3. Run this command:
+
+```
+sc stop inpoutx64
+```
+
+### Step 2: Delete the Service
+
+In the same Command Prompt:
+
+```
+sc delete inpoutx64
+```
+
+### Step 3: Delete the Driver File
+
+Open File Explorer and navigate to:
+
+```
+C:\Windows\System32\drivers\
+```
+
+Find and delete the file named **inpoutx64.sys** (there may also be a **.dll** variant — delete that too if present).
+
+If you cannot delete the file, it may be in use. Restart your PC in Safe Mode (hold Shift while clicking Restart, then Troubleshoot → Advanced Options → Startup Settings → Restart → press 4 for Safe Mode) and try again.
+
+### Step 4: Remove the Registry Entry (Optional)
+
+Open Registry Editor and navigate to:
+
+```
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\inpoutx64
+```
+
+Right-click the **inpoutx64** folder on the left side and select **Delete**.
+
+### Step 5: Restart Your PC
+
+Restart normally. The driver is now fully removed from your system.
+
+---
+
+## Should You Uninstall KB5121003 Instead?
+
+Some users on Reddit recommend simply uninstalling the August update. This does restore stability, but it is **not recommended** for most players.
+
+KB5121003 patches **over 400 security vulnerabilities**. Removing it leaves your system exposed to those flaws. The registry workaround or driver removal method lets you keep the security update while fixing the game crash.
+
+If you must uninstall temporarily:
+
+1. Settings → Windows Update → Update history → Uninstall updates
+2. Find **KB5121003** → Uninstall
+3. Restart your PC
+4. Consider pausing Windows Update for one to two weeks until Microsoft ships a permanent fix
+
+---
+
+## How to Check if You Have the inpoutx64 Driver
+
+Not sure if this driver is even on your system? Here is a quick check:
+
+1. Press **Win + S**, type **cmd**, and open Command Prompt
+2. Run: `sc query inpoutx64`
+3. If you see "SERVICE_NAME: inpoutx64" with status info, the driver is installed
+4. If you see "The specified service does not exist," the driver is not on your system — your crashes have a different cause
+
+You can also check for the file directly:
+
+1. Open File Explorer
+2. Navigate to `C:\Windows\System32\drivers\`
+3. Search for **inpoutx64**
+
+---
+
+## FAQ
+
+### Is this a permanent fix?
+
+No. Both the registry workaround and the driver removal method are temporary. Microsoft is still investigating the interaction and has not released a permanent Windows update addressing the issue. Check Windows Update regularly for a follow-up patch.
+
+### Will this break my RGB lighting?
+
+The registry method (Fix 1) disables the driver, which may cause RGB lighting to stop working or behave erratically. The driver removal method (Fix 2) permanently removes the driver, which will break the RGB control software that relies on it until you reinstall that software.
+
+### Why are only three games affected?
+
+Microsoft has only confirmed three games so far: Marvel Tōkon, Arc Raiders, and The Finals. All three are Unreal Engine 5 titles with anti-cheat systems that probe for kernel-level drivers. Other UE5 games or games with similar anti-cheat may also be affected but have not been officially confirmed yet.
+
+### I do not have RGB peripherals. Can I still be affected?
+
+Yes. The inpoutx64 driver is not only used by RGB software — it can also be installed by hardware monitoring tools like ZenTimings, fan control utilities, and memory tuning applications. Check using the method above.
+
+### When will Microsoft release a permanent fix?
+
+Microsoft has not announced a timeline. Based on similar past issues, expect a fix in the September 2026 Patch Tuesday update at the earliest. Until then, use the registry workaround.
+
+---
+
+If you are still experiencing crashes after both fixes, the issue may be unrelated to KB5121003. Check our [Marvel Tōkon beginner's guide](/games/marvel-tokon/beginners-guide) for optimal settings, and file a report through Windows Feedback Hub (press **Win + F**) so Microsoft can track your case.
