@@ -39,6 +39,28 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['CRPG', 'Turn-Based', 'D&D', 'Fantasy', 'Story-Rich'],
     emoji: '🎲',
   },
+  'star-wars-zero-company': {
+    name: 'Star Wars Zero Company',
+    slug: 'star-wars-zero-company',
+    headerImage: '/images/games/star-wars-zero-company-header-v20260825.jpg',
+    description: "Bit Reactor and Respawn's single-player turn-based tactics game set during the final days of the Clone Wars. Command Hawks and an elite squad of mercenaries in covert operations against the Separatist-aligned Infinite Coil cult. The most ambitious Star Wars strategy game in years, from the former Firaxis team behind XCOM.",
+    releaseYear: '2026',
+    developer: 'Bit Reactor / Respawn Entertainment',
+    publisher: 'Electronic Arts',
+    tags: ['Turn-Based Tactics', 'Star Wars', 'Clone Wars', 'Strategy', 'Single-Player', 'XCOM-Style'],
+    emoji: '⭐',
+  },
+  'resonance-plague-tale-legacy': {
+    name: 'Resonance: A Plague Tale Legacy',
+    slug: 'resonance-plague-tale-legacy',
+    headerImage: '/images/games/resonance-plague-tale-legacy-header-v20260825.jpg',
+    description: "Asobo Studio's prequel to A Plague Tale, set 15 years before Requiem. Play as Sophia, a treasure hunter on Crete's Minotaur Island, wielding dual swords in a Ghost of Tsushima-inspired combat system. Day one on Xbox Game Pass and PC Game Pass.",
+    releaseYear: '2026',
+    developer: 'Asobo Studio',
+    publisher: 'Focus Entertainment',
+    tags: ['Action-Adventure', 'Prequel', 'Medieval', 'Mythology', 'Single-Player', 'Stealth'],
+    emoji: '🏛️',
+  },
   'rampage-evolution': {
     name: 'Rampage Evolution',
     slug: 'rampage-evolution',
@@ -340,6 +362,8 @@ export const ALL_GAMES: Record<string, GameMeta> = {
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'resonance-plague-tale-legacy',
+  'star-wars-zero-company',
   'nioh-3',
   'the-sinking-city-2',
   'peak',
