@@ -347,6 +347,28 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Survival Horror', 'Lovecraftian', 'Action-Adventure', 'Single-Player', 'Investigation'],
     emoji: '🌊',
   },
+  'helldivers-2': {
+    name: 'Helldivers 2',
+    slug: 'helldivers-2',
+    headerImage: '/images/games/helldivers-2-header-v20260826.jpg',
+    description: "Arrowhead Game Studios' co-op tactical shooter. Drop into a satirical sci-fi galaxy and fight for Super Earth against bugs, bots, and the Illuminate. The Devoid of Liberty update opens the Void biome, adds the Wretch and Crusher enemies, raises the level cap to 300, and brings SEAF support squads.",
+    releaseYear: '2024',
+    developer: 'Arrowhead Game Studios',
+    publisher: 'Sony Interactive Entertainment',
+    tags: ['Co-op Shooter', 'Tactical', 'Sci-Fi', 'Multiplayer', 'Third-Person'],
+    emoji: '🪖',
+  },
+  'metal-gear-solid-master-collection-vol-2': {
+    name: 'Metal Gear Solid: Master Collection Vol. 2',
+    slug: 'metal-gear-solid-master-collection-vol-2',
+    headerImage: '/images/games/metal-gear-solid-master-collection-vol-2-header-v20260826.jpg',
+    description: "Konami's definitive Metal Gear Solid collection. MGS4: Guns of the Patriots escapes its 18-year PS3 prison alongside Peace Walker HD and Ghost Babel. Launching August 27, 2026 on PS5, Xbox Series X|S, Switch 2, Switch, and PC.",
+    releaseYear: '2026',
+    developer: 'Konami Digital Entertainment',
+    publisher: 'Konami',
+    tags: ['Stealth', 'Action', 'Classic', 'Single-Player', 'Collection'],
+    emoji: '📦',
+  },
   'nioh-3': {
     name: 'Nioh 3',
     slug: 'nioh-3',
@@ -362,6 +384,8 @@ export const ALL_GAMES: Record<string, GameMeta> = {
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'helldivers-2',
+  'metal-gear-solid-master-collection-vol-2',
   'resonance-plague-tale-legacy',
   'star-wars-zero-company',
   'nioh-3',
