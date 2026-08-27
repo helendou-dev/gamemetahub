@@ -369,6 +369,17 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Stealth', 'Action', 'Classic', 'Single-Player', 'Collection'],
     emoji: '📦',
   },
+  'blood-of-dawnwalker': {
+    name: 'The Blood of Dawnwalker',
+    slug: 'blood-of-dawnwalker',
+    headerImage: '/images/games/blood-of-dawnwalker-header-v20260827.jpg',
+    description: "Rebel Wolves' dark fantasy open-world RPG from The Witcher 3's director. Play as Coen — human by day, vampire by night — with 30 in-game days to save his family from vampire lord Brencis in 14th-century Vale Sangora. Time is a currency: every quest spends it. Launching September 3, 2026 on PC, PS5, and Xbox Series X|S.",
+    releaseYear: '2026',
+    developer: 'Rebel Wolves',
+    publisher: 'Bandai Namco Entertainment',
+    tags: ['Action RPG', 'Open World', 'Dark Fantasy', 'Vampires', 'Single-Player', 'Story-Rich'],
+    emoji: '🧛',
+  },
   'nioh-3': {
     name: 'Nioh 3',
     slug: 'nioh-3',
@@ -384,6 +395,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'blood-of-dawnwalker',
   'helldivers-2',
   'metal-gear-solid-master-collection-vol-2',
   'resonance-plague-tale-legacy',
