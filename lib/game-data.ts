@@ -50,6 +50,17 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Turn-Based Tactics', 'Star Wars', 'Clone Wars', 'Strategy', 'Single-Player', 'XCOM-Style'],
     emoji: '⭐',
   },
+  'witcher-3': {
+    name: 'The Witcher 3: Wild Hunt',
+    slug: 'witcher-3',
+    headerImage: '/images/games/witcher-3-header-v20260829.jpg',
+    description: "CD Projekt Red's landmark open-world RPG. Geralt of Rivia hunts monsters across Velen, Novigrad, and Skellige in one of the most acclaimed games ever made. The Remastered edition arrives September 29, 2026 as a free upgrade, with the third expansion Songs of the Past coming in 2027.",
+    releaseYear: '2015',
+    developer: 'CD Projekt Red',
+    publisher: 'CD Projekt',
+    tags: ['Open World', 'Action RPG', 'Dark Fantasy', 'Story-Rich', 'Single-Player'],
+    emoji: '🐺',
+  },
   'resonance-plague-tale-legacy': {
     name: 'Resonance: A Plague Tale Legacy',
     slug: 'resonance-plague-tale-legacy',
@@ -395,6 +406,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'witcher-3',
   'blood-of-dawnwalker',
   'helldivers-2',
   'metal-gear-solid-master-collection-vol-2',
