@@ -402,12 +402,24 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Action RPG', 'Soulslike', 'Dark Fantasy', 'Samurai', 'Single-Player'],
     emoji: '⛩️',
   },
+  'onimusha-way-of-the-sword': {
+    name: 'Onimusha: Way of the Sword',
+    slug: 'onimusha-way-of-the-sword',
+    headerImage: '/images/games/onimusha-way-of-the-sword-header-v20260901.jpg',
+    description: "Capcom's revival of the legendary samurai action series after 20 years, powered by RE Engine. Play as Miyamoto Musashi in demon-infested Sengoku-era Japan, mastering the Issen counter system and wielding the Oni Gauntlet. IGN 10/10, Metacritic 86, Gamescom Best Gameplay. Launching September 4, 2026 on PS5, Xbox Series X|S, Nintendo Switch 2, and PC.",
+    releaseYear: '2026',
+    developer: 'Capcom',
+    publisher: 'Capcom',
+    tags: ['Action-Adventure', 'Samurai', 'Dark Fantasy', 'Capcom', 'Single-Player', 'RE Engine'],
+    emoji: '🏯',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
   'witcher-3',
   'blood-of-dawnwalker',
+  'onimusha-way-of-the-sword',
   'helldivers-2',
   'metal-gear-solid-master-collection-vol-2',
   'resonance-plague-tale-legacy',

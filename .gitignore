@@ -33,3 +33,4 @@ ARTIFACT_*
 .workbuddy/
 server.log
 generated-images/
+tmp-img/ 
