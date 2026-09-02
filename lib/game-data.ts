@@ -413,10 +413,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Action-Adventure', 'Samurai', 'Dark Fantasy', 'Capcom', 'Single-Player', 'RE Engine'],
     emoji: '🏯',
   },
+  'dragons-dogma-2': {
+    name: "Dragon's Dogma 2",
+    slug: 'dragons-dogma-2',
+    headerImage: '/images/games/dragons-dogma-2-header-v20260902.jpg',
+    description: "Capcom's acclaimed open-world action RPG where you hunt the Dragon as the Arisen, commanding a party of Pawns. Title Update 3.2 (September 2026) rebuilds the save system, adds Dragonsbaulk Draught to cure Dragonsplague, six weapon-skill slots, a full Pawn AI overhaul, and 60 FPS performance modes. The Dark Arisen expansion arrives October 9, 2026 with the frozen Norgan region and Relic Expedition Cycle.",
+    releaseYear: '2024',
+    developer: 'Capcom',
+    publisher: 'Capcom',
+    tags: ['Action RPG', 'Open World', 'Dark Fantasy', 'Capcom', 'Single-Player', 'Pawns'],
+    emoji: '🐲',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'dragons-dogma-2',
   'witcher-3',
   'blood-of-dawnwalker',
   'onimusha-way-of-the-sword',
