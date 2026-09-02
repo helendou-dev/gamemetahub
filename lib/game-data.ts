@@ -424,11 +424,23 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Action RPG', 'Open World', 'Dark Fantasy', 'Capcom', 'Single-Player', 'Pawns'],
     emoji: '🐲',
   },
+  'mewgenics': {
+    name: 'Mewgenics',
+    slug: 'mewgenics',
+    headerImage: '/images/games/mewgenics-header-v20260902.jpg',
+    description: "The tactical cat-breeding roguelite from The Binding of Isaac and Super Meat Boy creator Edmund McMillen and Tyler Glaiel. Breed mutant cats across generations, assign class collars, and send squads into 200+ hours of turn-based adventures packed with 900+ items and 200+ enemies. Metacritic 88, IGN 9/10, OpenCritic Must-Play. Launching September 8, 2026 on PS5, Xbox Series X|S, and Nintendo Switch 2 for $39.99 (PC out now).",
+    releaseYear: '2026',
+    developer: 'Edmund McMillen, Tyler Glaiel',
+    publisher: 'Edmund McMillen & Tyler Glaiel',
+    tags: ['Turn-Based Tactics', 'Roguelite', 'Strategy', 'Simulation', 'Indie', 'Cats', 'Single-Player'],
+    emoji: '🐱',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
   'dragons-dogma-2',
+  'mewgenics',
   'witcher-3',
   'blood-of-dawnwalker',
   'onimusha-way-of-the-sword',
