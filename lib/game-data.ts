@@ -435,10 +435,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Turn-Based Tactics', 'Roguelite', 'Strategy', 'Simulation', 'Indie', 'Cats', 'Single-Player'],
     emoji: '🐱',
   },
+  'valheim': {
+    name: 'Valheim',
+    slug: 'valheim',
+    headerImage: '/images/games/valheim-header-v20260908.jpg',
+    description: "Iron Gate AB's Viking survival sandbox leaves Early Access with version 1.0 on September 9, 2026. Build longships, battle mythic beasts, and explore the new Deep North biome — the final frozen region — with full crossplay across PC, Xbox, PS5, and Nintendo Switch 2.",
+    releaseYear: '2026',
+    developer: 'Iron Gate AB',
+    publisher: 'Coffee Stain Publishing',
+    tags: ['Survival', 'Sandbox', 'Crafting', 'Open World', 'Co-op', 'Vikings', 'Multiplayer'],
+    emoji: '🪓',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'valheim',
   'dragons-dogma-2',
   'mewgenics',
   'witcher-3',
