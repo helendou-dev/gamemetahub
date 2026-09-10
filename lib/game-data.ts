@@ -446,10 +446,34 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Survival', 'Sandbox', 'Crafting', 'Open World', 'Co-op', 'Vikings', 'Multiplayer'],
     emoji: '🪓',
   },
+  'runescape-dragonwilds': {
+    name: 'RuneScape: Dragonwilds',
+    slug: 'runescape-dragonwilds',
+    headerImage: '/images/games/runescape-dragonwilds-header-v20260910.jpg',
+    description: "Jagex's open-world RuneScape survival crafting game leaves Early Access on September 15, 2026 with the 1.0 update — the Scorned Wilderness raid, the Kuldra boss fight, Runite-tier crafting, all 13 skills releasable to level 99, and the long-awaited Runite weapons. Crossplay across PC, PS5, Xbox Series X|S, and Nintendo Switch 2, with day-one availability on Xbox Game Pass and PS Plus Extra.",
+    releaseYear: '2026',
+    developer: 'Jagex Ltd',
+    publisher: 'Jagex Ltd',
+    tags: ['Survival', 'Crafting', 'RuneScape', 'Open World', 'Co-op', 'Cross-Platform', 'Game Pass'],
+    emoji: '🐉',
+  },
+  'wardogs': {
+    name: 'WARDOGS',
+    slug: 'wardogs',
+    headerImage: '/images/games/wardogs-header-v20260910.jpg',
+    description: "BULKHEAD's 100-player, three-team tactical All-Out-Warfare FPS launches into Steam Early Access on September 10, 2026 for $39.99. Set in the derelict industrial mountains of Eastern Europe, every match runs on cash earned through eliminations, vehicle captures, and objective play, with both loadouts and respawns purchased from your in-match bankroll. Three faction-colored launch maps with destructible cover, combined-arms combat, and a PvE Extraction mode already in development.",
+    releaseYear: '2026',
+    developer: 'BULKHEAD',
+    publisher: 'Team17',
+    tags: ['Tactical FPS', 'Multiplayer', 'Early Access', '100-Player', 'Destructible', 'Multiplayer'],
+    emoji: '🐺',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'runescape-dragonwilds',
+  'wardogs',
   'valheim',
   'dragons-dogma-2',
   'mewgenics',
