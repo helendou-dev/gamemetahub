@@ -468,10 +468,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Tactical FPS', 'Multiplayer', 'Early Access', '100-Player', 'Destructible', 'Multiplayer'],
     emoji: '🐺',
   },
+  'aniimo': {
+    name: 'Aniimo',
+    slug: 'aniimo',
+    headerImage: '/images/games/aniimo-header-v20260911.jpg',
+    description: "Pawprint Studio's free-to-play cross-platform creature-collecting RPG launches globally on September 16, 2026. Explore a living open world as a Keeper, befriend Aniimo with the Twine mechanic, transform into them mid-battle, and square off in the 3v3 Egg Heist PvEvP mode. 30 million pre-registrations unlocked four reward tiers and the Sunlit Meadow cosmetic set.",
+    releaseYear: '2026',
+    developer: 'Pawprint Studio',
+    publisher: 'Kingsglory (FunPlus)',
+    tags: ['Creature-Collecting', 'Open World', 'Free-to-Play', 'Co-op', 'Cross-Platform', 'PvPvE'],
+    emoji: '🦄',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'aniimo',
   'runescape-dragonwilds',
   'wardogs',
   'valheim',
