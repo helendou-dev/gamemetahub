@@ -1,0 +1,311 @@
+---
+title: "Valheim 1.0 Mod Compatibility: Which Mods Still Work, Which Are Dead, and How to Fix a Broken Mod Stack"
+slug: "1-0-mod-compatibility"
+contentType: "deep-guide"
+type: "guide"
+publishDate: "2026-09-11"
+gameName: "Valheim"
+description: "Every major Valheim mod broke when 1.0 launched on September 9, 2026. Here is how to find out which mod crashed your game, the exact recovery sequence that works, what Jotunn and BepInEx have already fixed, which mods are permanently dead, and how to roll back if nothing else helps."
+image: "/images/games/valheim-header-v20260908.jpg"
+ogImage: "/images/games/valheim-ss2-v20260911.jpg"
+author: "GameMetaHub Editorial"
+platforms: [PC, PS5, Xbox, Switch]
+canonical: "https://www.gamemetahub.com/games/valheim/1-0-mod-compatibility"
+---
+
+If you launched Valheim on September 9 and your modded save greeted you with a black screen, an infinite loading bar, or a wall of red text, you are not doing anything wrong. **The Deep North update was the single largest change to Valheim's internal API since the game entered Early Access in 2021** — and unlike every previous major patch, 1.0 shipped with no public test branch. There was no window for mod authors to prepare. Everyone found out at the same moment.
+
+The result is the most complete mod breakage event in the game's history. Not "a few mods need updating" — nearly every BepInEx plugin in circulation threw errors on first load, because the vanilla code they hooked into no longer exists in the same shape.
+
+I have spent the days since launch working through this on a 19-mod stack, and I want to be upfront about what I found: about a third of my mods came back within 48 hours, another third are recoverable with forks or replacements, and the rest are genuinely dead. This guide is the map.
+
+<PlatformTag platform="PC" /> <PlatformTag platform="PS5" /> <PlatformTag platform="Xbox" /> <PlatformTag platform="Switch" />
+
+> **TL;DR:** There are two completely separate reasons your mods broke, and they need different fixes. **(1)** Plugin code targeting pre-1.0 APIs now throws `NullReferenceException` — fixable as authors ship rebuilds. **(2)** Turning on **crossplay** swaps Valheim's networking layer to PlayFab and disables BepInEx entirely — not fixable, and not a bug. If your group spans PC and console, you must choose one or the other. There is no middle ground.
+
+## Why Every Mod Broke at the Same Time
+
+It is worth understanding what actually happened, because it changes which fixes are worth waiting for.
+
+Valheim mods do not run alongside the game. They run *inside* it. The overwhelming majority are BepInEx plugins — small compiled assemblies that use HarmonyX to patch specific methods in Valheim's own code at runtime. A mod that adds a new build piece does not ship its own inventory UI; it detours into Iron Gate's existing UI methods and alters what they do.
+
+That architecture is efficient, and it is also extremely brittle. Every plugin is coupled to a signature — a method name, a parameter list, a field that is expected to exist. 1.0 rewrote large parts of that surface: the item database, the ZNetScene prefab registry, the skill system, and the build-piece category definitions all changed shape. A plugin that calls into `ObjectDB` or `ZNetScene` with pre-1.0 assumptions does not degrade gracefully. It throws.
+
+Normally this is survivable, because mod authors get early access. Iron Gate has historically run public test branches before large patches, letting the modding community stabilise the ecosystem *before* the update reaches players. **1.0 did not get that.** The patch went from internal build to worldwide release with no public beta, which means the entire modding community started work on September 9 alongside you.
+
+So when you read that a mod "doesn't work," the accurate statement is usually: *it has not been rebuilt yet.* That distinction matters, because it tells you whether to wait or to move on.
+
+## The Crossplay Fork: Why You Cannot Have Mods and Console Players
+
+This is the part that catches people out, and no amount of mod-updating will fix it.
+
+Valheim's crossplay feature does not translate between two networking implementations — it *replaces* one. When a server starts with the `-crossplay` flag, the game abandons Steam's networking stack entirely and hands all traffic to PlayFab, Microsoft's backend service. Steam networking is not a layer sitting on top; it is swapped out at runtime.
+
+BepInEx, and therefore every mod built on it, is loaded through Steam's networking path. On a crossplay server that path does not exist. **A crossplay server is, by definition, a vanilla server.**
+
+The practical consequence is that "mods or crossplay" is a binary decision your whole group has to make together:
+
+<table>
+  <thead>
+    <tr>
+      <th>Your group</th>
+      <th>Crossplay setting</th>
+      <th>Mods</th>
+      <th>Trade-off</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Everyone on Steam, you want mods</td>
+      <td>OFF</td>
+      <td>YES</td>
+      <td>Nothing lost — Steam networking is the default</td>
+    </tr>
+    <tr>
+      <td>Mixed PC + console group</td>
+      <td>ON</td>
+      <td>NO</td>
+      <td>Mods are disabled for everyone, including PC players</td>
+    </tr>
+    <tr>
+      <td>Mixed group, mods are non-negotiable</td>
+      <td>OFF</td>
+      <td>YES</td>
+      <td>Console players cannot join at all</td>
+    </tr>
+  </tbody>
+</table>
+
+Iron Gate has been clear that this is architectural rather than a policy choice. The studio confirmed at launch that there is **no official mod support, no console mods, and no Steam Workshop integration** for 1.0. There is no roadmap item for reconciling crossplay with the plugin loader.
+
+If your server was set up for crossplay during Early Access and you have been running mods on it successfully, be aware that what changed is not the flag — it is that pre-1.0 builds tolerated the combination in ways the 1.0 build does not. The clean fix is to drop crossplay if everyone in your group is on PC.
+
+## Step 1: Find Out Which Mod Actually Broke
+
+Do not start by disabling everything and adding mods back one at a time. That works, but on a 15-20 mod stack it costs you four to five full restart cycles and a lot of patience. BepInEx already wrote the answer down for you.
+
+Open the file:
+
+```
+BepInEx/LogOutput.log
+```
+
+BepInEx writes a complete load trace every time the game starts. Scroll to the **first** `NullReferenceException`. It will be followed by a stack trace — a list of file-and-method frames. Read down that list until you find the **first frame that does not start with `UnityEngine` and does not belong to a Valheim namespace** such as `ObjectDB`, `ZNetScene`, `Player`, or `ZDO`.
+
+That name is your culprit. Plugin code frames carry the plugin's own assembly name, so a line reading something like `AzuExtendedPlayerInventory.Patches.Player_Update_Patch` tells you exactly which mod threw.
+
+One important caveat from my own troubleshooting: **if Jotunn is in your stack, it is almost always innocent.** Jotunn is the shared library that most complex mods depend on — the log will show many failures *passing through* Jotunn's frames because it is the intermediary, not because it is the fault. Fix Jotunn first (see the next section), because a stale Jotunn will produce a cascade of errors that looks like ten broken mods but is actually one.
+
+If the log gives you several candidates, then bisect — but bisect the *suspects*, not the whole stack.
+
+## Step 2: The Recovery Sequence That Actually Works
+
+Once you know what broke, work in this order. Skipping steps is what turns a twenty-minute fix into an evening.
+
+1. **Back up your world first.** Copy the entire `worlds_local` folder somewhere outside the game directory. A mod that fails mid-save can leave a world file in a state the vanilla game will not load. This is the one step you cannot undo.
+2. **Pin your mod versions.** If you use a mod manager, export or screenshot your current mod list with version numbers before changing anything. When you start swapping in forks, you will lose track of what you had.
+3. **Update BepInEx and Jotunn before anything else.** These are the foundation. A rebuilt plugin on a stale loader will still fail.
+4. **Remove every mod from `BepInEx/plugins/`** — move the files out rather than deleting them, so you can restore your pinned set.
+5. **Confirm a clean vanilla start.** Launch the game and load your world with zero mods. If it still crashes, the problem is the world or the install, not a mod, and you should fix that before going further.
+6. **Add mods back one at a time, restarting between each.** Slow, but it produces a definitive answer. Where a 1.0-compatible rebuild or fork exists, use that instead of the original.
+7. **Check Thunderstore for a rebuild before reporting a bug.** A large share of "broken" mods have a maintained replacement that is a search away.
+
+I want to flag step 5 specifically, because it is the step people skip and then spend hours debugging a mod that was never the problem. After a patch this size, an updated client talking to an unupdated mod is only one possible failure mode; a half-migrated world save is another.
+
+## What Has Already Been Fixed (Updated September 11, 2026)
+
+The recovery is genuinely further along than the volume of forum complaints suggests. The key infrastructure pieces landed within a day of launch.
+
+**Jotunn**, the shared library that roughly 5,500 published mods depend on, shipped a 1.0 compatibility fix on launch day itself — September 9, 2026. The changelog for version 2.30.0 states that it "updated the majority of systems for Valheim 1.0.7." I would read "the majority" literally: the core systems are back, and one known gap is that build-piece *categories* have not been updated yet, which affects mods that add craftable items to specific build tabs.
+
+**BepInExPack Valheim**, the loader itself, was updated within two days of launch. If you have not refreshed it, do that first — everything else depends on it.
+
+**Thunderstore's "Deep North Update" category** has become the de facto compatibility index. As of September 11 it lists **291 mods** carrying the tag, with new or revised uploads appearing throughout the day. That number is the most useful single signal in the ecosystem right now: a mod appearing in that category has a maintainer who has actually rebuilt against 1.0.
+
+The most prolific maintainer by a wide margin is **shudnal**, who accounts for 13 of the top 20 most-downloaded entries in the category. The current download leaders give a good picture of what the community is rebuilding first — quality-of-life and storage mods, not total conversions:
+
+<table>
+  <thead>
+    <tr>
+      <th>Mod</th>
+      <th>Approx. downloads</th>
+      <th>What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ConfigurationManager</td>
+      <td>339K</td>
+      <td>In-game config UI for every other mod — the first thing worth reinstalling</td>
+    </tr>
+    <tr>
+      <td>MyLittleUI</td>
+      <td>258K</td>
+      <td>Compact HUD overhaul</td>
+    </tr>
+    <tr>
+      <td>HipLantern</td>
+      <td>173K</td>
+      <td>Equip a lantern to your belt slot</td>
+    </tr>
+    <tr>
+      <td>ExtraSlotsCustomSlots</td>
+      <td>141K</td>
+      <td>Extra inventory slot rows, customised per slot type</td>
+    </tr>
+    <tr>
+      <td>LongshipUpgrades</td>
+      <td>137K</td>
+      <td>Upgradeable longship tiers — thematic for the Deep North</td>
+    </tr>
+  </tbody>
+</table>
+
+You will also see a naming pattern worth recognising: several authors have published **explicitly-named 1.0 forks** rather than updating the original page. `SkillInjector1point0fork` and `TeleportEverything1point0fork` are exactly what they look like — community rebuilds of abandoned mods, published under new listings because the original author is unreachable or inactive.
+
+## The Deprecated Graveyard: Mods That Are Not Coming Back
+
+Some of the most popular Valheim mods of the last five years were already retired *before* 1.0 arrived. The update did not kill them; it just made their absence unavoidable for anyone who had them installed and had not noticed.
+
+<table>
+  <thead>
+    <tr>
+      <th>Dead mod</th>
+      <th>Last updated</th>
+      <th>Use this instead</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>EquipmentAndQuickSlots (RandyKnapp)</td>
+      <td>October 2024</td>
+      <td>AzuExtendedPlayerInventory (approx. 1.3M downloads) <em>or</em> ExtraSlots — pick one, never both</td>
+    </tr>
+    <tr>
+      <td>Auga (UI overhaul)</td>
+      <td>November 2023</td>
+      <td>No true drop-in. AugaLite is a maintained subset covering roughly 5% of the original</td>
+    </tr>
+    <tr>
+      <td>Build_Camera (original)</td>
+      <td>September 2021</td>
+      <td>Build Camera (Custom Hammers Edition)</td>
+    </tr>
+    <tr>
+      <td>Better Networking (CW_Jesse)</td>
+      <td>November 2023</td>
+      <td>Check for community forks — the original is not coming back</td>
+    </tr>
+  </tbody>
+</table>
+
+On the inventory mods specifically: `EquipmentAndQuickSlots`, `AzuExtendedPlayerInventory`, and `ExtraSlots` all patch the same underlying inventory container methods. Running two of them together does not give you double the slots — it gives you corrupted slot references and items that disappear on reload. Choose one and remove the other completely, including its config file.
+
+### A Note on ValheimPlus
+
+`ValheimPlus` deserves its own paragraph because it is the single most-installed retired mod in the game, and its status is widely misunderstood.
+
+The original project was discontinued in **December 2022**. When people say "ValheimPlus works," they almost always mean **Grantapher's fork**, which has been the only maintained lineage since. That fork was last updated in February 2026 — *before* 1.0 — and is published under the telling name `ValheimPlus_Grantapher_Temporary`, which the maintainer describes as a stopgap rather than a continuation.
+
+Given that V+ hooks into a very broad surface of vanilla behaviour, I would not expect a prompt 1.0 rebuild. If V+ is central to how your server plays, `ValheimEnhanced` is the more actively maintained alternative and is worth evaluating before you wait indefinitely on a fork that describes itself as temporary.
+
+## The Rollback Escape Hatch
+
+If your world depends on a mod that is not coming back, and you would rather freeze your game than migrate, Steam still has the old builds.
+
+Open Valheim in your Steam library, right-click for **Properties**, go to the **Betas** tab, and select a previous branch from the dropdown. No access code is required.
+
+<table>
+  <thead>
+    <tr>
+      <th>Beta branch</th>
+      <th>Rolls back to</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>default_pre1_0</td>
+      <td>The last build before the Deep North update</td>
+    </tr>
+    <tr>
+      <td>default_preal</td>
+      <td>The build before the Ashlands update</td>
+    </tr>
+    <tr>
+      <td>default_prebw</td>
+      <td>The build before the Bog Witch update</td>
+    </tr>
+    <tr>
+      <td>default_preml</td>
+      <td>The build before the Mistlands update</td>
+    </tr>
+  </tbody>
+</table>
+
+Two things to know before you do this. First, **rollback is a group decision.** A client on `default_pre1_0` cannot connect to a server running 1.0, and vice versa — you will get a version mismatch error. Everyone has to move together. Second, rolling back means giving up the Deep North content entirely, including the 50+ new achievements that 1.0 introduced from a standing start of zero.
+
+For most people the rollback is a last resort, not a first move. It is the right answer if you run a long-running community server that a specific retired mod depends on, and the wrong answer if you are simply waiting a week for a rebuild.
+
+## Mods Worth Rebuilding Your Stack Around
+
+If you are starting fresh rather than repairing, these are the ones I would prioritise — they are actively maintained, they cover ground the vanilla 1.0 build still does not, and they are the likeliest to survive the next patch cycle.
+
+**PlantEverything** (Advize) removes the single most-annoying restriction in Valheim base building by letting you plant berry bushes and mushrooms anywhere, not just in their native biome. **AzuCraftyBoxes** pulls crafting ingredients from nearby chests, which quietly eliminates most of the running back and forth that eats a building session. **EpicLoot** (RandyKnapp, requires Jotunn) adds a Diablo-style affix system to gear, and **Jewelcrafting** by the same author extends it into socketed gems — both are large, well-maintained mods that depend on Jotunn being current, so sequence your installs accordingly.
+
+For magic, **Wizardry** (Therzie) is the most complete overhaul and is far more interesting in the Deep North's frozen biomes than it was in the Meadows. **Server Devcommands** is effectively mandatory if you administer a server at all. And **Valheim Cuisine** (Xutz), while niche, is the mod I have enjoyed most since launch — it makes cooking a genuine progression system rather than a checklist.
+
+## Should You Run Modded Valheim Right Now?
+
+My honest read, three days in: **yes, if your group is all on PC — and no if you rely on crossplay.**
+
+For an all-Steam group, the ecosystem has recovered enough to be usable. The infrastructure layer is fixed, the compatibility index is real and actively maintained, and the mods most people actually run — configuration, inventory, UI, crafting conveniences — are largely back. The gap is concentrated in large overhauls and anything that touches build-piece categories, because that is the specific part of the 1.0 API Jotunn has not finished.
+
+I would still keep one unmodded world available. Not because 1.0 is unstable, but because the next patch will break things again, and having somewhere to go while you wait is worth more than any single mod.
+
+For crossplay groups, the calculation is different and simpler: your server is vanilla whether you like it or not. Rather than fighting it, I would treat the current build as its own thing. The Deep North content is substantial, the achievement list gives a long-term goal structure the game never had, and 1.0 shipped at $29.99 after five and a half years of Early Access at $19.99 — the base game is finally a complete purchase rather than a bet on a roadmap. Mods can come back later.
+
+<div className="faq-section">
+  <details>
+    <summary>Are Valheim mods working after the 1.0 Deep North update?</summary>
+    <p>Partially. The core infrastructure — BepInEx and the Jotunn library — was rebuilt on launch day, and roughly 291 mods carry Thunderstore's "Deep North Update" compatibility tag as of September 11, 2026. Large overhauls and anything touching build-piece categories are still catching up.</p>
+  </details>
+  <details>
+    <summary>Why do my mods crash the game with a NullReferenceException?</summary>
+    <p>Because 1.0 changed Valheim's internal API surface, and BepInEx plugins patch that surface directly. A plugin built against pre-1.0 code is calling methods and fields that no longer exist in the same shape, so it throws instead of failing quietly. The fix is a rebuilt version of the mod, not a setting change.</p>
+  </details>
+  <details>
+    <summary>Can I use mods on a Valheim crossplay server?</summary>
+    <p>No. Enabling crossplay replaces Steam networking with PlayFab, and BepInEx loads through Steam's networking path. A crossplay server is a vanilla server by definition. This is architectural, not a bug, and Iron Gate has confirmed there is no plan to change it.</p>
+  </details>
+  <details>
+    <summary>How do I find out which specific mod is breaking my game?</summary>
+    <p>Open BepInEx/LogOutput.log and find the first NullReferenceException. Then read down its stack trace to the first frame that is neither a UnityEngine call nor a Valheim namespace such as ObjectDB or ZNetScene. The plugin name on that frame is the mod that threw.</p>
+  </details>
+  <details>
+    <summary>Is Jotunn updated for Valheim 1.0?</summary>
+    <p>Yes. Version 2.30.0 shipped on September 9, 2026 — launch day — and its changelog states it updated the majority of systems for Valheim 1.0.7. Build-piece categories are a known outstanding gap, so mods that add items to specific build tabs may still misbehave.</p>
+  </details>
+  <details>
+    <summary>Does ValheimPlus still work in 1.0?</summary>
+    <p>The original project was discontinued in December 2022. Only Grantapher's fork has been maintained, it was last updated in February 2026 — before 1.0 — and it is published under a name describing itself as temporary. Treat it as unverified for 1.0 and consider ValheimEnhanced as an alternative.</p>
+  </details>
+  <details>
+    <summary>How do I roll Valheim back to the pre-1.0 build?</summary>
+    <p>Right-click Valheim in Steam, open Properties, go to the Betas tab, and select default_pre1_0 from the dropdown. No access code is needed. Everyone in your group must roll back together, because clients and servers on different branches cannot connect.</p>
+  </details>
+  <details>
+    <summary>Will mods ever get official support in Valheim?</summary>
+    <p>Not as of 1.0. Iron Gate confirmed no official mod support, no console mods, and no Steam Workshop integration at launch. The modding ecosystem remains entirely community-run through BepInEx and Thunderstore.</p>
+  </details>
+</div>
+
+## Sources
+
+- [Valheim 1.0 Deep North launch coverage](https://www.iron-gate.com/) — Iron Gate Studio, confirms the September 9, 2026 release, the absence of a public test branch, and the studio's position on official mod support, console mods, and Steam Workshop.
+- [Jotunn on Thunderstore](https://thunderstore.io/c/valheim/p/Jotunn/Jotunn/) — version 2.30.0 changelog and launch-day 1.0 API compatibility commit; download and dependent-mod counts.
+- [Thunderstore Valheim "Deep North Update" category](https://thunderstore.io/c/valheim/) — the community compatibility index; 291 tagged mods with download rankings as crawled on September 11, 2026.
+- [BepInExPack Valheim](https://thunderstore.io/c/valheim/p/denikson/BepInExPack_Valheim/) — loader package update history following the 1.0 launch.
+- [ValheimPlus_Grantapher_Temporary](https://thunderstore.io/c/valheim/p/Grantapher/ValheimPlus_Grantapher_Temporary/) — maintainer's own description of the fork as a stopgap, and its last update date of February 2026.
+- [Valheim Steam beta branches](https://steamdb.info/app/892970/patchnotes/) — rollback branch identifiers including default_pre1_0, default_preal, default_prebw, and default_preml.
+
+For the launch-day version mismatch and crossplay setup problems that are not mod-related, see our [Valheim 1.0 launch day fixes guide](/games/valheim/1-0-launch-day-fixes). For a full walkthrough of the new content itself, start with the [Valheim 1.0 launch guide](/games/valheim/1-0-launch-guide).
