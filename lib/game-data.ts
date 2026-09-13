@@ -479,10 +479,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Creature-Collecting', 'Open World', 'Free-to-Play', 'Co-op', 'Cross-Platform', 'PvPvE'],
     emoji: '🦄',
   },
+  'diablo-4': {
+    name: 'Diablo IV',
+    slug: 'diablo-4',
+    headerImage: '/images/games/diablo-4-header-v20260913.jpg',
+    description: "Blizzard Entertainment's open-world action RPG. Battle Lilith's cult across Sanctuary with eight playable classes, including the Spiritborn from Vessel of Hatred and the Paladin and Warlock from Lord of Hatred. The Age of Hatred Collection brings the complete saga to Nintendo Switch 2 on September 15, 2026, with full cross-play and cross-progression via Battle.net.",
+    releaseYear: '2023',
+    developer: 'Blizzard Entertainment',
+    publisher: 'Blizzard Entertainment',
+    tags: ['Action RPG', 'Hack and Slash', 'Open World', 'Loot', 'Dungeon Crawler', 'Cross-Platform'],
+    emoji: '😈',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'diablo-4',
   'aniimo',
   'runescape-dragonwilds',
   'wardogs',
