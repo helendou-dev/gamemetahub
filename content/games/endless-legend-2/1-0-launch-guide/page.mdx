@@ -1,0 +1,266 @@
+---
+title: "Endless Legend 2 1.0 Launch Guide: Sandshapers, Rogue Factions, and How to Play Your First Tidefall"
+metaDescription: "Endless Legend 2 leaves Early Access on September 17, 2026 for PC, PS5 and Xbox Series X|S. The practical 1.0 guide: what the Sandshapers and Rogue Factions actually change, how Tidefall reshapes the map, every Deed reward, and the first-40-turn priority order."
+slug: "1-0-launch-guide"
+type: "guide"
+publishDate: "2026-09-14"
+category: "Gaming"
+gameName: "Endless Legend 2"
+contentType: "deep-guide"
+description: "Amplitude Studios exits Early Access on September 17, 2026 with the Sandshapers, two Rogue Factions and the community-built Mangrove of Harmony. This is the 1.0 playbook: how Tidefall works, how the 12 Deeds pay out, which faction to pick for turn one, and the district geometry math that decides whether your empire grows or stalls."
+image: "/images/games/endless-legend-2-header-v20260914.jpg"
+ogImage: "/images/games/endless-legend-2-ss1-v20260914.jpg"
+author: "GameMetaHub"
+platforms: [PC, PS5, Xbox Series X|S]
+canonical: "https://www.gamemetahub.com/games/endless-legend-2/1-0-launch-guide"
+tags: ["Endless Legend 2", "Amplitude Studios", "Hooded Horse", "4X Strategy", "Turn-Based Strategy", "Launch Guide", "Sandshapers", "Tidefall"]
+---
+
+import { GameRating, ProTip, InfoBox } from '@/components/mdx-components';
+
+<GameRating score="82" source="Steam user reviews (Very Positive)" platforms="PC, PS5, Xbox Series X|S" />
+
+Endless Legend 2 leaves Early Access on **Thursday, September 17, 2026**. It arrives on PC (Steam, Epic Games Store, Microsoft Store), PlayStation 5 and Xbox Series X|S on the same day — the first time the series has ever shipped on consoles. Base price stays at **$49.99**; Hooded Horse has confirmed 1.0 does not come with a hike.
+
+The important part for anyone planning a first campaign: 1.0 is not a victory-lap patch. It adds a sixth major faction, an entirely new faction *type*, and a minor faction designed by the player community. It also lands three days from now, which means the version of this game you can read guides about today is not the version you will be playing on Thursday.
+
+I have been playing the Early Access build through the faction reworks and the multiplayer updates, and I have been through the refreshed demo that is live right now. This guide is what I would want handed to me before pressing Start: how Tidefall actually works, which rewards are sitting on the table unclaimed, which faction to pick first, and the priority order for your opening moves.
+
+## What Actually Arrives in the 1.0 Build
+
+Three pieces of content, and they are not equal in value to a new player.
+
+**The Sandshapers — the sixth major faction.** The oldest civilization on Saiadha, and the only one that remembers the planet before the oceans rose. Their stated sacred duty is terraforming Saiadha back into the desert it used to be. In practice this means a dedicated faction quest, new units, new heroes, new technologies, and faction traits that will also feed into the Custom Faction creator, so Sandshaper abilities can be combined onto a homebrew civilization. Amplitude has not published the exact terraforming rules yet, so how far their environmental mechanics go beyond flavor is the single biggest unknown of launch week.
+
+**Rogue Factions — a new faction category.** These are splinter groups derived from existing major factions rather than wholly new civilizations. They share their parent's foundation but get their own quest, story and gameplay rules. The first two:
+
+- **The Order of Zelevas** — a conquest-focused offshoot of the Kin of Sheredyn. If you like the Sheredyn military engine but find the defensive posture too passive, this is the answer.
+- **The Severed Claw** — a Necrophage variant that can only replace its losses by enslaving other factions. That is a brutal constraint: you cannot simply rebuild a stack, you have to take prisoners. Expect this to be the hardest faction in the game at 1.0 and the most interesting one to watch other players handle.
+
+**The Mangrove of Harmony — the community minor faction.** A starfish-like people built with direct input from Amplitude's players. It brings its own villages, a recruitable unit roster, a new population type, a dedicated hero with two exclusive hero skills, and its own questline, with lore hooks around Dustwater reservoirs. Its signature unit, the **Colossus of Harmony**, is a mobile walking fortress that fires Dust-infused tendrils at long range. For empire-builders, the real prize is the new population type — minor faction populations are how you specialize a city into a specific output, and a brand-new one is a new optimization lane.
+
+<table>
+<thead>
+<tr><th>What</th><th>Type</th><th>Why it matters to you</th></tr>
+</thead>
+<tbody>
+<tr><td>Sandshapers</td><td>New major faction</td><td>A full new campaign and new traits for Custom Faction builds</td></tr>
+<tr><td>Order of Zelevas</td><td>Rogue Faction (Kin of Sheredyn)</td><td>Aggressive variant of the friendliest starter faction</td></tr>
+<tr><td>The Severed Claw</td><td>Rogue Faction (Necrophage)</td><td>Hard mode: losses can only be replaced by enslaving enemies</td></tr>
+<tr><td>Mangrove of Harmony</td><td>New minor faction</td><td>New population type, recruitable units, dedicated hero, questline</td></tr>
+</tbody>
+</table>
+
+Everything else in 1.0 is the accumulated Early Access work finding its final form. The December 2025 update is the one that matters most historically — it added co-op and competitive multiplayer, reworked city construction, and overhauled the pacification quest chain. Amplitude has also published monthly *State of the Game* analytics through the whole Early Access period, which is unusually transparent for the genre, and the numbers are worth knowing: after the victory condition redesign, complaints about victory conditions fell roughly 90 percent; negativity about the missing multiplayer dropped 78 percent.
+
+<InfoBox title="What Early Access fixed — and what it did not">
+Amplitude's own January 2026 numbers showed AI opponents winning 50% of *completed* games on default settings. That figure excludes campaigns human players abandoned after already knowing they had lost, so the real disparity was likely worse. The Summer Solstice update and the tutorial changes (sandbox difficulty in the tutorial, no AI bonuses on Normal) were the response. If you have not touched the game since 2025, treat difficulty expectations as reset.
+</InfoBox>
+
+## Tidefall Is the Whole Game — Understand It Before Turn 1
+
+Every 4X game has the same structural flaw: exploration is the most fun phase, and it ends. Once the map is revealed and the land is claimed, you either become a warmonger or play tall behind your borders. Amplitude's Game Director Derek Paxton has [talked openly about building Tidefall specifically to solve that](https://www.xboxuk.com/how-endless-legend-2-raises-the-tide-on-turn-based-strategy-games/), and about rejecting the version of the idea where rising oceans reclaim cities and destroy work the player already did.
+
+Here is the mechanic in plain terms. Saiadha starts covered in water, so you begin on a limited landmass with room to learn your faction in relative safety. Then the oceans drain. There are **three Tidefall events per game**, and on average settings they land roughly **40 to 50 turns apart**, stretching or compressing with map size. Amplitude originally tested eight and cut it down, on the logic that fewer, bigger disruptions beat frequent small ones.
+
+What a Tidefall actually does to your board:
+
+- **New land appears.** Former ocean tiles become explorable, with fresh strategic resources, minor faction villages, and dangerous nests that were previously unreachable.
+- **Land bridges form.** This is the part that breaks plans. Islands connect to continents. A city you built as an untouchable chokepoint can become strategically irrelevant, and a safe backline city can suddenly have a hostile empire parked next to it.
+- **Coastal and river food bonuses dry up.** Every tile adjacent to water — ocean, lake or river — gets a food bonus. When the seas retreat, those bonuses vanish and the rivers dry out. Cities that grew fat on water adjacency quietly stop growing.
+- **Fortresses with their own defenders become reachable and must be cleared.**
+- **After the third Tidefall, Doomwraiths emerge from the planet depths** and start threatening areas you had written off as safe.
+
+Between each Tidefall comes the **Monsoon** — reduced unit vision, but extra collectable resources and roaming megafauna on the map.
+
+<ProTip title="The single highest-value habit in this game">
+Bank Influence before a Tidefall lands. New territory appears instantly, and the empire that can immediately claim the choicest tiles, pacify the newly reachable villages, and drop a camp on a fresh strategic resource gets a compounding head start. Players who spend Influence the turn before a Tidefall are handing that advantage away for nothing. If you are four or five turns out from one and holding 150+ Influence, sit on it.
+</ProTip>
+
+Getting a feel for the timeline: in the demo build one reviewer did not even encounter another major faction until past turn 110, which tells you how much of the early game is you and the map. That is not dead time. It is the window where your district geometry and your technology path get decided.
+
+## The 12 Deeds: Free Permanent Bonuses Nobody Claims
+
+This is the system I would want to know about before my first turn, and almost nobody mentions it in beginner guides.
+
+**Deeds** are race-style objectives that unlock when a Tidefall hits. Four open per Tidefall cycle, so twelve across a full game. The catch: **only the first major faction to complete a Deed gets the reward**, and the window stays open from the Tidefall until somebody finishes it. The reward is not a one-off payment — it is a permanent empire-wide upgrade.
+
+<table>
+<thead>
+<tr><th>Tidefall</th><th>Deed</th><th>Requirement</th><th>Permanent reward</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Bringer of Death</td><td>First to eliminate at least 30 units</td><td>+1 Movement Points on units</td></tr>
+<tr><td>1</td><td>Bringer of Comfort</td><td>First to have a city with 20 population slots</td><td>+3 Population slot on population vocations</td></tr>
+<tr><td>1</td><td>Bringer of Treasure</td><td>First to hold 30 of one strategic resource</td><td>+1 exploited resource production on extractors</td></tr>
+<tr><td>1</td><td>Bringer of Citizenry</td><td>First to have a city with 20 population</td><td>+2 Industry on population units</td></tr>
+<tr><td>2</td><td>Bringer of Liberation</td><td>First to clear 6 Fortresses</td><td>+10 Damage on units</td></tr>
+<tr><td>2</td><td>Bringer of Wealth</td><td>First to have a city with 25 districts</td><td>−50% Influence cost on Foundations</td></tr>
+<tr><td>2</td><td>Bringer of Peace</td><td>First to pacify 10 villages</td><td>Unlocks 1 Protectorate slot</td></tr>
+<tr><td>2</td><td>Bringer of Metropolises</td><td>First to have 3 cities</td><td>+1 City Cap</td></tr>
+<tr><td>3</td><td>Bringer of Doom</td><td>First to defeat 5 Doomwraiths</td><td>+10 Defense on units</td></tr>
+<tr><td>3</td><td>Bringer of Unity</td><td>First to claim 15 territories</td><td>+5 Industry on Works districts</td></tr>
+<tr><td>3</td><td>Bringer of Riches</td><td>First to generate at least 1 of each of the 6 strategic resources</td><td>+50 Science on cities</td></tr>
+<tr><td>3</td><td>Bringer of Multitudes</td><td>First to have 100 population across the empire</td><td>Draws a Hero from a draft of 3</td></tr>
+</tbody>
+</table>
+
+Two of these are worth building an entire opening around. **Bringer of Wealth** (−50% Influence cost on Foundations) directly accelerates the district-placement game that everything else depends on, and **Bringer of Metropolises** (+1 City Cap) is the kind of bonus that most 4X games make you fight for across an era. They are also both achievable in the Tidefall 2 window if you have been expanding deliberately rather than sprawling.
+
+The Military Deeds are the easy trap. Chasing **Bringer of Death** means fighting wars you did not need in your first 50 turns to win +1 Movement, when a builder opening would have claimed two economic Deeds instead. Check the Deeds panel the moment a Tidefall lands, pick the two you can realistically finish first, and let the rest go.
+
+## Choosing a Faction for Your First Campaign
+
+The roster at 1.0 is six major factions, and the asymmetry is real — these are not stat variations, they are six different games. Here is how they actually play, ranked by how forgiving they are to a newcomer.
+
+<table>
+<thead>
+<tr><th>Faction</th><th>Playstyle</th><th>Difficulty for a first campaign</th></tr>
+</thead>
+<tbody>
+<tr><td>Kin of Sheredyn</td><td>Militaristic defenders. Fortifying cities generates zeal, zeal buys Commandments — some spawn new population, others punish enemy armies on the map</td><td>Easiest. Straightforward economy, strong defensive position, forgiving of mistakes</td></tr>
+<tr><td>Order of Zelevas (Rogue)</td><td>Conquest-focused Sheredyn variant</td><td>Moderate. Same foundation, aggression required</td></tr>
+<tr><td>Aspects</td><td>Spread coral across hexes. Coral improves tile yields, heals armies, and acts as a movement network — and quietly pacifies nearby minor faction villages without combat</td><td>Moderate. Powerful, but you have to think in networks instead of borders</td></tr>
+<tr><td>Sandshapers (new in 1.0)</td><td>Terraform specialists rebuilding the desert world</td><td>Unknown. Rules not fully published — see below</td></tr>
+<tr><td>Last Lords</td><td>Dust vampires. Do not eat food</td><td>Hard. The economy runs on a resource loop most players have no instincts for</td></tr>
+<tr><td>Tahuks</td><td>Mad scientists and religious zealots</td><td>Hard. Wants to do several unusual things at once</td></tr>
+<tr><td>Necrophage / The Severed Claw</td><td>Hunger-driven, city-limited war machine. The Severed Claw can only replace losses by enslaving other factions</td><td>Hardest. Best saved for a second or third campaign</td></tr>
+</tbody>
+</table>
+
+Three honest recommendations:
+
+**If this is your first Endless Legend 2 campaign, play the Kin of Sheredyn.** Their defensive bonuses and shield stacking mean a bad decision costs you a few turns instead of a city, and their zeal economy teaches you the Commandment system without punishing you for learning it. Faction choice is close to irreversible in terms of what you learn, so start with the one that teaches the most.
+
+**If you want the 1.0 experience itself, play the Sandshapers** — but go in knowing that no reliable guide exists yet. Their terraforming mechanics have not been detailed publicly, and a new faction at launch is always where the balance outliers hide. My read is that they will be strong in the mid-game (terraforming presumably compounds) and awkward early, since terrain manipulation is rarely cheap. That is a guess, not a report.
+
+**Skip The Severed Claw until you have won once.** The enslave-to-replace rule turns every battle into a logistics problem, and logistics problems are much harder when you are still learning what a Foundation is. It looks like the most interesting faction in the game. It is not a tutorial.
+
+If you want a parallel for how much faction identity matters in a big turn-based tactics game, our [Baldur's Gate 3 beginner classes guide](/games/baldurs-gate-3/best-beginner-classes-guide) makes the same argument in a different genre: the first pick determines what you learn, not how strong you end up.
+
+## Your First 40 Turns, in Priority Order
+
+This is the section I would actually use. Everything below is ordered by how much it pays off, not by when the game teaches it to you.
+
+### 1. Fill your five basic yields before chasing anything exotic
+
+Your empire runs on **Food, Industry, Dust, Science and Influence**. Food grows population, Industry builds, Dust buys, Science researches, Influence expands and assimilates. Above those sit six strategic resources — Titanium, Glassteel, Lazualin and Hyperium are the four you will meet first — which upgrade districts and units.
+
+New players lose their opening by over-investing in strategic resources before the basic five are online. Early Dust buyouts are almost always worse than an extra Industry district. Get Food, Industry and Science flowing first; Dust takes care of itself once your cities have population assigned.
+
+### 2. Understand that population assignment is your real economy
+
+Population grows from food surplus, and each citizen works a specific vocation generating a specific resource. Different population types are better at different jobs. This is where the game opens up: every minor faction you assimilate gives you a population type with different aptitudes, which lets you push one city toward pure Science and another toward pure Industry.
+
+That is also why the **Mangrove of Harmony** matters more than "a new minor faction" sounds. A new population type is a new specialization option for your best city.
+
+### 3. Build districts in tight geometric clusters, not spreading chains
+
+Districts are where most campaigns quietly fall apart. The structure is three-tier: you place a **Foundation** on a tile adjacent to your existing city zones, you build a **District** on that Foundation, then you add district-specific improvements.
+
+Each new district carries an Approval cost — the figure commonly cited is 10 Approval per district — and negative Approval cuts your production. But a district **upgrades to level 2, clearing that cost and adding a bonus, when it is surrounded by four other districts** (or three districts plus the city center).
+
+So the winning pattern is compact clusters that satisfy the surround condition repeatedly, not a long snake along a river. Think tetris blocks, not coastline. A district placed to complete two adjacent clusters at once is worth about two freebies.
+
+<CommonMistake title="The river-adjacency trap">
+Every tile next to water — ocean, lake or river — gets a food bonus, and it is genuinely good in the first 40 turns. The trap is building a sprawling riverfront district line that never satisfies the four-surround condition, because the Tidefall will dry those rivers out and take the bonus with it, leaving you holding a low-level district grid with an Approval bill and no growth. Take the river tiles you can fit into a cluster. Do not let them dictate your shape.
+</CommonMistake>
+
+### 4. Decide camp, city, or ministry at the regional level
+
+When you claim a new region, you get a fork that a lot of players never notice: a camp can be **expanded into a full city using Influence**, or it can be expanded and **attached to an existing city as a ministry**. Attaching routes the entire region's resource output into the older urban center without adding another settlement you have to manage.
+
+Ministries are the correct answer more often than new players assume. A separate city means another Approval bill, another build queue, another thing the AI can siege. A ministry means the same output with none of the overhead — and it sidesteps City Cap pressure entirely. Expand into a third or fourth city when you have a specific reason. Otherwise, attach.
+
+### 5. Scout hard during the Monsoon, and bank Influence into every Tidefall
+
+During Monsoon, unit vision drops, which is exactly when aggressive scouting pays — you want to know where the new coastline will expose land before it happens, because the first empire to drop a camp on a revealed strategic resource keeps it.
+
+Which brings the loop back to Influence. Influence expands territory, assimilates minor factions and drives diplomacy. Its value spikes at the Tidefall, and it is the resource most often wasted in the turns before one. If you take nothing else from this guide: **Influence held at a Tidefall is an empire-scale advantage; Influence spent the turn before is nothing.**
+
+### 6. Bank technology instead of filling every era
+
+Research is split into **six eras**, and you only need a certain number of technologies per era to advance — you are never required to clear the tier. If your faction's defining technology is deep in a branch you do not otherwise need, rush it and skip the filler. Filling out an era is a comfort habit, and it costs you turns that compounds.
+
+## Combat, Sieges, and Why Autoresolve Is a Tax
+
+Battles are **turn-based and fought on hexes**, on a slice of the campaign map. Combat is not a separate minigame with its own rules; it uses the terrain you have been staring at, which is why positioning on the campaign map matters before the fight starts.
+
+What decides fights:
+
+- **Deployment.** You position troops before the battle opens. Terrain is the whole point of that phase — put ranged units on high ground and melee in the trees.
+- **High ground increases damage. Forests give defense bonuses**, particularly against ranged attacks.
+- **Attacks of opportunity.** Pulling a melee unit out of an adjacent enemy's reach gives that enemy a free hit. This is the single most common way new players lose units they did not need to lose.
+- **Heroes get one active skill per battle.** One. Spending it in the first round on a fight you were going to win anyway is a wasted resource — save it for the fight that is close.
+- **Victory means eliminating all enemies.** Anything less is a **draw**. There is no partial credit and no retreat with honor; if your army cannot finish the job, the turn is gone.
+
+Manual control genuinely outperforms autoresolve, especially early when your unit compositions are unbalanced and the AI can find the mismatch. My rule: autoresolve anything where you would win with two-thirds of your force intact, fight manually when the bar looks close.
+
+**Sieges** need their own patience. You besiege to reduce Fortification Points over multiple turns, then breach walls to access districts. After you take the city you choose **Occupy** (keep it), **Sack** (loot it), or **Raze** (destroy it) — and each of those takes time, during which the defender's allies can arrive. Siege the city you want to keep, and do not start one you cannot finish in three turns.
+
+<InfoBox title="Diplomacy has a price list">
+Declaring **justified** war costs nothing and is only available when relations are already very poor. Declaring **unjustified** war is available anytime and damages your Approval. War Score pushes the terms of peace in your favor, but **War Fatigue** lowers city Approval the longer a war drags on and can tip you into rebellion. Long wars are not free even when you are winning them.
+</InfoBox>
+
+## Platforms, Price, Editions and the Demo
+
+**Price:** $49.99 USD on PC. Hooded Horse has stated the base price will not change at 1.0, so there is no reason to wait for a launch discount — there will not be one. No microtransactions.
+
+**Platforms:** PC via [Steam](https://store.steampowered.com/app/3407390/), [Epic Games Store](https://store.epicgames.com/en-US/p/endless-legend-2-2e2eb9) and the Microsoft Store; PlayStation 5; Xbox Series X|S. This is the franchise's console debut, enabled by Amplitude regaining independence from Sega in 2024. A physical PS5 edition is being produced with Strictly Limited, with exact availability still to be confirmed.
+
+**Game Pass:** the Early Access build was available through PC Game Pass. Whether 1.0 stays on the service is not something I could confirm from the announcement material — check the store listing on September 17 rather than assuming either way.
+
+**The demo is still live, and it is unusually generous.** It runs about **90 turns** across two playable factions — the defensive builders of the Kin of Sheredyn and the cursed knights of the Last Lords — against a roster of five opposing factions, long enough to see a Tidefall actually happen. It is free on Steam, PS5 and Xbox Series X|S. If you are on the fence about a $49.99 turn-based 4X, spend a weekend with the demo instead of reading another preview.
+
+**Controls and accessibility:** full Xbox and PlayStation controller support with Steam Input, plus a mouse-only option, meaning the console versions are not a compromise port. Adjustable difficulty, save-anywhere, text size scaling, subtitle options, colorblind alternatives and camera comfort settings are all in. 16 supported languages, 56 Steam achievements.
+
+**System requirements (PC):** minimum is a 4th-gen Intel Core i5 or AMD FX-8350 with 8 GB RAM, a GTX 1060 or RX 5500-XT, and about 10.5 GB of storage on Windows 10/11 with DirectX 11. Recommended is a 6th-gen Core i7 or Ryzen 5 1500X with 12 GB RAM and a GTX 1070 or RX 5700-XT. Saves live in `Documents\Endless Legend 2\Save Files`, with Steam Cloud and Xbox Cloud support.
+
+## Should Early Access Players Start a New Campaign?
+
+Honest answer: I do not know, and neither does anyone publishing a strict yes-or-no right now. Amplitude has not made a clear public statement on whether long-running Early Access campaigns carry into 1.0, and a patch that adds a faction, a faction category, a new minor faction and a new population type is exactly the kind of patch that tends to invalidate old saves.
+
+My recommendation is to assume a break and plan around it. Start the Sandshapers campaign fresh on September 17 — new faction, new systems, and a clean Deeds race, which is the part of 1.0 that actually rewards a fresh start. If you want to finish an existing campaign first, do it before the patch lands rather than after.
+
+If you have been through this with a game that got a sweeping systems overhaul — we covered the same problem when [Project Zomboid Build 42 changed the rules under existing saves](/games/project-zomboid/build-42-return-guide) — the pattern is consistent: assume the old run is finished, treat the new version as a new game, and stop treating the old save as a reason to delay. In a 4X game with three Tidefalls and twelve Deeds paced into it, a mid-campaign patch is a bigger disruption than most.
+
+## FAQ
+
+<div className="faq-section">
+<details>
+<summary>When exactly does Endless Legend 2 leave Early Access?</summary>
+<p>September 17, 2026, simultaneously on PC, PlayStation 5 and Xbox Series X|S. It is the first Endless Legend title to launch on consoles.</p>
+</details>
+<details>
+<summary>Is the price going up at 1.0?</summary>
+<p>No. $49.99 USD stays the same. Hooded Horse has confirmed the base price does not change on release, and the game has no microtransactions.</p>
+</details>
+<details>
+<summary>How many Tidefalls happen in one game?</summary>
+<p>Three. They land roughly 40 to 50 turns apart on average map settings, with the gap scaling with map size. After the third one, Doomwraiths start emerging from the planet.</p>
+</details>
+<details>
+<summary>What should I play as a first campaign?</summary>
+<p>The Kin of Sheredyn. Their defensive bonuses and zeal economy are the most forgiving and teach you the Commandment system without punishing mistakes. Save The Severed Claw — and arguably the Necrophage in general — for a later run.</p>
+</details>
+<details>
+<summary>Do I need to play Endless Legend 1 first?</summary>
+<p>No. It is a sequel in the same universe with a new world and a new cast, and the tutorial has been retuned toward newcomers with sandbox difficulty and no AI bonuses on Normal.</p>
+</details>
+<details>
+<summary>Is it on Game Pass?</summary>
+<p>The Early Access build was available through PC Game Pass. Whether the 1.0 version stays on the service has not been confirmed — check the store listing on release day.</p>
+</details>
+<details>
+<summary>Can I try it for free?</summary>
+<p>Yes. A refreshed demo is live on Steam, PS5 and Xbox Series X|S with roughly 90 turns of play across the Kin of Sheredyn and the Last Lords, against five rival factions. It is long enough to see a Tidefall happen.</p>
+</details>
+</div>
+
+## The Bottom Line
+
+Endless Legend 2 at 1.0 is the version of a good game that finally has a reason to exist outside Early Access. The Tidefall design is the most convincing answer any 4X has given to the mid-game exploration collapse — three scripted moments where the map you spent 40 turns learning becomes a different map, and the coastal cities you optimized around stop paying out. Three of them per campaign, spaced far enough apart that each one resets your plans without feeling like a gimmick.
+
+For Thursday, my concrete plan would be: demo first if you have not touched it; Kin of Sheredyn or Sandshapers for campaign one depending on whether you want the safest learning curve or the actual new content; Influence banked into every Tidefall; districts built in clusters from the very first Foundation; and the Deeds panel opened the moment the water starts dropping.
+
+The one thing I would not do is treat this as a wait-and-see release. Base price is fixed, there is no launch discount coming, and the demo is free — the only real question left is whether your PC meets the recommended spec.

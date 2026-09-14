@@ -490,10 +490,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Action RPG', 'Hack and Slash', 'Open World', 'Loot', 'Dungeon Crawler', 'Cross-Platform'],
     emoji: '😈',
   },
+  'endless-legend-2': {
+    name: 'Endless Legend 2',
+    slug: 'endless-legend-2',
+    headerImage: '/images/games/endless-legend-2-header-v20260914.jpg',
+    description: "Amplitude Studios' turn-based fantasy 4X leaves Early Access on September 17, 2026, published by Hooded Horse and landing on PC, PlayStation 5 and Xbox Series X|S. Build a civilization on the dying world of Saiadha, where the Tidefall drains the oceans turn by turn and exposes new land to claim. 1.0 adds the desert-reclaiming Sandshapers faction, the Rogue Factions system, and the community-designed Mangrove of Harmony.",
+    releaseYear: '2026',
+    developer: 'Amplitude Studios',
+    publisher: 'Hooded Horse',
+    tags: ['4X', 'Turn-Based Strategy', 'Fantasy', 'City Builder', 'Multiplayer', 'Cross-Platform'],
+    emoji: '🏜️',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'endless-legend-2',
   'diablo-4',
   'aniimo',
   'runescape-dragonwilds',
