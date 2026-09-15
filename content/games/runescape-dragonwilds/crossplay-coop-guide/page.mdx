@@ -1,0 +1,67 @@
+---
+title: "Dragonwilds 1.0 Crossplay and Co-Op Guide: How Multiplayer Actually Works"
+metaDescription: "RuneScape: Dragonwilds 1.0 supports crossplay across PC, PS5, Xbox Series X|S, and Switch 2. The practical guide: 4-player in-game co-op vs 6-player dedicated servers, why consoles cannot host, the exact search rules for joining worlds, and the privacy settings that silently block your friends."
+slug: "crossplay-coop-guide"
+publishDate: "2026-09-15"
+category: "Gaming"
+gameName: "RuneScape: Dragonwilds"
+contentType: "hot-take"
+description: "RuneScape: Dragonwilds 1.0 launches with crossplay on PC, PS5, Xbox Series X|S, and Switch 2. This guide explains the difference between 4-player in-game co-op and 6-player dedicated servers, why consoles cannot host, how to find worlds by exact name, and the version-mismatch gotcha that makes servers vanish."
+image: "/images/games/runescape-dragonwilds-ss1-v20260915.jpg"
+author: "GameMetaHub"
+platforms: ["PC", "PS5", "Xbox Series X|S", "Nintendo Switch 2"]
+canonical: "https://www.gamemetahub.com/games/runescape-dragonwilds/crossplay-coop-guide"
+tags: ["RuneScape: Dragonwilds", "Crossplay", "Co-Op", "Multiplayer", "Dedicated Server", "Jagex", "Cross-Platform"]
+---
+
+import { GameRating, ProTip, InfoBox } from '@/components/mdx-components';
+
+RuneScape: Dragonwilds 1.0 is live today across PC, PS5, Xbox Series X|S, and Nintendo Switch 2 with full crossplay. The multiplayer system is not one unified pool, though — it splits into two modes with different rules, caps, and platform restrictions. If you are planning to co-op the Scorned Wilderness raid with friends, here is how it actually behaves, including the search and version-mismatch quirks that trip people up.
+
+## Two Modes: In-Game Co-Op vs Dedicated Server
+
+Dragonwilds supports two multiplayer architectures, and the choice matters for group size and platform mix.
+
+**In-game co-op** caps at **4 players total**, including the host. One player creates a world, opens it to Public or Friends, and others join directly. Progress is tied to that world file on the host's machine or console save, so if the host is offline the world is unreachable. For console players this is the only hosting option — PlayStation, Xbox, and Switch 2 cannot run the dedicated server tool.
+
+**Dedicated servers** raise the cap to **6 players** and run independently of any single player's session. Per [Jagex's official dedicated server guide](https://dragonwilds.runescape.com/news/how-to-dedicated-servers), the server application is **Windows and Linux only**, distributed free on Steam under app ID **4019830**. No console build exists, so a PC player in your group must run it.
+
+RAM sizing follows Jagex's published formula: **2 GB baseline plus 1 GB per player**. A full six-player server needs 8 GB. The default port is **UDP 7777**.
+
+## Joining a World: Exact Name Search, Case-Sensitive
+
+The in-game browser at **Worlds → Public** searches by the **exact world name**, and the search is **case-sensitive** with a **16-character maximum**. A world named `Ashenfall` will not appear if you search `ashenfall`. This applies to both player-hosted worlds and dedicated servers.
+
+For dedicated servers, the searchable name is controlled by the `DefaultWorldName` field in `DedicatedServer.ini`, not the `ServerName` field. If you are hosting, make sure the two match or your friends will search the wrong string. Steam invitations and the Steam overlay join flow do **not** route to dedicated servers — players must use the in-game browser.
+
+## Version Mismatch: The Silent Server
+
+When the host or dedicated server is on a different patch version than the client, the server **silently disappears** from the browser. There is no error message, no "version mismatch" banner — the world simply does not show up. This has been a consistent pain point through Dragonwilds' early access, where Jagex shipped hotfixes on a near-daily cadence.
+
+The fix is straightforward but easy to miss: every player, including the host, must be on the same build. For dedicated servers, this means restarting the server application after every patch. Jagex's guide is explicit that "Dedicated Servers will need to be restarted to sync updates." Given how aggressive the early-access hotfix cadence was, expect the same rhythm post-1.0 — and check the version at the top of the server log first, before you start blaming your network.
+
+## Platform-Specific Privacy Blockers
+
+Crossplay is on by default, but each platform has its own privacy layer that can prevent you from seeing or joining friends' worlds.
+
+On **Nintendo Switch 2**, Parental Controls can restrict online communication and multiplayer access. If a player cannot see public worlds at all, check the system-level parental settings first.
+
+On **Xbox Series X|S**, the relevant toggle is under **Settings → Account → Privacy and Online Safety → Xbox Privacy → View Details and Customize → Communication and Multiplayer**. The "You can join cross-network play" setting must be set to Allow.
+
+On **PS5**, the path is **Settings → Family and Parental Controls → PS5 Console Restrictions → Communication and User-Generated Content**. Restrictions here block both voice chat and multiplayer session discovery.
+
+None of these are game-level settings — they are console OS policies, which means Dragonwilds cannot surface a clearer error when they block connection.
+
+## Mods and Mixed Groups
+
+Console players **cannot install mods**. If your group includes PS5, Xbox, or Switch 2 players, the PC host must run an unmodded client and an unmodded dedicated server. A single server-side mod will block console clients entirely.
+
+## Raid Progress Lives with the World
+
+The Scorned Wilderness raid progress is tied to the world file, not individual player accounts. This means:
+
+- If you are playing on a **player-hosted world**, the raid is only available when the host is online. If your group's host is in a different time zone, plan sessions accordingly.
+- If you are playing on a **dedicated server**, the raid is available whenever the server is running, regardless of who is logged in.
+- Switching worlds — from a friend's hosted world to a dedicated server, for example — means starting raid progress from scratch. The unlocks and checkpoint states do not transfer.
+
+For the pre-raid checklist — the quest gates, Sanguine Urn locations, and gear thresholds — see our [Scorned Wilderness raid prep guide](/games/runescape-dragonwilds/scorned-wilderness-raid-prep). For the full 1.0 feature list, the [launch guide](/games/runescape-dragonwilds/1-0-launch-guide) has the overview.
