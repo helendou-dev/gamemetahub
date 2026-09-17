@@ -505,7 +505,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     name: 'Trails in the Sky 2nd Chapter',
     slug: 'trails-in-the-sky-2nd-chapter',
     headerImage: '/images/games/trails-in-the-sky-2nd-chapter-header-v20260917.jpg',
-    description: "Nihon Falcom's turn-based JRPG launches on PlayStation 5, Nintendo Switch, Switch 2 and PC on September 17, 2026, with an introductory price of $53.99. Estelle Bright's search for Joshua carries her across Liberl and straight into the Ouroboros conspiracy, supported by an enhanced HD presentation, dual-audio voiceover and cross-progression between Switch consoles and PC.",
+    description: "Nihon Falcom's turn-based JRPG launches on PlayStation 5, Nintendo Switch, Switch 2 and PC on September 17, 2026, with an introductory price of $53.99. Estelle Bright's search for Joshua carries her across Liberl and straight into the Ouroboros conspiracy, supported by an enhanced HD presentation and dual Japanese / English voiceover.",
     releaseYear: '2026',
     developer: 'Nihon Falcom',
     publisher: 'Nihon Falcom / GungHo Online Entertainment America / Clouded Leopard Entertainment',
