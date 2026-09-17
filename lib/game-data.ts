@@ -501,11 +501,35 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['4X', 'Turn-Based Strategy', 'Fantasy', 'City Builder', 'Multiplayer', 'Cross-Platform'],
     emoji: '🏜️',
   },
+  'trails-in-the-sky-2nd-chapter': {
+    name: 'Trails in the Sky 2nd Chapter',
+    slug: 'trails-in-the-sky-2nd-chapter',
+    headerImage: '/images/games/trails-in-the-sky-2nd-chapter-header-v20260917.jpg',
+    description: "Nihon Falcom's turn-based JRPG launches on PlayStation 5, Nintendo Switch, Switch 2 and PC on September 17, 2026, with an introductory price of $53.99. Estelle Bright's search for Joshua carries her across Liberl and straight into the Ouroboros conspiracy, supported by an enhanced HD presentation, dual-audio voiceover and cross-progression between Switch consoles and PC.",
+    releaseYear: '2026',
+    developer: 'Nihon Falcom',
+    publisher: 'Nihon Falcom / GungHo Online Entertainment America / Clouded Leopard Entertainment',
+    tags: ['JRPG', 'Turn-Based Combat', 'Story-Rich', 'Party-Based', 'Cross-Platform', 'Remaster'],
+    emoji: '⚔️',
+  },
+  'halloween-the-game': {
+    name: 'Halloween: The Game',
+    slug: 'halloween-the-game',
+    headerImage: '/images/games/halloween-the-game-header-v20260917.jpg',
+    description: "IllFonic and Gun Interactive's asymmetrical horror game launches on PC, PlayStation 5 and Xbox Series X|S on September 8, 2026. One player stalks the lobby as Michael Myers while four survivors use tools, stealth and teamwork to escape Haddonfield, with 1978 film locations, proximity-based fear and seasonal updates leading into Halloween.",
+    releaseYear: '2026',
+    developer: 'IllFonic',
+    publisher: 'IllFonic Publishing / Gun Interactive',
+    tags: ['Horror', 'Asymmetric Multiplayer', 'Survival Horror', 'Stealth', 'Licensed'],
+    emoji: '🎃',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
   'endless-legend-2',
+  'trails-in-the-sky-2nd-chapter',
+  'halloween-the-game',
   'diablo-4',
   'aniimo',
   'runescape-dragonwilds',
