@@ -523,10 +523,34 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Horror', 'Asymmetric Multiplayer', 'Survival Horror', 'Stealth', 'Licensed'],
     emoji: '🎃',
   },
+  'control-resonant': {
+    name: 'CONTROL Resonant',
+    slug: 'control-resonant',
+    headerImage: '/images/games/control-resonant-header-v20260919.jpg',
+    description: "Remedy Entertainment's sequel to the multi-award-winning Control launches on September 24, 2026 for $59.99 on PC, PlayStation 5 and Xbox Series X|S. Dylan Faden steps out of the Oldest House and into a paranatural crisis engulfing Manhattan, wielding the shapeshifting melee weapon Aberrant and new paranatural powers while searching for his sister, FBC Director Jesse Faden. The Digital Deluxe Edition adds 48-hour early access on PS5.",
+    releaseYear: '2026',
+    developer: 'Remedy Entertainment',
+    publisher: 'Remedy Entertainment',
+    tags: ['Action RPG', 'Hack and Slash', 'Story-Rich', 'Paranormal', 'Single Player', 'Cross-Platform'],
+    emoji: '🌀',
+  },
+  'silent-hill-townfall': {
+    name: 'SILENT HILL: Townfall',
+    slug: 'silent-hill-townfall',
+    headerImage: '/images/games/silent-hill-townfall-header-v20260919.jpg',
+    description: "Screen Burn's first-person Silent Hill adventure, published by KONAMI and Annapurna Interactive, arrives on PC and PlayStation 5 on September 23, 2026 for $49.99. Simon Ordell returns to a fog-shrouded Scottish island town to 'put things right', relying on tense evasion, distraction tools and mind-bending puzzles rather than firepower. The Digital Deluxe Edition unlocks the town 48 hours early.",
+    releaseYear: '2026',
+    developer: 'Screen Burn',
+    publisher: 'KONAMI / Annapurna Interactive',
+    tags: ['Horror', 'Psychological Horror', 'First-Person', 'Stealth', 'Puzzle', 'Single Player'],
+    emoji: '🌫️',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'control-resonant',
+  'silent-hill-townfall',
   'endless-legend-2',
   'trails-in-the-sky-2nd-chapter',
   'halloween-the-game',
