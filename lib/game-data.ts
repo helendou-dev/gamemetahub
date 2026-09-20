@@ -545,10 +545,34 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Horror', 'Psychological Horror', 'First-Person', 'Stealth', 'Puzzle', 'Single Player'],
     emoji: '🌫️',
   },
+  'dune-awakening': {
+    name: 'Dune: Awakening',
+    slug: 'dune-awakening',
+    headerImage: '/images/games/dune-awakening-header-v20260920.jpg',
+    description: "Funcom's open-world survival MMO on Arrakis arrives on PlayStation 5 and Xbox Series X|S on September 22, 2026 alongside Xbox Game Pass, with PC Update 1.5 adding a full Solo Mode with three difficulty presets and tunable survival sliders. Survive sandworms, manage water, build spice-harvesting bases, and choose between PvE-only Hagga Basin or contested PvP Deep Desert — currently $24.99 on Steam (50% off through October 8, 2026).",
+    releaseYear: '2025',
+    developer: 'Funcom',
+    publisher: 'Funcom',
+    tags: ['Open World Survival', 'Sci-Fi', 'Dune', 'Crafting', 'Base Building', 'Mature', 'Cross-Platform'],
+    emoji: '🏜️',
+  },
+  'tcg-card-shop-simulator': {
+    name: 'TCG Card Shop Simulator',
+    slug: 'tcg-card-shop-simulator',
+    headerImage: '/images/games/tcg-card-shop-simulator-header-v20260920.jpg',
+    description: "O.P. Neon Games' first-person card shop sim exits Early Access on September 14, 2026 with the 1.0 release. Stock shelves with Tetramon booster packs, hire staff, host tournaments, and unlock the playable Tetramon TCG mode where you build decks and battle with the cards you collect. 4M+ Early Access players, 95% positive reviews, now $16.99 on Steam (15% off).",
+    releaseYear: '2026',
+    developer: 'OPNeon Games',
+    publisher: 'OPNeon Games',
+    tags: ['Simulation', 'Card Game', 'Indie', 'Shop Management', 'Tetramon', 'Single-Player'],
+    emoji: '🃏',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'dune-awakening',
+  'tcg-card-shop-simulator',
   'control-resonant',
   'silent-hill-townfall',
   'endless-legend-2',
