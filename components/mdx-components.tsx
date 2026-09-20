@@ -150,11 +150,33 @@ export function GameRating({
   platforms?: string;
 }) {
   const numScore = typeof score === 'string' ? parseFloat(score) : score;
-  const isHigh = numScore >= 90;
-  const isGood = numScore >= 75;
-  const color = isHigh ? '#22c55e' : isGood ? '#eab308' : '#ef4444';
-  const bg = isHigh ? 'rgba(34,197,94,0.08)' : isGood ? 'rgba(234,179,8,0.08)' : 'rgba(239,68,68,0.08)';
-  const borderColor = isHigh ? 'rgba(34,197,94,0.2)' : isGood ? 'rgba(234,179,8,0.2)' : 'rgba(239,68,68,0.2)';
+  // Pre-release articles legitimately pass score="TBA" — parseFloat yields NaN.
+  // Without this guard NaN fails every threshold and the badge renders red,
+  // which reads as "bad score" on a game that has not been reviewed yet.
+  const hasNumericScore = Number.isFinite(numScore);
+  const isHigh = hasNumericScore && numScore >= 90;
+  const isGood = hasNumericScore && numScore >= 75;
+  const color = !hasNumericScore
+    ? 'var(--text-muted)'
+    : isHigh
+      ? '#22c55e'
+      : isGood
+        ? '#eab308'
+        : '#ef4444';
+  const bg = !hasNumericScore
+    ? 'rgba(148,163,184,0.08)'
+    : isHigh
+      ? 'rgba(34,197,94,0.08)'
+      : isGood
+        ? 'rgba(234,179,8,0.08)'
+        : 'rgba(239,68,68,0.08)';
+  const borderColor = !hasNumericScore
+    ? 'rgba(148,163,184,0.2)'
+    : isHigh
+      ? 'rgba(34,197,94,0.2)'
+      : isGood
+        ? 'rgba(234,179,8,0.2)'
+        : 'rgba(239,68,68,0.2)';
 
   return (
     <div

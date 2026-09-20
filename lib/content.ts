@@ -13,6 +13,7 @@ export interface ContentFrontmatter {
   title: string;
   description?: string;
   metaDescription?: string;
+  excerpt?: string;
   game?: string;
   gameName?: string;
   type?: string;
@@ -24,6 +25,9 @@ export interface ContentFrontmatter {
   author?: string;
   tags?: string[];
   image?: string;
+  featuredImage?: string;
+  headerImage?: string;
+  ogImage?: string;
   keywords?: string;
   modifiedDate?: string;
   jsonLd?: Record<string, unknown>;
@@ -48,6 +52,8 @@ export interface ContentListItem {
   description: string;
   type: string;
   date: string;
+  /** Last meaningful modification (falls back to the publish date). */
+  updated: string;
   author: string;
   tags: string[];
   image?: string;
@@ -57,6 +63,34 @@ export interface ContentListItem {
 }
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
+
+/**
+ * Canonicalize a content type value.
+ * Legacy articles use inconsistent spellings ("review-roundup", "review roundup",
+ * "Endings Guide"), which bypass the type badge / label maps. Map known variants
+ * onto the canonical snake_case tokens used across the app.
+ */
+const TYPE_ALIASES: Record<string, string> = {
+  'review-roundup': 'review_roundup',
+  'review roundup': 'review_roundup',
+  'endings guide': 'guide',
+  'hot take': 'hot-take',
+  'deep guide': 'deep-guide',
+  'beginner guide': 'beginner_guide',
+  'preview guide': 'preview_guide',
+  'tier list': 'tier_list',
+  'meta tier list': 'meta_tier_list',
+  'patch notes': 'patch_notes',
+  'error fix': 'error_fix',
+  'game release': 'game_release',
+};
+
+export function canonicalType(value: unknown): string {
+  if (typeof value !== 'string') return '';
+  const raw = value.trim();
+  if (!raw) return '';
+  return TYPE_ALIASES[raw.toLowerCase()] || raw;
+}
 
 /**
  * Normalize a content entry from frontmatter for display use.
@@ -70,16 +104,29 @@ export function normalizeEntry(
   const platforms = (fm.platforms as string[]) || [];
   const readTime = rawContent ? readingTime(rawContent) : undefined;
 
+  // Description: legacy articles use `excerpt`, newer ones use `description`/`metaDescription`.
+  const description = (fm.description || fm.metaDescription || fm.excerpt || '') as string;
+
+  // Hero image: articles across three generations of frontmatter schema use
+  // `image`, `featuredImage`, `ogImage`, or `headerImage`. Keep all four in the chain.
+  const heroImage = (fm.image || fm.featuredImage || fm.ogImage || fm.headerImage || '') as string;
+
   return {
     game,
     slug,
     title: fm.title || slug,
-    description: fm.description || fm.metaDescription || '',
-    type: (fm.type || fm.contentType || 'guide') as string,
+    description,
+    type: canonicalType(fm.type) || canonicalType(fm.contentType) || 'guide',
     date: (fm.publishDate || fm.publishedAt || fm.updatedAt || fm.date || '') as string,
+    updated: (fm.updatedAt ||
+      fm.modifiedDate ||
+      fm.publishDate ||
+      fm.publishedAt ||
+      fm.date ||
+      '') as string,
     author: (fm.author || 'GameMetaHub') as string,
     tags: (fm.tags || []) as string[],
-    image: (fm.image || fm.featuredImage || fm.ogImage || '') as string | undefined,
+    image: heroImage || undefined,
     url: `/games/${game}/${slug}`,
     readingTime: readTime,
     platforms: platforms.length > 0 ? platforms : undefined,
@@ -201,14 +248,18 @@ export function generatePageJsonLd(
   const heroImage = (frontmatter.image as string) || (frontmatter.headerImage as string) || '';
 
   // Determine schema type: hot-take → NewsArticle, deep-guide → Article
-  const isHotTake = frontmatter.contentType === 'hot-take' || frontmatter.contentType === 'news';
+  const isHotTake =
+    canonicalType(frontmatter.contentType) === 'hot-take' ||
+    canonicalType(frontmatter.type) === 'hot-take' ||
+    canonicalType(frontmatter.contentType) === 'news' ||
+    canonicalType(frontmatter.type) === 'news';
   const schemaType = isHotTake ? 'NewsArticle' : 'Article';
 
   const article: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': schemaType,
     headline: frontmatter.title,
-    description: frontmatter.description || frontmatter.metaDescription || '',
+    description: frontmatter.description || frontmatter.metaDescription || (frontmatter.excerpt as string) || '',
     datePublished: publishDate,
     dateModified: modifiedDate,
     inLanguage: 'en',
@@ -244,37 +295,61 @@ export function generatePageJsonLd(
 
 /**
  * Auto-detect FAQ sections in article content and generate FAQPage schema.
- * Looks for h2 headings containing "FAQ" or "Frequently Asked" followed by Q&A pairs.
+ *
+ * Two markup styles are supported:
+ *  1. `<details className="faq-section"><summary>Q</summary><p>A</p></details>`
+ *     (preferred — pre-renders safely, so most newer articles use it)
+ *  2. markdown `### Question` pairs nested under an `## FAQ` heading
  */
 export function generateFaqSchema(
   frontmatter: ContentFrontmatter,
   url: string,
   rawContent: string,
 ): Record<string, unknown> | null {
-  // Only process if content has an FAQ section
-  const hasFaqSection = /^#{1,3}\s+(FAQ|Frequently Asked Questions?)/mi.test(rawContent);
-  if (!hasFaqSection) return null;
+  const MAX_PAIRS = 10;
 
-  // Extract Q&A pairs: look for lines starting with "### " as questions,
-  // followed by the content until the next "### " or end of section
-  const faqSectionStart = rawContent.search(/^#{1,3}\s+(FAQ|Frequently Asked Questions?)/mi);
-  if (faqSectionStart === -1) return null;
+  // Only process documents that actually declare an FAQ block. This prevents
+  // unrelated <details> toggles (spoiler warnings, patch notes, etc.) from
+  // being published as FAQPage structured data.
+  const hasFaqHeading = /^#{1,3}\s+(FAQ|Frequently Asked Questions?)/mi.test(rawContent);
+  const hasFaqMarkup = /faq-section/.test(rawContent);
+  if (!hasFaqHeading && !hasFaqMarkup) return null;
 
-  const faqSection = rawContent.slice(faqSectionStart);
   const qaPairs: { question: string; answer: string }[] = [];
 
-  // Match "### Question text?" followed by answer content
-  const qaRegex = /^###\s+(.+?)(?:\s*)$\s*\n([\s\S]*?)(?=\n###\s|\n##\s|$)/gm;
-  let match;
-  let count = 0;
-  while ((match = qaRegex.exec(faqSection)) !== null && count < 10) {
-    const question = match[1].replace(/[`*_~]/g, '').trim();
-    // Strip markdown formatting from answer, limit to ~300 chars
-    let answer = match[2].replace(/[`*_~\[\]]/g, '').replace(/\n+/g, ' ').trim();
+  const cleanText = (input: string): string =>
+    input
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/[`*_~[\]]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+  const pushPair = (rawQuestion: string, rawAnswer: string): void => {
+    if (qaPairs.length >= MAX_PAIRS) return;
+    const question = cleanText(rawQuestion);
+    let answer = cleanText(rawAnswer);
+    if (!question || !answer) return;
     if (answer.length > 300) answer = answer.slice(0, 297) + '...';
-    if (question && answer) {
-      qaPairs.push({ question, answer });
-      count++;
+    qaPairs.push({ question, answer });
+  };
+
+  // --- Pass 1: <summary>Question</summary> … </details> markup
+  const detailsRegex = /<summary[^>]*>([\s\S]*?)<\/summary>([\s\S]*?)(?=<\/details>|$)/g;
+  let dm: RegExpExecArray | null;
+  while ((dm = detailsRegex.exec(rawContent)) !== null && qaPairs.length < MAX_PAIRS) {
+    pushPair(dm[1], dm[2]);
+  }
+
+  // --- Pass 2: "### Question" pairs under a FAQ heading (only if Pass 1 found nothing)
+  if (qaPairs.length === 0) {
+    const headingMatch = rawContent.match(/^#{1,3}\s+(FAQ|Frequently Asked Questions?)/mi);
+    if (headingMatch && headingMatch.index !== undefined) {
+      const faqSection = rawContent.slice(headingMatch.index);
+      const qaRegex = /^###\s+(.+?)\s*$\s*\n([\s\S]*?)(?=\n###\s|\n##\s|$)/gm;
+      let m: RegExpExecArray | null;
+      while ((m = qaRegex.exec(faqSection)) !== null && qaPairs.length < MAX_PAIRS) {
+        pushPair(m[1], m[2]);
+      }
     }
   }
 
@@ -302,8 +377,9 @@ export function contentToSitemapEntry(
   slug: string,
   frontmatter: ContentFrontmatter,
 ) {
-  const isGuide = frontmatter.contentType === 'deep-guide' || frontmatter.type === 'guide';
-  const isNews = frontmatter.contentType === 'hot-take' || frontmatter.type === 'news';
+  const type = canonicalType(frontmatter.contentType) || canonicalType(frontmatter.type);
+  const isGuide = type === 'deep-guide' || type === 'guide' || type === 'beginner_guide';
+  const isNews = type === 'hot-take' || type === 'news';
   return {
     url: `${siteConfig.url}/games/${game}/${slug}`,
     lastModified: frontmatter.modifiedDate || frontmatter.publishDate || frontmatter.date || new Date().toISOString(),

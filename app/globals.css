@@ -215,6 +215,24 @@
     border: 1px solid rgba(244, 63, 94, 0.2);
   }
 
+  .type-badge-review {
+    background: rgba(6, 182, 212, 0.12);
+    color: #22d3ee;
+    border: 1px solid rgba(6, 182, 212, 0.2);
+  }
+
+  .type-badge-preview {
+    background: rgba(99, 102, 241, 0.12);
+    color: #818cf8;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+  }
+
+  .type-badge-class {
+    background: rgba(217, 70, 239, 0.12);
+    color: #e879f9;
+    border: 1px solid rgba(217, 70, 239, 0.2);
+  }
+
   /* ===== Button Styles ===== */
   .btn-primary {
     @apply inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm;

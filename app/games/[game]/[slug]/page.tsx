@@ -9,7 +9,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import { getContentByPath, listAllContent, readingTime, generatePageJsonLd, generateFaqSchema } from '@/lib/content';
+import remarkGfm from 'remark-gfm';
+import { getContentByPath, listAllContent, readingTime, generatePageJsonLd, generateFaqSchema, canonicalType } from '@/lib/content';
 import { ALL_GAMES } from '@/lib/game-data';
 import { slugify } from '@/lib/slugify';
 import { siteConfig } from '@/lib/site-config';
@@ -39,20 +40,41 @@ export async function generateMetadata({
   const { frontmatter } = content;
   const url = `${siteConfig.url}/games/${params.game}/${params.slug}`;
 
+  // Legacy articles store the summary under `excerpt` instead of `description`.
+  const description =
+    frontmatter.description || frontmatter.metaDescription || (frontmatter.excerpt as string) || '';
+  const ogImage = (frontmatter.image || frontmatter.ogImage || frontmatter.headerImage) as
+    | string
+    | undefined;
+
+  // Canonical: articles use the `canonical` key, but older code read `canonicalUrl`
+  // (which no article sets) — so the field was silently ignored. Honour both, and
+  // normalise the host to the www. apex we actually serve, otherwise a frontmatter
+  // value pointing at the bare apex domain would emit a conflicting canonical.
+  const rawCanonical = (frontmatter.canonical || frontmatter.canonicalUrl) as string | undefined;
+  let canonical = url;
+  if (rawCanonical) {
+    if (rawCanonical.startsWith('/')) {
+      canonical = `${siteConfig.url}${rawCanonical}`;
+    } else {
+      canonical = rawCanonical.replace(/^https?:\/\/(?:www\.)?gamemetahub\.com/i, siteConfig.url);
+    }
+  }
+
   return {
     title: { absolute: frontmatter.title },
-    description: frontmatter.description || `Guide and tips for ${params.game.replace(/-/g, ' ')}`,
+    description: description || `Guide and tips for ${params.game.replace(/-/g, ' ')}`,
     keywords: frontmatter.keywords || frontmatter.tags?.join(', '),
-    alternates: { canonical: frontmatter.canonicalUrl || url },
+    alternates: { canonical },
     openGraph: {
       title: frontmatter.title,
-      description: frontmatter.description || '',
+      description,
       url,
       type: 'article',
       publishedTime: frontmatter.publishDate || frontmatter.date,
       modifiedTime: frontmatter.modifiedDate || frontmatter.publishDate || frontmatter.date,
-      ...(frontmatter.image || frontmatter.ogImage || frontmatter.headerImage
-        ? { images: [{ url: (frontmatter.image || frontmatter.ogImage || frontmatter.headerImage) as string, width: 1200, height: 630 }] }
+      ...(ogImage
+        ? { images: [{ url: ogImage, width: 1200, height: 630 }] }
         : {
             images: [{
               url: `/og?title=${encodeURIComponent(frontmatter.title)}&type=${encodeURIComponent(frontmatter.type || 'default')}&game=${encodeURIComponent(frontmatter.game || params.game.replace(/-/g, ' '))}`,
@@ -63,29 +85,45 @@ export async function generateMetadata({
     twitter: {
       card: 'summary_large_image',
       title: frontmatter.title,
-      description: frontmatter.description || '',
+      description,
     },
   };
 }
 
 const TYPE_BADGE: Record<string, string> = {
   guide: 'type-badge-guide',
+  'deep-guide': 'type-badge-guide',
+  beginner_guide: 'type-badge-guide',
+  preview_guide: 'type-badge-preview',
+  'hot-take': 'type-badge-news',
+  news: 'type-badge-news',
   tier_list: 'type-badge-tier',
+  meta_tier_list: 'type-badge-tier',
+  class_guide: 'type-badge-class',
   comparison: 'type-badge-comparison',
   error_fix: 'type-badge-fix',
   patch_notes: 'type-badge-patch',
-  news: 'type-badge-news',
   game_release: 'type-badge-release',
+  review: 'type-badge-review',
+  review_roundup: 'type-badge-review',
 };
 
 const TYPE_LABEL: Record<string, string> = {
   guide: '📖 Guide',
+  'deep-guide': '📖 Guide',
+  beginner_guide: '📖 Beginner Guide',
+  preview_guide: '👀 Preview',
+  'hot-take': '📰 News',
+  news: '📰 News',
   tier_list: '🏆 Tier List',
+  meta_tier_list: '🏆 Tier List',
+  class_guide: '🎭 Class Guide',
   comparison: '⚖️ Comparison',
   error_fix: '🔧 Fix Guide',
   patch_notes: '📋 Patch Notes',
-  news: '📰 News',
   game_release: '🚀 Launch Guide',
+  review: '⭐ Review',
+  review_roundup: '⭐ Review Roundup',
 };
 
 const PLATFORM_COLORS: Record<string, { bg: string; color: string; border: string }> = {
@@ -123,8 +161,9 @@ export default async function GameContentPage({
   const tags = (frontmatter.tags || []) as string[];
   const platforms = (frontmatter.platforms || []) as string[];
   const gameName = ALL_GAMES[params.game]?.name || frontmatter.game || params.game.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
-  const typeLabel = TYPE_LABEL[frontmatter.type || ''] || '🎮 Article';
-  const typeBadge = TYPE_BADGE[frontmatter.type || ''] || 'type-badge-guide';
+  const resolvedType = canonicalType(frontmatter.type) || canonicalType(frontmatter.contentType);
+  const typeLabel = TYPE_LABEL[resolvedType] || '🎮 Article';
+  const typeBadge = TYPE_BADGE[resolvedType] || 'type-badge-guide';
   const heroImage = (frontmatter.image as string) || (frontmatter.ogImage as string) || (frontmatter.headerImage as string) || '';
   const author = (frontmatter.author as string) || 'GameMetaHub';
   const publishDate = frontmatter.publishDate || frontmatter.date;
@@ -247,7 +286,11 @@ export default async function GameContentPage({
 
             {/* Article Body */}
             <div className="article-body">
-              <MDXRemote source={content.content} components={mdxComponents} />
+              <MDXRemote
+                source={content.content}
+                components={mdxComponents}
+                options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+              />
             </div>
 
             {/* GA4 Enhanced Event Tracking */}
@@ -258,7 +301,7 @@ export default async function GameContentPage({
 
             {/* Related Articles */}
             <RelatedArticles
-              current={{ game: params.game, slug: params.slug, type: frontmatter.type || 'guide' }}
+              current={{ game: params.game, slug: params.slug, type: resolvedType || 'guide' }}
               articles={allArticles}
             />
 
