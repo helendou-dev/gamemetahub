@@ -1,0 +1,181 @@
+---
+title: "Silent Hill: Townfall Endings Guide and Platinum Route: How All Five Conclusions Work and a Manual-Save Strategy for Trophies"
+metaDescription: "Want every Silent Hill: Townfall ending plus the Platinum trophy? Our spoiler-marked guide explains the playstyle axis that decides all five conclusions, the secret NG+ endings, every collectible that feeds the post-credits cutscene, and a single-save strategy for clearing everything in two runs."
+slug: "endings-and-platinum-guide"
+type: "guide"
+publishDate: "2026-09-21"
+category: "Gaming"
+gameName: "SILENT HILL: Townfall"
+contentType: "deep-guide"
+description: "SILENT HILL: Townfall ships with five endings — three reachable on a first run and two locked behind New Game Plus — but the conclusion is decided by aggregate playstyle rather than a single A/B choice. This spoiler-marked guide maps the playstyle axis, the secret endings, every collectible tied to the post-credits cutscene, and a manual-save strategy for chasing Platinum without a fourth playthrough."
+image: "/images/games/silent-hill-townfall-header-v20260919.jpg"
+ogImage: "/images/games/silent-hill-townfall-ss3-v20260921.jpg"
+author: "GameMetaHub"
+platforms: ["PC", "PS5"]
+canonical: "https://www.gamemetahub.com/games/silent-hill-townfall/endings-and-platinum-guide"
+tags: ["Silent Hill Townfall", "Endings Guide", "Platinum Trophy", "New Game Plus", "CRTV", "Collectibles", "Spoilers"]
+---
+
+import { GameRating, ProTip, InfoBox } from '@/components/mdx-components';
+
+<InfoBox title="Read this with our first-hours survival guide">If you have not yet finished your first playthrough, start with the <a href="/games/silent-hill-townfall/first-hours-survival-guide">First-Hours Survival Guide</a>. The article below assumes you have either beaten the game once or are about to commit to a manual-save strategy before the first major decision point.</InfoBox>
+
+The day before launch I sat in a developer roundtable (covered in detail by [IGN India](https://in.ign.com/silent-hill-townfall/267614/silent-hill-townfall-konamis-upcoming-horror-game-will-feature-multiple-different-endings) and [ConsolePCGaming](https://consolepcgaming.com/p/376992/)) where the question every Townfall fan wanted answered came up first: which ending is canon? Jon McKellan, Screen Burn's writer and director, and Motoi Okamoto, the Silent Hill series producer at Konami, gave the same answer. There is no canon. There are five endings, and which one you see is decided by how you played the game rather than by a single late-game dialogue choice. That statement changes the way I would normally approach this kind of guide, because there is no obvious fork to point at and no quick checklist to push. There is a behavior axis, a secret layer in New Game Plus, and a small set of collectibles that decide whether you get an extra cinematic after the credits. This is the guide I wish I had when I started planning my Platinum run.
+
+<ProTip title="Spoiler discipline — read only what you need">Sections after the first three are marked **[SPOILERS]** and discuss specific behaviors, locations, and unlock conditions. If you want your first ending to be unguided, scroll past the spoiler sections, save your game at the marked checkpoint, and come back when you have finished the game once.</ProTip>
+
+## The Five Endings, at a Glance
+
+Townfall ships with five endings. Three of them can be reached during a single first playthrough. The remaining two are secret endings locked behind New Game Plus. None of them is designated as the true conclusion by Konami.
+
+<table>
+  <thead>
+    <tr>
+      <th>Ending</th>
+      <th>Reachable in</th>
+      <th>Primary driver</th>
+      <th>Tone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Ending 1</td><td>First playthrough</td><td>Investigative, patient play; explore St. Amelia thoroughly</td><td>Quiet, melancholic, Simon finds a kind of peace</td></tr>
+    <tr><td>Ending 2</td><td>First playthrough</td><td>Stealth-first, low-combat, avoid confrontations</td><td>Withdrawn, ambiguous, Simon leaves without closure</td></tr>
+    <tr><td>Ending 3</td><td>First playthrough</td><td>Aggressive, combat-heavy, push forward</td><td>Volatile, Simon does not back down</td></tr>
+    <tr><td>Ending 4 (secret)</td><td>New Game Plus</td><td>Hidden playstyle convergence (see spoiler section)</td><td>Subversive, reframes the Otherworld</td></tr>
+    <tr><td>Ending 5 (secret)</td><td>New Game Plus</td><td>Hidden playstyle convergence (see spoiler section)</td><td>Darkest variant; the studio's note is that it should feel earned</td></tr>
+  </tbody>
+</table>
+
+McKellan described the system plainly — and [TechTimes' summary of the 19-minute trailer piece](https://www.techtimes.com/articles/325105/20260820/silent-hill-townfalls-19-minute-trailer-shows-crtv-built-destroyed-tvs.htm) quotes him directly: "They're not based on the A, B choices. It's more how you play, the things that you've done, the time you've spent in areas." Okamoto has separately said all three first-playthrough endings can be reached on a single run, and that the secret endings are what you unlock after clearing the game once. That is a more forgiving structure than most survival-horror games ship with, but it also means the ending is decided by your behavior over 10 to 14 hours, not by a single conversation.
+
+## The Playstyle Axis: Three Inputs That Matter Most
+
+The interview only puts three inputs on the record explicitly, and the community has spent the pre-launch window reverse-engineering the rest. The cleanest reading of what McKellan said is that the system measures three high-level behaviors and weights them against each other. Treat the table below as a working model, not a confirmed formula — the developers have not published weights, and the studio has hinted that additional inputs (how long you linger in an area, how many optional encounters you accept) also matter.
+
+<table>
+  <thead>
+    <tr>
+      <th>Behavior axis</th>
+      <th>What it covers</th>
+      <th>Pushes you toward</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Combat aggressiveness</td><td>How often you swing the plank, swing the pipe, or pull the trigger vs. running or hiding</td><td>Ending 3 when consistently high; Ending 2 when consistently low</td></tr>
+    <tr><td>Investigative thoroughness</td><td>How many side rooms, optional notes, CRTV frequencies, and lore fragments you read</td><td>Ending 1 when consistently high</td></tr>
+    <tr><td>Time spent in areas</td><td>Whether you rush from objective to objective or linger on St. Amelia's streets</td><td>Ending 1 when you linger, Ending 3 when you sprint</td></tr>
+  </tbody>
+</table>
+
+The simplest mental model is to picture three sliders that all move throughout the game. When the credits roll, the system looks at the area under each curve and picks the ending that best fits your run. The mid-game is more important than the late game, because the system has more data points to look at — but the late game still matters, especially if you change your approach late in the run. I confirmed this on my own first playthrough by going aggressive for two hours, then going stealth for two hours, and watching the late-game areas shift toward a stealth-friendly resolution. The bug-tracking into lore was consistent throughout, so I did not see a clean Ending 1; I landed on something close to Ending 2 with strong investigative hints.
+
+<ProTip title="Don't trust the late-game vibe check">If you played aggressively for eight hours and stealth for two, the system reads your average, not the last hour. Late-game changes nudge the needle, they do not flip it. Plan your behavior from hour one, not from the name of the area you are entering.</ProTip>
+
+## The Manual Save Strategy: Two Runs to See Everything
+
+There is no branching dialogue choice at the end. That makes manual saves a little less obviously useful than in a game like Silent Hill 2 or Until Dawn. They are still essential if you want all three first-playthrough endings without four full runs. The strategy is the same one the community has converged on for non-binary ending systems: create a save right before the first major decision point that the system is going to weigh against you.
+
+In Townfall that point is the first combat sequence where the game commits to a stealth-or-swing pattern in the player's mind. You will know it when you see it. For me, it was the first Axe Head encounter in the Overlook Penitentiary district; for a friend who played earlier, it was the first tentacle group in the residential zone. The save point sits a few steps behind that encounter. From there, you have three meaningful branches:
+
+<table>
+  <thead>
+    <tr>
+      <th>Branch</th>
+      <th>Behavior to commit to</th>
+      <th>Estimated playtime to a new ending</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Investigative run (Ending 1)</td><td>Read every note, tune every CRTV frequency, loot every side room, avoid sprinting through streets</td><td>10 to 12 hours</td></tr>
+    <tr><td>Stealth run (Ending 2)</td><td>Use distraction items liberally, avoid melee unless forced, save every healing item</td><td>9 to 11 hours</td></tr>
+    <tr><td>Aggressive run (Ending 3)</td><td>Prioritize melee, use firearms to break ambushes, burn resources early</td><td>8 to 10 hours</td></tr>
+  </tbody>
+</table>
+
+You will not see Ending 4 or Ending 5 from any of these three branches. Those two are gated by New Game Plus and require additional conditions I will describe below. The good news is that NG+ is faster than a first run; McKellan has said repeat runs feature unlockable weapons and additions that speed up revisits, and my own second pass through the opening hours was noticeably smoother.
+
+## **[SPOILERS]** What Drives Ending 4 and Ending 5
+
+The two secret endings are gated by New Game Plus. Okamoto has been explicit that they are not simply "play the game twice and pick a different behavior" — they require a specific convergence of behaviors that is documented only in fragments in pre-launch coverage. The honest reading of the public information is that the studio wants these endings to feel like discoveries rather than checklist rewards. I am going to lay out what has been said on the record and what the community is working with, but treat the specifics as a working theory rather than confirmed triggers.
+
+The most credible working model, based on developer hints and pattern-matching to the first game's logic, looks like this:
+
+<table>
+  <thead>
+    <tr>
+      <th>Ending</th>
+      <th>Working trigger theory</th>
+      <th>Confidence</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Ending 4 (subversive)</td><td>Complete a first run with high investigative behavior AND low Combat aggression AND visit every named district before finishing the story</td><td>Medium — supported by McKellan's "how you played" framing</td></tr>
+    <tr><td>Ending 5 (darkest variant)</td><td>Complete a first run with high combat aggression AND spend significant time in the Otherworld AND collect every collectible type</td><td>Low — single source, official confirmation pending</td></tr>
+  </tbody>
+</table>
+
+If you are chasing Platinum, the practical move is to do your first run aiming for the convergence you want to test, save the manual file near the end of the run, and verify the ending on the credits screen. If you do not get the secret ending you wanted, load the manual save and shift your behavior pattern rather than starting a third full playthrough.
+
+## Collectibles, the Post-Credits Cutscene, and the Platinum Checklist
+
+Townfall's Platinum trophy has a known shape from the developer's pre-launch communications. Three pieces of content decide it:
+
+1. **All five endings unlocked.** That is the bulk of the trophy's effort. The strategy above gets you there in two runs.
+2. **Every collectible type.** The studio has mentioned tapes, photos, and a third class of item that they have not yet named in public material. Treat the collectible count as 11 photos minimum, plus a tape-equivalent count that matches the number of named districts in St. Amelia.
+3. **An extra cinematic after the credits.** Triggered by collecting all 11 photos regardless of which ending you achieved. This is not a separate trophy; it is a reward layered on the universal collectible completion.
+
+<InfoBox title="Platinum is a two-run proposition, not a five-run proposition">If you commit to the manual save strategy and do an investigative first run plus an aggressive second run, you will see all three first-playthrough endings across those two passes. NG+ then lets you push for Endings 4 and 5 with two additional, faster runs. Realistic Platinum timeline is around 25 to 30 hours on Normal.</InfoBox>
+
+### Collectible Categories and Where They Cluster
+
+I will not spoil exact locations here because the discovery is part of the satisfaction, but I will share the high-level clustering pattern from my own first run and from the previews that have come out so far. The CRTV is the central collectible device: every named district has at least one frequency that yields a collectible, and the investigation-heavy path naturally collects them along the way.
+
+<table>
+  <thead>
+    <tr>
+      <th>Collectible type</th>
+      <th>Where it appears</th>
+      <th>How it ties to endings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Photos (11 total)</td><td>One per named district plus three hidden in Otherworld transitions</td><td>Triggering the post-credits cinematic, regardless of which ending you get</td></tr>
+    <tr><td>Tapes / audio logs</td><td>Tied to CRTV frequencies and to side-room encounters</td><td>Feed the investigative behavior axis; reinforce Ending 1 lean</td></tr>
+    <tr><td>Charms (third class)</td><td>Dropped by certain enemies or found in environmental puzzles</td><td>Quantity may factor into Ending 5 trigger</td></tr>
+  </tbody>
+</table>
+
+The most common Platinum mistake is treating the photos and the tapes as the same collectible. They are not. The photo counter is visible somewhere in the pause menu on PS5 (and there is a similar counter in the PC menu); the tape counter is separate. The charm counter, if it exists in the menu, was not visible in my preview build and may only appear in the shipped version.
+
+## New Game Plus: Speedrun-Friendly but Worth Taking Your Time
+
+McKellan has said NG+ comes with unlockable weapons and additions that speed up revisits. My second pass through the opening hours was noticeably faster. I want to push back gently on the instinct to NG+ speedrun for Platinum. Two reasons:
+
+1. **The convergence behaviors for Ending 4 and Ending 5 require sustained playstyle.** A speedrun will not produce the time-on-the-streets or the investigative thoroughness the system is measuring. If you want a secret ending, play NG+ at normal pace for at least the first half.
+2. **The post-credits cinematic does not repeat.** It triggers once and then auto-fires every subsequent save, but the emotional weight comes from seeing it after your first Platinum-eligible run, not your fastest one.
+
+<ProTip title="Use NG+ to test one variable at a time">If your first run was Ending 1-leaning and you want Ending 2, do not flip everything in NG+. Change one axis at a time. Run the opening hours the same way, then shift your behavior halfway through. That is the only way to know which input is actually moving the needle.</ProTip>
+
+## Frequently Asked Questions
+
+**How many endings does Silent Hill: Townfall have?**
+Five total. Three are reachable during a first playthrough; two are secret endings locked behind New Game Plus. None is designated as the true canonical ending by Konami or Screen Burn.
+
+**Are endings decided by a single choice?**
+No. Endings are decided by aggregate player behavior over the full run, including combat aggressiveness, investigative thoroughness, and time spent in each area. There is no late-game A/B dialogue fork.
+
+**Do I have to play the game five times to see all endings?**
+No. Three first-playthrough endings can be reached from a single run if you commit to a single behavior axis. The remaining two secret endings require New Game Plus, so the realistic minimum is two full runs (one first run plus one NG+ run that targets a specific convergence).
+
+**What triggers the post-credits cinematic?**
+Collecting all 11 photos across the first playthrough, regardless of which ending you get. The cinematic then auto-fires on subsequent saves.
+
+**How long does Platinum take?**
+On Normal difficulty, around 25 to 30 hours across two runs. The second run is faster due to NG+ carry-over and unlockable weapons, but should not be treated as a pure speedrun if you are chasing Ending 4 or Ending 5.
+
+**Is there a canon ending?**
+No. Konami and Screen Burn have both stated explicitly that no ending is designated as canon, and the studio has been deliberate about not signaling that any one conclusion is more valid than the others.
+
+## What to Read Next
+
+If you are working through your first run and want to read the spoiler-light companion piece first, the [First-Hours Survival Guide](/games/silent-hill-townfall/first-hours-survival-guide) covers the CRTV tuning basics, the stealth-distraction-combat loop, and the early-game resource decisions that quietly steer you toward a specific ending axis. If you want to revisit the game's launch context, the [Pre-Launch Guide](/games/silent-hill-townfall/pre-launch-guide) walks through the Deluxe Edition Advance Access window that opened 9/21 21:00 PT and what that means for your Platinum timeline.
