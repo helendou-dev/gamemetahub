@@ -556,6 +556,17 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Open World Survival', 'Sci-Fi', 'Dune', 'Crafting', 'Base Building', 'Mature', 'Cross-Platform'],
     emoji: '🏜️',
   },
+  'core-keeper': {
+    name: 'Core Keeper',
+    slug: 'core-keeper',
+    headerImage: '/images/games/core-keeper-header-v20260921.jpg',
+    description: "Pugstorm's award-winning 1-8 player mining sandbox adventure. Dig, build, fight, farm and unravel the mystery of the ancient Core across seven diverse biomes. The 1.3 Riders of the Underground update adds rideable mounts, the Moss sub-biome, the Hookshot, and a full Mage & Summoner rework — the first of three major updates on the Road to the Maw.",
+    releaseYear: '2024',
+    developer: 'Pugstorm',
+    publisher: 'Fireshine Games / bilibili',
+    tags: ['Survival', 'Sandbox', 'Mining', 'Crafting', 'Co-op', 'Pixel Art', 'Multiplayer'],
+    emoji: '⛏️',
+  },
   'tcg-card-shop-simulator': {
     name: 'TCG Card Shop Simulator',
     slug: 'tcg-card-shop-simulator',
@@ -571,6 +582,7 @@ export const ALL_GAMES: Record<string, GameMeta> = {
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'core-keeper',
   'dune-awakening',
   'tcg-card-shop-simulator',
   'control-resonant',
