@@ -578,10 +578,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Simulation', 'Card Game', 'Indie', 'Shop Management', 'Tetramon', 'Single-Player'],
     emoji: '🃏',
   },
+  'graveyard-keeper-2': {
+    name: 'Graveyard Keeper 2',
+    slug: 'graveyard-keeper-2',
+    headerImage: '/images/games/graveyard-keeper-2-header-v20260922.jpg',
+    description: "Lazy Bear Games' medieval cemetery management sequel launches on PC, PlayStation 5, Xbox Series X|S, Nintendo Switch and Switch 2 on September 22, 2026. Restore The Town, manage the graveyard, automate production with your zombie workforce, and lead an undead army against a zombie apocalypse — a deeper, broader, more unhinged take on the cult 2018 original.",
+    releaseYear: '2026',
+    developer: 'Lazy Bear Games',
+    publisher: 'tinyBuild',
+    tags: ['Simulation', 'Medieval', 'Dark Comedy', 'Crafting', 'Automation', 'Zombies', 'Single-Player', 'Cross-Platform'],
+    emoji: '⚰️',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'graveyard-keeper-2',
   'core-keeper',
   'dune-awakening',
   'tcg-card-shop-simulator',
