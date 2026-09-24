@@ -589,10 +589,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Simulation', 'Medieval', 'Dark Comedy', 'Crafting', 'Automation', 'Zombies', 'Single-Player', 'Cross-Platform'],
     emoji: '⚰️',
   },
+  'stick-it-to-the-stickman': {
+    name: 'Stick It to the Stickman',
+    slug: 'stick-it-to-the-stickman',
+    headerImage: '/images/games/stick-it-to-the-stickman-header-v20260924.jpg',
+    description: "Free Lives' physics-based corporate brawler leaves Early Access with version 1.0 on September 23, 2026. Punch, chainsaw, and fireball your way up the corporate ladder, then tear it back down through two new endgame modes — Billionaire Bunker and the 9-archetype Neurolink — plus new Ninja and Negotiator classes, new bosses, and the conclusion of the Founder storyline. 300,000+ wishlists, 96% positive reviews, and 50% off ($5.99) for launch week.",
+    releaseYear: '2026',
+    developer: 'Free Lives',
+    publisher: 'Devolver Digital',
+    tags: ['Action', 'Beat \'em Up', 'Roguelite', 'Physics', 'Indie', 'Co-op', 'Single-Player'],
+    emoji: '👔',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'stick-it-to-the-stickman',
   'graveyard-keeper-2',
   'core-keeper',
   'dune-awakening',
