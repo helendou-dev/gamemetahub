@@ -600,10 +600,34 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Action', 'Beat \'em Up', 'Roguelite', 'Physics', 'Indie', 'Co-op', 'Single-Player'],
     emoji: '👔',
   },
+  'minecraft-dungeons-2': {
+    name: 'Minecraft Dungeons II',
+    slug: 'minecraft-dungeons-2',
+    headerImage: '/images/games/minecraft-dungeons-2-header-v20260924.jpg',
+    description: "Mojang Studios and Double Eleven's dungeon-crawler ARPG sequel drops September 29, 2026 across PC (Steam/Microsoft Store), PS5, Xbox Series X|S, Nintendo Switch, and Switch 2 — Game Pass day one, $29.99 Standard / $49.99 Deluxe, 4-player online and local co-op with crossplay, and the new rift-accessed The Sift dimension. Pre-order by September 28 to lock in the Twisted cape, 2 hero skins, and the Twisted chicken pet.",
+    releaseYear: '2026',
+    developer: 'Mojang Studios / Double Eleven',
+    publisher: 'Xbox Game Studios',
+    tags: ['ARPG', 'Dungeon Crawler', 'Co-op', 'Crossplay', 'Family-Friendly', 'Xbox Game Pass', 'Multi-Platform'],
+    emoji: '⛏️',
+  },
+  'ghost-of-yotei': {
+    name: 'Ghost of Yōtei',
+    slug: 'ghost-of-yotei',
+    headerImage: '/images/games/ghost-of-yotei-header-v20260924.jpg',
+    description: "Sucker Punch Productions' standalone Ghost sequel returns for its 1-year anniversary with Ghost of Yōtei Complete Edition on October 1, 2026 — Echoes of Sekigahara narrative expansion (Ashoro Foothills + Battle of Sekigahara flashbacks with Nagato), Most Wanted roguelike with 4 playable characters (Atsu dual katana, Oyuki kusarigama, Nagato yari, and Jin Sakai), and Legends 4-player co-op. Free patch v2.0 on October 1 adds Beauty of Yōtei mode, armor transmog, and high-contrast accessibility. $69.99 Complete / $14.99 Upgrade; pre-order by September 30 for Sakai Armor early unlock.",
+    releaseYear: '2025',
+    developer: 'Sucker Punch Productions',
+    publisher: 'Sony Interactive Entertainment',
+    tags: ['Action-Adventure', 'Open World', 'Samurai', 'PS5 Exclusive', 'Single-Player', 'Story-Rich'],
+    emoji: '🗾',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'minecraft-dungeons-2',
+  'ghost-of-yotei',
   'stick-it-to-the-stickman',
   'graveyard-keeper-2',
   'core-keeper',
