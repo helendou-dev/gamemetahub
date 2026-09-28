@@ -622,10 +622,22 @@ export const ALL_GAMES: Record<string, GameMeta> = {
     tags: ['Action-Adventure', 'Open World', 'Samurai', 'PS5 Exclusive', 'Single-Player', 'Story-Rich'],
     emoji: '🗾',
   },
+  'toem-2': {
+    name: 'TOEM 2',
+    slug: 'toem-2',
+    headerImage: '/images/games/toem-2-header-v20260928.jpg',
+    description: "Something We Made and popagenda's cozy photography adventure sequel arrives September 29, 2026 on PC/Steam (Win/Mac/Linux), PS5, Nintendo Switch, and Switch 2. The black-and-white, hand-drawn world goes fully 3D with run, jump, and climb, while the camera gains Swiss-army-knife attachments (screwdriver, hammer, shears) for unconventional interactions. $19.99, Steam Deck Verified, demo on Steam now, 3-4 hour playthrough. No Xbox version at launch.",
+    releaseYear: '2026',
+    developer: 'Something We Made',
+    publisher: 'Something We Made / popagenda',
+    tags: ['Photography', 'Cozy', 'Adventure', 'Indie', 'Single-Player', 'Hand-Drawn', 'No Fail States', 'Relaxed Pacing'],
+    emoji: '📸',
+  },
 };
 
 /** Ordered list for homepage "Popular Games" section */
 export const POPULAR_GAMES_ORDER: string[] = [
+  'toem-2',
   'minecraft-dungeons-2',
   'ghost-of-yotei',
   'stick-it-to-the-stickman',
