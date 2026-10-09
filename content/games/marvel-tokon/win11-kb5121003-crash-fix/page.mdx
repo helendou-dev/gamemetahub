@@ -13,7 +13,6 @@ author: "GameMetaHub"
 platforms: ["PC"]
 featuredImageAlt: "Gaming PC with RGB peripherals and Windows 11 crash error on screen after KB5121003 update"
 tags: ["Marvel Tōkon", "KB5121003", "Windows 11", "crash fix", "inpoutx64", "RGB driver", "Arc Raiders", "The Finals"]
-jsonLd: '{"@context":"https://schema.org","@type":"HowTo","name":"Fix Marvel Tōkon Crashing After Windows 11 KB5121003 Update","description":"Windows 11 KB5121003 is crashing Marvel Tōkon, Arc Raiders, and The Finals due to the inpoutx64 RGB driver. Here is the official Microsoft registry fix and Embark Studios driver removal method.","datePublished":"2026-08-24T17:30:00Z","supply":[{"@type":"HowToSupply","name":"Windows 11 Registry Editor"}],"step":[{"@type":"HowToStep","name":"Back up the Registry","text":"Create a restore point or export the registry key before making changes."},{"@type":"HowToStep","name":"Open Registry Editor","text":"Type regedit in the Start menu and open the Registry Editor."},{"@type":"HowToStep","name":"Navigate to inpoutx64 service key","text":"Go to HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\inpoutx64"},{"@type":"HowToStep","name":"Change Start value to 4","text":"Double-click the Start value and set its data to 4 to disable the driver."},{"@type":"HowToStep","name":"Restart your PC","text":"Restart for the change to take effect."}]}'
 ---
 
 import { GameRating } from '@/components/mdx-components';
